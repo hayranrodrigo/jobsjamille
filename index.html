@@ -9,11 +9,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* ============================================================
-     PALETA (baseada na planilha original)
-     Creme dourado: #FFF2CC | Marrom dourado: #7F6000
-     Tons de apoio: gold #C9A961, off-white #FAF8F1, etc.
-     ============================================================ */
   :root {
     --gold-50: #FAF8F1;
     --gold-100: #FFF2CC;
@@ -32,8 +27,8 @@
     --success-soft: #E3EDD9;
     --warn: #C97D2E;
     --warn-soft: #F8E8D4;
-    --shadow-soft: 0 1px 2px rgba(127, 96, 0, 0.04), 0 4px 12px rgba(127, 96, 0, 0.06);
-    --shadow-lift: 0 4px 24px rgba(127, 96, 0, 0.12);
+    --shadow-soft: 0 1px 2px rgba(127,96,0,0.04), 0 4px 12px rgba(127,96,0,0.06);
+    --shadow-lift: 0 4px 24px rgba(127,96,0,0.12);
     --radius: 14px;
     --radius-sm: 8px;
   }
@@ -49,117 +44,22 @@
     min-height: 100vh;
     min-height: 100dvh;
     -webkit-font-smoothing: antialiased;
-    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   }
-  h1, h2, h3, .serif { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; letter-spacing: 0.2px; }
+  h1,h2,h3,.serif { font-family:'Cormorant Garamond',Georgia,serif; font-weight:600; }
   button { font-family: inherit; cursor: pointer; }
   input, select { font-family: inherit; }
 
-  /* =================== TELA DE LOGIN =================== */
-  .login-wrap {
-    min-height: 100vh; min-height: 100dvh;
-    display: flex; align-items: center; justify-content: center;
-    padding: 24px;
-    background:
-      radial-gradient(circle at 20% 0%, var(--gold-200) 0%, transparent 50%),
-      radial-gradient(circle at 80% 100%, var(--gold-200) 0%, transparent 50%),
-      var(--gold-50);
-  }
-  .login-card {
-    width: 100%; max-width: 400px;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    padding: 40px 32px;
-    box-shadow: var(--shadow-lift);
-    text-align: center;
-  }
-  .login-monogram {
-    width: 64px; height: 64px;
-    margin: 0 auto 20px;
-    border-radius: 50%;
-    background: var(--gold-100);
-    border: 1.5px solid var(--gold-300);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px; font-weight: 600;
-    color: var(--gold-700);
-  }
-  .login-title {
-    font-size: 26px;
-    color: var(--gold-700);
-    margin: 0 0 6px;
-  }
-  .login-subtitle {
-    color: var(--ink-soft);
-    font-size: 13px;
-    margin: 0 0 28px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-  .field { text-align: left; margin-bottom: 18px; }
-  .field label {
-    display: block;
-    font-size: 12px;
-    color: var(--ink-soft);
-    margin-bottom: 6px;
-    font-weight: 500;
-    letter-spacing: 0.3px;
-  }
-  .field input, .field select {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    background: var(--paper);
-    color: var(--ink);
-    font-size: 15px;
-    transition: border-color 0.15s, box-shadow 0.15s;
-  }
-  .field input:focus, .field select:focus {
-    outline: none;
-    border-color: var(--gold-500);
-    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.15);
-  }
-  .btn-primary {
-    width: 100%;
-    padding: 13px 16px;
-    border: none;
-    border-radius: var(--radius-sm);
-    background: var(--gold-700);
-    color: var(--paper);
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: 0.3px;
-    transition: background 0.15s, transform 0.05s;
-  }
-  .btn-primary:hover { background: var(--gold-900); }
-  .btn-primary:active { transform: scale(0.99); }
-  .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
-  .login-error {
-    background: var(--danger-soft);
-    color: var(--danger);
-    padding: 10px 12px;
-    border-radius: var(--radius-sm);
-    font-size: 13px;
-    margin-bottom: 16px;
-    display: none;
-  }
-  .login-error.show { display: block; }
-
-  /* =================== PAINEL =================== */
-  .app { display: none; }
-  .app.show { display: block; }
-
+  /* ========== TOPBAR ========== */
   .topbar {
     background: var(--paper);
     border-bottom: 1px solid var(--line);
-    padding: 14px 20px;
+    padding: 12px 20px;
     display: flex; align-items: center; justify-content: space-between;
     position: sticky; top: 0; z-index: 50;
     backdrop-filter: blur(8px);
+    gap: 12px;
   }
-  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
   .brand-monogram {
     width: 38px; height: 38px;
     border-radius: 50%;
@@ -169,37 +69,67 @@
     font-family: 'Cormorant Garamond', serif;
     font-size: 18px; font-weight: 600;
     color: var(--gold-700);
+    flex-shrink: 0;
   }
-  .brand-text { line-height: 1.1; }
   .brand-text .title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    color: var(--gold-700);
-    font-weight: 600;
+    font-size: 18px; color: var(--gold-700); font-weight: 600; line-height:1.1;
   }
   .brand-text .sub {
-    font-size: 11px;
-    color: var(--ink-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
+    font-size: 10px; color: var(--ink-soft);
+    text-transform: uppercase; letter-spacing: 0.6px;
   }
-  .btn-logout {
-    background: transparent;
+
+  /* seletor de mês direto na topbar */
+  .topbar-mes {
+    display: flex; align-items: center; gap: 8px; flex: 1; justify-content: flex-end;
+  }
+  .topbar-mes label {
+    font-size: 11px; color: var(--ink-soft);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+  .topbar select {
+    padding: 8px 32px 8px 12px;
     border: 1px solid var(--line);
     border-radius: var(--radius-sm);
-    color: var(--ink-soft);
-    padding: 8px 14px;
-    font-size: 13px;
+    background: var(--gold-50) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237F6000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>") no-repeat right 10px center;
+    -webkit-appearance: none; appearance: none;
+    color: var(--ink);
+    font-size: 14px; font-weight: 500;
+    cursor: pointer;
+    min-width: 130px;
+    max-width: 180px;
   }
-  .btn-logout:hover { background: var(--gold-50); color: var(--gold-700); }
+  .topbar select:focus { outline: none; border-color: var(--gold-500); }
 
+  /* ========== CONTAINER ========== */
   .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 24px 20px 48px;
+    padding: 24px 20px 60px;
   }
 
-  /* Cards de métricas */
+  /* ========== ERRO DE CONFIG ========== */
+  .config-alert {
+    background: var(--danger-soft);
+    border: 1px solid var(--danger);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    color: var(--danger);
+    display: none;
+  }
+  .config-alert.show { display: block; }
+  .config-alert strong { display: block; margin-bottom: 6px; font-size: 15px; }
+  .config-alert code {
+    background: rgba(178,58,72,0.1);
+    padding: 2px 6px; border-radius: 4px;
+    font-family: monospace; font-size: 13px;
+  }
+
+  /* ========== CARDS MÉTRICAS ========== */
   .metrics {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -210,62 +140,87 @@
     background: var(--paper);
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    padding: 18px 18px;
+    padding: 18px;
     box-shadow: var(--shadow-soft);
+    position: relative;
+    overflow: hidden;
   }
+  .metric-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold-300);
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .metric-card.received::before { background: var(--success); }
+  .metric-card.pending::before  { background: var(--warn); }
   .metric-card .label {
-    font-size: 11px;
-    color: var(--ink-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    font-weight: 500;
-    margin-bottom: 8px;
+    font-size: 11px; color: var(--ink-soft);
+    text-transform: uppercase; letter-spacing: 0.6px;
+    font-weight: 500; margin-bottom: 8px;
   }
   .metric-card .value {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    font-weight: 600;
-    color: var(--gold-700);
-    line-height: 1;
+    font-size: 28px; font-weight: 600;
+    color: var(--gold-700); line-height: 1;
   }
   .metric-card.received .value { color: var(--success); }
-  .metric-card.pending .value { color: var(--warn); }
-
-  /* Filtros */
-  .toolbar {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    align-items: center;
+  .metric-card.pending  .value { color: var(--warn); }
+  .metric-card .sub {
+    font-size: 11px; color: var(--ink-soft); margin-top: 4px;
   }
-  .toolbar select {
-    padding: 11px 36px 11px 14px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    background: var(--paper) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237F6000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>") no-repeat right 12px center;
-    -webkit-appearance: none; appearance: none;
-    color: var(--ink);
-    font-size: 14px;
-    min-width: 180px;
-    cursor: pointer;
+
+  /* Barra de progresso */
+  .progress-wrap { margin-top: 10px; }
+  .progress-bar {
+    height: 4px; background: var(--line);
+    border-radius: 10px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-300), var(--gold-700));
+    border-radius: 10px;
+    transition: width 0.5s ease;
+  }
+
+  /* ========== TOOLBAR ========== */
+  .toolbar {
+    display: flex; gap: 10px;
+    margin-bottom: 18px;
+    flex-wrap: wrap; align-items: center;
   }
   .btn-add {
     margin-left: auto;
     background: var(--gold-700);
     color: var(--paper);
     border: none;
-    padding: 11px 18px;
+    padding: 10px 18px;
     border-radius: var(--radius-sm);
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 14px; font-weight: 500;
     display: flex; align-items: center; gap: 6px;
     transition: background 0.15s;
+    white-space: nowrap;
   }
   .btn-add:hover { background: var(--gold-900); }
-  .btn-add::before { content: "+"; font-size: 18px; font-weight: 400; line-height: 1; }
+  .btn-add svg { width: 16px; height: 16px; }
 
-  /* Tabela / Lista de jobs */
+  /* search */
+  .search-wrap { position: relative; flex: 1; min-width: 140px; max-width: 260px; }
+  .search-wrap svg {
+    position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+    width: 15px; height: 15px; color: var(--ink-soft); pointer-events: none;
+  }
+  .search-input {
+    width: 100%;
+    padding: 9px 12px 9px 32px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--paper);
+    color: var(--ink); font-size: 14px;
+  }
+  .search-input:focus { outline: none; border-color: var(--gold-500); }
+
+  /* ========== TABELA ========== */
   .jobs-card {
     background: var(--paper);
     border: 1px solid var(--line);
@@ -275,21 +230,18 @@
   }
   .jobs-header {
     display: grid;
-    grid-template-columns: minmax(0, 2fr) 130px 130px 1fr 110px;
+    grid-template-columns: minmax(0,2fr) 130px 150px 1fr 100px;
     gap: 14px;
-    padding: 14px 20px;
+    padding: 12px 20px;
     background: var(--gold-100);
     border-bottom: 1px solid var(--gold-200);
     font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    color: var(--gold-700);
-    font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--gold-700); font-weight: 600;
   }
-  .jobs-list { padding: 4px 0; }
   .job-row {
     display: grid;
-    grid-template-columns: minmax(0, 2fr) 130px 130px 1fr 110px;
+    grid-template-columns: minmax(0,2fr) 130px 150px 1fr 100px;
     gap: 14px;
     padding: 14px 20px;
     border-bottom: 1px solid var(--line);
@@ -299,17 +251,15 @@
   .job-row:last-child { border-bottom: none; }
   .job-row:hover { background: var(--gold-50); }
   .job-origem {
-    font-weight: 500;
-    color: var(--ink);
+    font-weight: 500; color: var(--ink);
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
   .job-valor {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 19px;
-    font-weight: 600;
-    color: var(--gold-700);
+    font-size: 19px; font-weight: 600; color: var(--gold-700);
   }
-  /* Switch PAGO/PENDENTE */
+
+  /* Switch */
   .switch {
     position: relative;
     display: inline-flex; align-items: center;
@@ -340,34 +290,25 @@
   }
   .switch input:checked ~ .switch-track::after { transform: translateX(20px); }
   .switch-label {
-    margin-left: 10px;
-    font-size: 12px;
-    color: var(--ink-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
-    font-weight: 500;
-    min-width: 56px;
+    margin-left: 8px;
+    font-size: 12px; color: var(--warn);
+    text-transform: uppercase; letter-spacing: 0.4px;
+    font-weight: 500; min-width: 56px;
   }
   .switch input:checked ~ .switch-label { color: var(--success); }
-  .switch:not(:has(input:checked)) .switch-label { color: var(--warn); }
 
-  /* Entregas (chips) */
-  .entregas { display: flex; gap: 6px; flex-wrap: wrap; }
+  /* Chips de entregas */
+  .entregas { display: flex; gap: 5px; flex-wrap: wrap; }
   .chip {
-    background: var(--gold-100);
-    color: var(--gold-700);
-    padding: 3px 9px;
-    border-radius: 100px;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
+    background: var(--gold-100); color: var(--gold-700);
+    padding: 3px 8px; border-radius: 100px;
+    font-size: 11px; font-weight: 600;
     border: 1px solid var(--gold-200);
   }
   .chip.empty { background: transparent; color: var(--ink-soft); border-color: transparent; opacity: 0.5; }
-  .chip-icon { opacity: 0.65; margin-right: 2px; }
 
   /* Ações */
-  .row-actions { display: flex; gap: 6px; justify-content: flex-end; }
+  .row-actions { display: flex; gap: 5px; justify-content: flex-end; }
   .icon-btn {
     width: 32px; height: 32px;
     border: 1px solid var(--line);
@@ -381,22 +322,12 @@
   .icon-btn.danger:hover { background: var(--danger-soft); color: var(--danger); border-color: var(--danger); }
   .icon-btn svg { width: 14px; height: 14px; }
 
-  .empty-state {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--ink-soft);
-  }
-  .empty-state .ico {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 48px;
-    color: var(--gold-300);
-    margin-bottom: 8px;
-  }
-
-  /* Loader */
+  /* Empty/Loader */
+  .empty-state { text-align: center; padding: 56px 20px; color: var(--ink-soft); }
+  .empty-state .ico { font-family: 'Cormorant Garamond', serif; font-size: 48px; color: var(--gold-300); margin-bottom: 8px; }
   .loader-wrap { display: flex; justify-content: center; padding: 40px; }
   .loader {
-    width: 36px; height: 36px;
+    width: 34px; height: 34px;
     border: 3px solid var(--gold-200);
     border-top-color: var(--gold-700);
     border-radius: 50%;
@@ -404,27 +335,23 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* =================== MODAL =================== */
+  /* ========== MODAL ========== */
   .modal-backdrop {
     position: fixed; inset: 0;
-    background: rgba(42, 36, 25, 0.45);
+    background: rgba(42,36,25,0.45);
     backdrop-filter: blur(4px);
-    display: none;
-    align-items: flex-end; justify-content: center;
+    display: none; align-items: flex-end; justify-content: center;
     z-index: 100;
-    padding: 0;
   }
   .modal-backdrop.show { display: flex; }
   .modal {
     background: var(--paper);
     border-radius: 20px 20px 0 0;
-    width: 100%;
-    max-width: 520px;
-    max-height: 92vh;
-    overflow-y: auto;
+    width: 100%; max-width: 520px;
+    max-height: 92dvh; overflow-y: auto;
     padding: 24px;
     padding-bottom: calc(24px + env(safe-area-inset-bottom));
-    animation: slideUp 0.25s cubic-bezier(0.2, 0.9, 0.3, 1);
+    animation: slideUp 0.25s cubic-bezier(0.2,0.9,0.3,1);
   }
   @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
   .modal-handle {
@@ -433,213 +360,196 @@
     border-radius: 100px;
     margin: -8px auto 16px;
   }
-  .modal-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 24px;
-    color: var(--gold-700);
-    margin: 0 0 4px;
+  .modal-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--gold-700); margin: 0 0 4px; }
+  .modal-sub { font-size: 12px; color: var(--ink-soft); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 12px; color: var(--ink-soft); margin-bottom: 6px; font-weight: 500; }
+  .field input, .field select {
+    width: 100%; padding: 11px 14px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm);
+    background: var(--paper); color: var(--ink); font-size: 15px;
+    transition: border-color 0.15s;
   }
-  .modal-sub {
-    font-size: 12px;
-    color: var(--ink-soft);
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .modal .field { margin-bottom: 14px; }
+  .field input:focus, .field select:focus { outline: none; border-color: var(--gold-500); box-shadow: 0 0 0 3px rgba(201,169,97,0.15); }
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-  .modal-actions {
-    display: flex; gap: 10px; margin-top: 20px;
-    padding-top: 16px;
-    border-top: 1px solid var(--line);
-  }
+  .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+  .modal-actions { display: flex; gap: 10px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
   .modal-actions .btn-primary { flex: 1; margin: 0; }
-  .btn-secondary {
-    padding: 13px 20px;
-    border: 1px solid var(--line);
-    background: var(--paper);
-    color: var(--ink-soft);
+  .btn-primary {
+    width: 100%; padding: 13px 16px; border: none;
     border-radius: var(--radius-sm);
-    font-weight: 500;
+    background: var(--gold-700); color: var(--paper);
+    font-size: 15px; font-weight: 500;
+    transition: background 0.15s;
+  }
+  .btn-primary:hover { background: var(--gold-900); }
+  .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+  .btn-secondary {
+    padding: 13px 20px; border: 1px solid var(--line);
+    background: var(--paper); color: var(--ink-soft);
+    border-radius: var(--radius-sm); font-weight: 500;
   }
   .btn-secondary:hover { background: var(--gold-50); }
 
-  /* Modal de confirmação */
+  /* Modal confirmar */
+  .modal-backdrop.confirm { align-items: center; padding: 20px; }
   .confirm-modal {
-    max-width: 380px;
-    border-radius: var(--radius);
-    margin: auto;
-    text-align: center;
+    max-width: 380px; border-radius: var(--radius);
+    margin: auto; text-align: center;
     padding: 28px 24px;
     padding-bottom: calc(24px + env(safe-area-inset-bottom));
   }
-  .modal-backdrop.confirm { align-items: center; padding: 20px; }
   .confirm-icon {
-    width: 56px; height: 56px;
-    border-radius: 50%;
-    background: var(--danger-soft);
-    color: var(--danger);
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--danger-soft); color: var(--danger);
     display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 14px;
-    font-size: 28px;
+    margin: 0 auto 14px; font-size: 28px; font-weight: 700;
   }
   .confirm-text { color: var(--ink-soft); margin: 0 0 18px; }
   .confirm-text strong { color: var(--ink); }
-  .btn-danger {
-    background: var(--danger);
-    color: white;
-  }
+  .btn-danger { background: var(--danger); color: white; }
   .btn-danger:hover { background: #8E2C38; }
 
   /* Toast */
   .toast {
     position: fixed;
-    left: 50%; bottom: calc(24px + env(safe-area-inset-bottom));
+    left: 50%;
+    bottom: calc(24px + env(safe-area-inset-bottom));
     transform: translateX(-50%) translateY(20px);
-    background: var(--ink);
-    color: var(--paper);
-    padding: 12px 20px;
-    border-radius: 100px;
-    font-size: 13px;
-    box-shadow: var(--shadow-lift);
-    opacity: 0;
-    pointer-events: none;
+    background: var(--ink); color: var(--paper);
+    padding: 12px 22px; border-radius: 100px;
+    font-size: 13px; box-shadow: var(--shadow-lift);
+    opacity: 0; pointer-events: none;
     transition: opacity 0.2s, transform 0.2s;
-    z-index: 200;
-    max-width: calc(100% - 40px);
+    z-index: 200; max-width: calc(100% - 40px);
+    white-space: nowrap;
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .toast.error { background: var(--danger); }
+  .toast.error   { background: var(--danger); }
   .toast.success { background: var(--success); }
 
-  /* =================== MOBILE =================== */
+  /* ========== MOBILE ========== */
   @media (max-width: 720px) {
-    .container { padding: 16px 14px 40px; }
-    .topbar { padding: 12px 14px; }
+    .container { padding: 16px 14px 50px; }
+    .topbar { padding: 10px 14px; }
     .brand-text .title { font-size: 16px; }
-    .brand-text .sub { font-size: 10px; }
-    .metrics { grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px; }
-    .metric-card { padding: 14px 16px; }
-    .metric-card .value { font-size: 24px; }
-    .toolbar { gap: 10px; }
-    .toolbar select { flex: 1; min-width: 0; }
-    .btn-add { margin-left: 0; width: 100%; justify-content: center; }
-
-    /* Lista vira cards no mobile */
+    .topbar-mes label { display: none; }
+    .topbar select { min-width: 110px; font-size: 13px; }
+    .metrics { grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
+    .metrics .metric-card:first-child { grid-column: span 2; }
+    .metric-card .value { font-size: 22px; }
     .jobs-header { display: none; }
     .job-row {
       grid-template-columns: 1fr auto;
       grid-template-areas:
-        "origem actions"
-        "valor switch"
+        "origem  actions"
+        "valor   switch"
         "entregas entregas";
-      gap: 10px;
-      padding: 16px;
-      border-bottom: 1px solid var(--line);
+      gap: 8px; padding: 14px 16px;
     }
-    .job-origem { grid-area: origem; font-size: 15px; white-space: normal; }
-    .job-valor { grid-area: valor; font-size: 22px; }
-    .job-switch { grid-area: switch; justify-self: end; }
-    .job-entregas { grid-area: entregas; padding-top: 4px; border-top: 1px dashed var(--line); margin-top: 4px; }
+    .job-origem  { grid-area: origem; white-space: normal; }
+    .job-valor   { grid-area: valor; font-size: 20px; }
+    .job-switch  { grid-area: switch; justify-self: end; }
+    .job-entregas{ grid-area: entregas; padding-top: 6px; border-top: 1px dashed var(--line); }
     .row-actions { grid-area: actions; }
-
-    .modal { border-radius: 18px 18px 0 0; padding: 20px; }
-    .modal-title { font-size: 22px; }
+    .search-wrap { max-width: 100%; }
+    .btn-add { margin-left: 0; width: 100%; justify-content: center; }
+    .toolbar { flex-direction: column; align-items: stretch; }
     .grid-4 { grid-template-columns: 1fr 1fr; }
+    .modal { border-radius: 18px 18px 0 0; }
   }
 </style>
 </head>
 <body>
 
-<!-- ================= LOGIN ================= -->
-<div class="login-wrap" id="loginScreen">
-  <div class="login-card">
-    <div class="login-monogram">JM</div>
-    <h1 class="login-title">Jobs Jamille Mariah</h1>
-    <p class="login-subtitle">Publicidade & Parcerias</p>
-
-    <div class="login-error" id="loginError"></div>
-
-    <div class="field">
-      <label for="loginSenha">Senha de acesso</label>
-      <input type="password" id="loginSenha" placeholder="Digite sua senha" autocomplete="current-password" />
+<!-- ========== TOPBAR ========== -->
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-monogram">JM</div>
+    <div class="brand-text">
+      <div class="title">Jobs Jamille Mariah</div>
+      <div class="sub">Publicidade & Parcerias</div>
     </div>
-
-    <button class="btn-primary" id="btnLogin">Entrar</button>
   </div>
+  <div class="topbar-mes">
+    <label for="selectMes">Mês</label>
+    <select id="selectMes"><option>Carregando…</option></select>
+  </div>
+</header>
+
+<!-- ========== PAINEL ========== -->
+<div class="container">
+
+  <!-- Alerta de configuração -->
+  <div class="config-alert" id="configAlert">
+    <strong>⚠️ URL do servidor não configurada</strong>
+    Abra o arquivo <code>index.html</code>, encontre a linha com <code>API_URL</code>
+    e cole a URL do seu Google Apps Script (termina com <code>/exec</code>).
+  </div>
+
+  <!-- Métricas -->
+  <div class="metrics">
+    <div class="metric-card">
+      <div class="label">Total Acordado</div>
+      <div class="value" id="mTotal">R$ 0</div>
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="progress-fill" id="mProgress" style="width:0%"></div></div>
+        <div class="sub" id="mPct" style="margin-top:5px;">0% recebido</div>
+      </div>
+    </div>
+    <div class="metric-card received">
+      <div class="label">Total Pago</div>
+      <div class="value" id="mPago">R$ 0</div>
+      <div class="sub" id="mPagoQt"></div>
+    </div>
+    <div class="metric-card pending">
+      <div class="label">A Receber</div>
+      <div class="value" id="mReceber">R$ 0</div>
+      <div class="sub" id="mReceberQt"></div>
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="search-input" id="searchInput" placeholder="Buscar cliente…" oninput="filtrarJobs()">
+    </div>
+    <button class="btn-add" id="btnNovoJob">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Novo Job
+    </button>
+  </div>
+
+  <!-- Tabela -->
+  <div class="jobs-card">
+    <div class="jobs-header">
+      <div>Origem / Cliente</div>
+      <div>Valor</div>
+      <div>Situação</div>
+      <div>Entregas</div>
+      <div style="text-align:right;">Ações</div>
+    </div>
+    <div class="jobs-list" id="jobsList">
+      <div class="loader-wrap"><div class="loader"></div></div>
+    </div>
+  </div>
+
 </div>
 
-<!-- ================= PAINEL ================= -->
-<div class="app" id="app">
-
-  <header class="topbar">
-    <div class="brand">
-      <div class="brand-monogram">JM</div>
-      <div class="brand-text">
-        <div class="title">Jobs Jamille Mariah</div>
-        <div class="sub">Painel de Controle</div>
-      </div>
-    </div>
-    <button class="btn-logout" id="btnLogout">Sair</button>
-  </header>
-
-  <div class="container">
-
-    <!-- Métricas -->
-    <div class="metrics">
-      <div class="metric-card">
-        <div class="label">Total Acordado</div>
-        <div class="value" id="mTotal">R$ 0</div>
-      </div>
-      <div class="metric-card received">
-        <div class="label">Total Pago</div>
-        <div class="value" id="mPago">R$ 0</div>
-      </div>
-      <div class="metric-card pending">
-        <div class="label">A Receber</div>
-        <div class="value" id="mReceber">R$ 0</div>
-      </div>
-    </div>
-
-    <!-- Filtros -->
-    <div class="toolbar">
-      <select id="selectMes"><option>Carregando...</option></select>
-      <button class="btn-add" id="btnNovoJob">Novo Job</button>
-    </div>
-
-    <!-- Tabela -->
-    <div class="jobs-card">
-      <div class="jobs-header">
-        <div>Origem / Cliente</div>
-        <div>Valor</div>
-        <div>Situação</div>
-        <div>Entregas</div>
-        <div style="text-align:right;">Ações</div>
-      </div>
-      <div class="jobs-list" id="jobsList">
-        <div class="loader-wrap"><div class="loader"></div></div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ================= MODAL JOB (criar/editar) ================= -->
+<!-- ========== MODAL CRIAR/EDITAR ========== -->
 <div class="modal-backdrop" id="modalJob">
   <div class="modal">
     <div class="modal-handle"></div>
     <h2 class="modal-title" id="modalTitulo">Novo Job</h2>
     <p class="modal-sub" id="modalSub">Cadastrar parceria</p>
-
     <div class="field">
-      <label>Origem / Cliente</label>
-      <input type="text" id="fOrigem" placeholder="Ex: La Vie, Império das Joias..." />
+      <label>Origem / Cliente *</label>
+      <input type="text" id="fOrigem" placeholder="Ex: La Vie, Império das Joias…" autocapitalize="words" />
     </div>
-
     <div class="grid-2">
       <div class="field">
-        <label>Valor (R$)</label>
+        <label>Valor (R$) *</label>
         <input type="number" id="fValor" step="0.01" min="0" placeholder="0,00" inputmode="decimal" />
       </div>
       <div class="field">
@@ -650,27 +560,13 @@
         </select>
       </div>
     </div>
-
-    <p class="modal-sub" style="margin-top:8px;">Entregas (opcional)</p>
+    <p class="modal-sub" style="margin-top:4px;">Entregas (opcional)</p>
     <div class="grid-4">
-      <div class="field">
-        <label>Visitas</label>
-        <input type="number" id="fVisitas" min="0" placeholder="0" inputmode="numeric" />
-      </div>
-      <div class="field">
-        <label>Stories</label>
-        <input type="number" id="fStories" min="0" placeholder="0" inputmode="numeric" />
-      </div>
-      <div class="field">
-        <label>Reels</label>
-        <input type="number" id="fReels" min="0" placeholder="0" inputmode="numeric" />
-      </div>
-      <div class="field">
-        <label>Posts</label>
-        <input type="number" id="fPosts" min="0" placeholder="0" inputmode="numeric" />
-      </div>
+      <div class="field"><label>Visitas</label><input type="number" id="fVisitas" min="0" placeholder="0" inputmode="numeric" /></div>
+      <div class="field"><label>Stories</label><input type="number" id="fStories" min="0" placeholder="0" inputmode="numeric" /></div>
+      <div class="field"><label>Reels</label><input type="number" id="fReels" min="0" placeholder="0" inputmode="numeric" /></div>
+      <div class="field"><label>Posts</label><input type="number" id="fPosts" min="0" placeholder="0" inputmode="numeric" /></div>
     </div>
-
     <div class="modal-actions">
       <button class="btn-secondary" id="btnCancelarJob">Cancelar</button>
       <button class="btn-primary" id="btnSalvarJob">Salvar</button>
@@ -678,12 +574,12 @@
   </div>
 </div>
 
-<!-- ================= MODAL CONFIRMAÇÃO ================= -->
+<!-- ========== MODAL CONFIRMAR DELETE ========== -->
 <div class="modal-backdrop confirm" id="modalConfirm">
   <div class="modal confirm-modal">
     <div class="confirm-icon">!</div>
     <h2 class="modal-title">Excluir Job?</h2>
-    <p class="confirm-text">Esta ação removerá <strong id="confirmNome">o job</strong> permanentemente da planilha. Não é possível desfazer.</p>
+    <p class="confirm-text">Isso removerá <strong id="confirmNome">o job</strong> permanentemente da planilha.</p>
     <div class="modal-actions">
       <button class="btn-secondary" id="btnCancelarExcluir" style="flex:1;">Cancelar</button>
       <button class="btn-primary btn-danger" id="btnConfirmarExcluir" style="flex:1;">Excluir</button>
@@ -691,89 +587,64 @@
   </div>
 </div>
 
-<!-- ================= TOAST ================= -->
+<!-- ========== TOAST ========== -->
 <div class="toast" id="toast"></div>
 
 <script>
 /* ============================================================
-   CONFIGURAÇÃO — cole aqui a URL do seu Web App publicado
-   (termina com /exec)
-
-   IMPORTANTE: Para testar localmente, abra via servidor HTTP:
-     - VS Code: instale "Live Server" e clique em "Go Live"
-     - Python: python -m http.server 8080  (e acesse localhost:8080)
-   Abrir direto como arquivo (file://) causa erros de CORS.
+   CONFIGURAÇÃO
+   Cole aqui a URL do seu Google Apps Script (termina com /exec)
    ============================================================ */
-const API_URL = 'https://script.google.com/macros/s/AKfycbzNFUcP9U1VFn3TBFM4hDSVyOKJwyNgySXQvNVSR2AEJ91RBA6dgLNmVDjb2HVN_eP_/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbwphgVV_ZyDTCz36p6dvCtLi_WYbW35Kuxc5-juA91OWlujUJqcW0yzh1LIX9PefBg8/exec';
 
 /* ============================================================
-   ESTADO GLOBAL
+   ESTADO
    ============================================================ */
 const state = {
-  token: null,
   abas: [],
   abaAtual: null,
   jobs: [],
+  todosjobs: [],   // cache sem filtro
   editandoLinha: null,
   excluindoLinha: null
 };
 
 /* ============================================================
-   ARMAZENAMENTO LOCAL
-   Usa localStorage (funciona em file://, http:// e https://).
-   sessionStorage falha quando o HTML é aberto como arquivo local.
-   ============================================================ */
-function storageGet(key) {
-  try { return localStorage.getItem(key); } catch(e) { return null; }
-}
-function storageSet(key, val) {
-  try { localStorage.setItem(key, val); } catch(e) {}
-}
-function storageRemove(key) {
-  try { localStorage.removeItem(key); } catch(e) {}
-}
-
-/* ============================================================
-   COMUNICAÇÃO COM A API
-   Usamos GET com query string para evitar preflight CORS.
-   O Google Apps Script publicado como "Qualquer pessoa" aceita
-   requisições de qualquer origem via GET.
-
-   ATENÇÃO: Se estiver abrindo como file://, o Chrome bloqueia
-   fetch para qualquer URL externa. Suba para o Cloudflare Pages
-   ou use um servidor local (Live Server / python -m http.server).
+   API — GET com query string (evita preflight CORS)
+   O Apps Script publicado como "Qualquer pessoa" responde
+   com redirect 302 → fetch com redirect:'follow' resolve isso.
    ============================================================ */
 async function api(acao, params = {}) {
   if (!API_URL || API_URL.includes('COLE_AQUI')) {
-    throw new Error('Cole a URL do Web App no index.html (linha com API_URL).');
+    document.getElementById('configAlert').classList.add('show');
+    throw new Error('URL do servidor não configurada.');
   }
 
-  // Monta query string com todos os parâmetros
   const qs = new URLSearchParams({ acao, ...params });
-  const url = `${API_URL}?${qs.toString()}`;
 
+  // Tenta com no-cors como fallback — Apps Script às vezes redireciona
   let resp;
   try {
-    resp = await fetch(url, {
+    resp = await fetch(`${API_URL}?${qs}`, {
       method: 'GET',
       redirect: 'follow',
-      // mode: 'cors' é o padrão — o Apps Script já envia os headers corretos
     });
   } catch (err) {
-    // Erro de rede ou CORS — dá uma mensagem mais amigável
-    if (err.message && err.message.toLowerCase().includes('failed to fetch')) {
-      throw new Error(
-        'Não foi possível conectar ao servidor. ' +
-        'Se estiver abrindo o arquivo diretamente (file://), ' +
-        'use o Live Server do VS Code ou suba para o Cloudflare Pages.'
-      );
-    }
-    throw err;
+    throw new Error(
+      'Falha de rede. Verifique se a URL do Apps Script está correta ' +
+      'e se o Web App está publicado como "Qualquer pessoa".'
+    );
   }
 
   if (!resp.ok) throw new Error(`Erro HTTP ${resp.status}`);
 
-  const data = await resp.json();
+  let data;
+  try {
+    data = await resp.json();
+  } catch {
+    throw new Error('Resposta inválida do servidor (não é JSON). Republique o Apps Script.');
+  }
+
   if (!data.ok) throw new Error(data.erro || 'Erro desconhecido da API');
   return data;
 }
@@ -781,63 +652,33 @@ async function api(acao, params = {}) {
 /* ============================================================
    UTILS
    ============================================================ */
-const $ = (id) => document.getElementById(id);
-const fmtBRL = (n) => 'R$ ' + Number(n || 0).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
-const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const $  = id => document.getElementById(id);
+const fmtBRL = n => 'R$ ' + Number(n||0).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+const esc    = s => String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-let toastTimer;
+let _toastT;
 function toast(msg, tipo = '') {
   const el = $('toast');
   el.textContent = msg;
   el.className = 'toast show ' + tipo;
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove('show'), 3000);
+  clearTimeout(_toastT);
+  _toastT = setTimeout(() => el.classList.remove('show'), 3000);
 }
 
 /* ============================================================
-   LOGIN
+   INICIALIZAÇÃO — carrega direto sem login
    ============================================================ */
-$('btnLogin').addEventListener('click', fazerLogin);
-$('loginSenha').addEventListener('keydown', (e) => { if (e.key === 'Enter') fazerLogin(); });
-
-async function fazerLogin() {
-  const senha = $('loginSenha').value.trim();
-  const erro  = $('loginError');
-  const btn   = $('btnLogin');
-
-  erro.classList.remove('show');
-  if (!senha) { erro.textContent = 'Digite a senha.'; erro.classList.add('show'); return; }
-
-  btn.disabled = true; btn.textContent = 'Entrando...';
-  try {
-    const r = await api('login', { senha });
-    state.token = r.token;
-    storageSet('jm_token', r.token);   // ← localStorage (não sessionStorage)
-    mostrarPainel();
-  } catch (e) {
-    erro.textContent = e.message || 'Erro ao entrar.';
-    erro.classList.add('show');
-  } finally {
-    btn.disabled = false; btn.textContent = 'Entrar';
+window.addEventListener('DOMContentLoaded', () => {
+  if (!API_URL || API_URL.includes('COLE_AQUI')) {
+    $('configAlert').classList.add('show');
+    $('jobsList').innerHTML = '<div class="empty-state"><div class="ico">⚙</div><p>Configure a URL do servidor no index.html</p></div>';
+    return;
   }
-}
-
-$('btnLogout').addEventListener('click', () => {
-  storageRemove('jm_token');
-  state.token = null;
-  $('app').classList.remove('show');
-  $('loginScreen').style.display = 'flex';
-  $('loginSenha').value = '';
+  carregarAbas();
 });
 
-function mostrarPainel() {
-  $('loginScreen').style.display = 'none';
-  $('app').classList.add('show');
-  carregarAbas();
-}
-
 /* ============================================================
-   CARREGAR ABAS (MESES)
+   ABAS (MESES)
    ============================================================ */
 async function carregarAbas() {
   try {
@@ -845,12 +686,12 @@ async function carregarAbas() {
     state.abas = r.abas;
 
     const sel = $('selectMes');
-    sel.innerHTML = r.abas.map((a) =>
+    sel.innerHTML = r.abas.map(a =>
       `<option value="${esc(a.nomeOriginal)}">${esc(a.nome)}</option>`
     ).join('');
 
-    if (r.abas.length === 0) {
-      $('jobsList').innerHTML = `<div class="empty-state"><div class="ico">∅</div><p>Nenhuma aba encontrada.</p></div>`;
+    if (!r.abas.length) {
+      $('jobsList').innerHTML = '<div class="empty-state"><div class="ico">∅</div><p>Nenhuma aba de mês encontrada na planilha.</p></div>';
       return;
     }
 
@@ -859,17 +700,18 @@ async function carregarAbas() {
     carregarJobs();
   } catch (e) {
     toast('Erro: ' + e.message, 'error');
-    $('jobsList').innerHTML = `<div class="empty-state"><div class="ico">!</div><p>Não foi possível carregar.<br><small>${esc(e.message)}</small></p></div>`;
+    $('jobsList').innerHTML = `<div class="empty-state"><div class="ico">!</div><p>${esc(e.message)}</p></div>`;
   }
 }
 
-$('selectMes').addEventListener('change', (e) => {
+$('selectMes').addEventListener('change', e => {
   state.abaAtual = e.target.value;
+  $('searchInput').value = '';
   carregarJobs();
 });
 
 /* ============================================================
-   CARREGAR JOBS DO MÊS
+   JOBS DO MÊS
    ============================================================ */
 async function carregarJobs() {
   if (!state.abaAtual) return;
@@ -877,6 +719,7 @@ async function carregarJobs() {
 
   try {
     const r = await api('listarJobs', { aba: state.abaAtual });
+    state.todosjobs = r.jobs;
     state.jobs = r.jobs;
     renderMetricas(r.metricas);
     renderJobs(r.jobs);
@@ -886,34 +729,56 @@ async function carregarJobs() {
   }
 }
 
+function filtrarJobs() {
+  const q = $('searchInput').value.toLowerCase().trim();
+  state.jobs = q
+    ? state.todosjobs.filter(j => j.origem.toLowerCase().includes(q))
+    : state.todosjobs;
+  renderJobs(state.jobs);
+}
+
+/* ============================================================
+   RENDER MÉTRICAS
+   ============================================================ */
 function renderMetricas(m) {
   $('mTotal').textContent   = fmtBRL(m.totalAcordado);
   $('mPago').textContent    = fmtBRL(m.totalPago);
   $('mReceber').textContent = fmtBRL(m.totalReceber);
+
+  const pct = m.totalAcordado > 0 ? Math.round(m.totalPago / m.totalAcordado * 100) : 0;
+  $('mProgress').style.width = pct + '%';
+  $('mPct').textContent = pct + '% recebido';
+
+  const pagos    = state.todosjobs.filter(j => j.situacao === 'PAGO').length;
+  const pendente = state.todosjobs.length - pagos;
+  $('mPagoQt').textContent    = pagos    + (pagos === 1 ? ' job pago' : ' jobs pagos');
+  $('mReceberQt').textContent = pendente + (pendente === 1 ? ' pendente' : ' pendentes');
 }
 
+/* ============================================================
+   RENDER JOBS
+   ============================================================ */
 function renderJobs(jobs) {
   const list = $('jobsList');
   if (!jobs.length) {
-    list.innerHTML = `<div class="empty-state"><div class="ico">∅</div><p>Nenhum job cadastrado neste mês.<br><small>Clique em "Novo Job" para adicionar.</small></p></div>`;
+    list.innerHTML = '<div class="empty-state"><div class="ico">∅</div><p>Nenhum job encontrado.<br><small>Clique em "Novo Job" para adicionar.</small></p></div>';
     return;
   }
 
-  list.innerHTML = jobs.map((j) => {
+  list.innerHTML = jobs.map(j => {
     const pago = j.situacao === 'PAGO';
-    const entregas = renderEntregas(j);
     return `
     <div class="job-row" data-linha="${j.linha}">
       <div class="job-origem">${esc(j.origem)}</div>
       <div class="job-valor">${fmtBRL(j.valor)}</div>
       <div class="job-switch">
-        <label class="switch" data-linha="${j.linha}">
+        <label class="switch">
           <input type="checkbox" ${pago ? 'checked' : ''} onchange="toggleSituacao(${j.linha}, this.checked)" />
           <span class="switch-track"></span>
           <span class="switch-label">${pago ? 'Pago' : 'Pendente'}</span>
         </label>
       </div>
-      <div class="job-entregas entregas">${entregas}</div>
+      <div class="job-entregas entregas">${renderChips(j)}</div>
       <div class="row-actions">
         <button class="icon-btn" title="Editar" onclick="abrirEditar(${j.linha})">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
@@ -926,63 +791,57 @@ function renderJobs(jobs) {
   }).join('');
 }
 
-function renderEntregas(j) {
+function renderChips(j) {
   const items = [
-    { k: 'visitas', n: j.visitas, lbl: 'V' },
-    { k: 'stories', n: j.stories, lbl: 'S' },
-    { k: 'reels',   n: j.reels,   lbl: 'R' },
-    { k: 'posts',   n: j.posts,   lbl: 'P' }
+    { n: j.visitas, l: 'Visitas' },
+    { n: j.stories, l: 'Stories' },
+    { n: j.reels,   l: 'Reels' },
+    { n: j.posts,   l: 'Posts' }
   ].filter(i => i.n > 0);
-  if (!items.length) return `<span class="chip empty">—</span>`;
-  return items.map(i =>
-    `<span class="chip" title="${i.k}"><span class="chip-icon">${i.lbl}</span>${i.n}</span>`
-  ).join('');
+  if (!items.length) return '<span class="chip empty">—</span>';
+  return items.map(i => `<span class="chip" title="${i.l}">${i.l[0]} ${i.n}</span>`).join('');
 }
 
 /* ============================================================
    TOGGLE PAGO/PENDENTE
    ============================================================ */
 async function toggleSituacao(linha, marcado) {
-  const novaSituacao = marcado ? 'PAGO' : 'PENDENTE';
+  const nova = marcado ? 'PAGO' : 'PENDENTE';
+  // Atualiza label do switch localmente antes da resposta
+  const row = document.querySelector(`[data-linha="${linha}"] .switch-label`);
+  if (row) row.textContent = marcado ? 'Pago' : 'Pendente';
+
   try {
-    await api('editarJob', { aba: state.abaAtual, linha, situacao: novaSituacao });
-    toast(`Marcado como ${novaSituacao.toLowerCase()}`, 'success');
+    await api('editarJob', { aba: state.abaAtual, linha, situacao: nova });
+    toast(`✓ ${nova === 'PAGO' ? 'Marcado como pago' : 'Marcado como pendente'}`, 'success');
     carregarJobs();
   } catch (e) {
     toast('Erro: ' + e.message, 'error');
-    carregarJobs();
+    carregarJobs(); // reverte
   }
 }
 
 /* ============================================================
-   MODAL NOVO / EDITAR JOB
+   MODAL CRIAR / EDITAR
    ============================================================ */
-$('btnNovoJob').addEventListener('click', () => abrirModalJob());
-$('btnCancelarJob').addEventListener('click', fecharModalJob);
-$('modalJob').addEventListener('click', (e) => { if (e.target === e.currentTarget) fecharModalJob(); });
-$('btnSalvarJob').addEventListener('click', salvarJob);
-
-function abrirModalJob() {
+$('btnNovoJob').addEventListener('click', () => {
   state.editandoLinha = null;
   $('modalTitulo').textContent = 'Novo Job';
-  $('modalSub').textContent = 'Cadastrar parceria em ' + nomeAbaLimpo();
-  $('fOrigem').value   = '';
-  $('fValor').value    = '';
+  $('modalSub').textContent = 'Cadastrar em ' + (state.abaAtual || '').trim();
+  $('fOrigem').value = ''; $('fValor').value = '';
   $('fSituacao').value = 'PENDENTE';
-  $('fVisitas').value  = '';
-  $('fStories').value  = '';
-  $('fReels').value    = '';
-  $('fPosts').value    = '';
+  $('fVisitas').value = ''; $('fStories').value = '';
+  $('fReels').value = ''; $('fPosts').value = '';
   $('modalJob').classList.add('show');
-  setTimeout(() => $('fOrigem').focus(), 250);
-}
+  setTimeout(() => $('fOrigem').focus(), 200);
+});
 
 function abrirEditar(linha) {
-  const j = state.jobs.find(x => x.linha === linha);
+  const j = state.todosjobs.find(x => x.linha === linha);
   if (!j) return;
   state.editandoLinha = linha;
   $('modalTitulo').textContent = 'Editar Job';
-  $('modalSub').textContent = nomeAbaLimpo();
+  $('modalSub').textContent = (state.abaAtual || '').trim();
   $('fOrigem').value   = j.origem;
   $('fValor').value    = j.valor;
   $('fSituacao').value = j.situacao;
@@ -993,94 +852,86 @@ function abrirEditar(linha) {
   $('modalJob').classList.add('show');
 }
 
-function fecharModalJob() {
-  $('modalJob').classList.remove('show');
-}
+$('btnCancelarJob').addEventListener('click', () => $('modalJob').classList.remove('show'));
+$('modalJob').addEventListener('click', e => { if (e.target === e.currentTarget) $('modalJob').classList.remove('show'); });
 
-function nomeAbaLimpo() {
-  return (state.abaAtual || '').trim();
-}
-
-async function salvarJob() {
+$('btnSalvarJob').addEventListener('click', async () => {
   const origem = $('fOrigem').value.trim();
-  if (!origem) { toast('Informe a origem/cliente', 'error'); return; }
-
+  if (!origem) { toast('Informe o cliente/origem', 'error'); return; }
   const dados = {
-    aba:      state.abaAtual,
-    origem:   origem,
-    valor:    $('fValor').value || 0,
+    aba: state.abaAtual,
+    origem,
+    valor:    $('fValor').value   || 0,
     situacao: $('fSituacao').value,
     visitas:  $('fVisitas').value,
     stories:  $('fStories').value,
     reels:    $('fReels').value,
     posts:    $('fPosts').value
   };
-
   const btn = $('btnSalvarJob');
-  btn.disabled = true; btn.textContent = 'Salvando...';
-
+  btn.disabled = true; btn.textContent = 'Salvando…';
   try {
     if (state.editandoLinha) {
       dados.linha = state.editandoLinha;
       await api('editarJob', dados);
-      toast('Job atualizado ✓', 'success');
+      toast('✓ Job atualizado', 'success');
     } else {
       await api('criarJob', dados);
-      toast('Job criado ✓', 'success');
+      toast('✓ Job criado', 'success');
     }
-    fecharModalJob();
+    $('modalJob').classList.remove('show');
     carregarJobs();
   } catch (e) {
     toast('Erro: ' + e.message, 'error');
   } finally {
     btn.disabled = false; btn.textContent = 'Salvar';
   }
-}
+});
 
 /* ============================================================
-   EXCLUIR JOB
+   EXCLUIR
    ============================================================ */
-$('btnCancelarExcluir').addEventListener('click', fecharModalConfirm);
-$('modalConfirm').addEventListener('click', (e) => { if (e.target === e.currentTarget) fecharModalConfirm(); });
-$('btnConfirmarExcluir').addEventListener('click', confirmarExcluir);
-
 function abrirExcluir(linha) {
-  const j = state.jobs.find(x => x.linha === linha);
+  const j = state.todosjobs.find(x => x.linha === linha);
   if (!j) return;
   state.excluindoLinha = linha;
   $('confirmNome').textContent = j.origem || 'este job';
   $('modalConfirm').classList.add('show');
 }
-function fecharModalConfirm() {
+
+$('btnCancelarExcluir').addEventListener('click', () => {
   $('modalConfirm').classList.remove('show');
   state.excluindoLinha = null;
-}
-async function confirmarExcluir() {
+});
+$('modalConfirm').addEventListener('click', e => {
+  if (e.target === e.currentTarget) {
+    $('modalConfirm').classList.remove('show');
+    state.excluindoLinha = null;
+  }
+});
+
+$('btnConfirmarExcluir').addEventListener('click', async () => {
   if (!state.excluindoLinha) return;
   const btn = $('btnConfirmarExcluir');
-  btn.disabled = true; btn.textContent = 'Excluindo...';
+  btn.disabled = true; btn.textContent = 'Excluindo…';
   try {
     await api('excluirJob', { aba: state.abaAtual, linha: state.excluindoLinha });
-    toast('Job excluído ✓', 'success');
-    fecharModalConfirm();
+    toast('✓ Job excluído', 'success');
+    $('modalConfirm').classList.remove('show');
+    state.excluindoLinha = null;
     carregarJobs();
   } catch (e) {
     toast('Erro: ' + e.message, 'error');
   } finally {
     btn.disabled = false; btn.textContent = 'Excluir';
   }
-}
+});
 
-/* ============================================================
-   INICIALIZAÇÃO
-   Tenta recuperar sessão salva. Usa localStorage (funciona em
-   file://, http:// e https://).
-   ============================================================ */
-window.addEventListener('DOMContentLoaded', () => {
-  const token = storageGet('jm_token');  // ← localStorage (não sessionStorage)
-  if (token) {
-    state.token = token;
-    mostrarPainel();
+/* ESC fecha modais */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    $('modalJob').classList.remove('show');
+    $('modalConfirm').classList.remove('show');
   }
 });
 </script>
