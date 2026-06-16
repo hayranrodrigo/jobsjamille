@@ -1,401 +1,499 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
-<meta name="theme-color" content="#FFF2CC" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,viewport-fit=cover"/>
+<meta name="theme-color" content="#FFF2CC"/>
 <title>Jobs Jamille Mariah</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --gold-50:  #FAF8F1;
-    --gold-100: #FFF2CC;
-    --gold-200: #F5E7B8;
-    --gold-300: #E8D08A;
-    --gold-500: #C9A961;
-    --gold-700: #7F6000;
-    --gold-900: #4A3800;
-    --ink:      #2A2419;
-    --ink-soft: #5C513E;
-    --paper:    #FFFDF8;
-    --line:     #E8DFC4;
-    --danger:   #B23A48;
-    --danger-soft: #F5E0E3;
-    --success:  #5E8B4A;
-    --success-soft: #E3EDD9;
-    --warn:     #C97D2E;
-    --warn-soft:#F8E8D4;
-    --blue:     #2563EB;
-    --blue-soft:#EFF6FF;
-    --shadow:   0 1px 2px rgba(127,96,0,.04), 0 4px 12px rgba(127,96,0,.06);
-    --shadow-lg:0 4px 24px rgba(127,96,0,.12);
-    --r:        14px;
-    --r-sm:     8px;
-  }
-  *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  html, body { margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', -apple-system, sans-serif;
-    background: var(--gold-50);
-    color: var(--ink);
-    font-size: 15px;
-    line-height: 1.5;
-    min-height: 100dvh;
-    -webkit-font-smoothing: antialiased;
-  }
-  button { font-family: inherit; cursor: pointer; border: none; }
-  input, select, textarea { font-family: inherit; }
+/* ═══════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════ */
+:root{
+  --g50:#FAF8F1; --g100:#FFF2CC; --g200:#F5E7B8; --g300:#E8D08A;
+  --g500:#C9A961; --g700:#7F6000; --g900:#4A3800;
+  --ink:#2A2419; --ink2:#5C513E; --ink3:#9A8D73;
+  --paper:#FFFDF8; --line:#E8DFC4; --line2:#D4C9A8;
+  --ok:#5E8B4A; --ok2:#E3EDD9; --warn:#C97D2E; --warn2:#F8E8D4;
+  --err:#B23A48; --err2:#F5E0E3;
+  --blue:#2563EB; --blue2:#EFF6FF; --blue3:#BFDBFE;
+  --sh:0 1px 3px rgba(127,96,0,.05),0 4px 14px rgba(127,96,0,.07);
+  --shl:0 6px 32px rgba(127,96,0,.13);
+  --r:14px; --rsm:8px;
+}
+*,*::before,*::after{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--g50);color:var(--ink);
+  font-size:15px;line-height:1.5;min-height:100dvh;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer;border:none}
+input,select,textarea{font-family:inherit}
 
-  /* ── TOPBAR ── */
-  .topbar {
-    background: var(--paper);
-    border-bottom: 1px solid var(--line);
-    padding: 11px 20px;
-    display: flex; align-items: center; justify-content: space-between;
-    position: sticky; top: 0; z-index: 50;
-    gap: 12px;
-  }
-  .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-  .brand-mono {
-    width: 38px; height: 38px; border-radius: 50%;
-    background: var(--gold-100); border: 1.5px solid var(--gold-300);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 17px; font-weight: 700; color: var(--gold-700);
-  }
-  .brand-txt .t1 { font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--gold-700); font-weight:600; line-height:1.1; }
-  .brand-txt .t2 { font-size:10px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.6px; }
-  .topbar-right { display:flex; align-items:center; gap:10px; }
-  .topbar-right label { font-size:11px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.5px; white-space:nowrap; }
-  .topbar select {
-    padding: 8px 30px 8px 12px;
-    border: 1px solid var(--line); border-radius: var(--r-sm);
-    background: var(--gold-50) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237F6000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>") no-repeat right 8px center;
-    -webkit-appearance: none; color: var(--ink); font-size:14px; font-weight:500; cursor:pointer; min-width:130px;
-  }
-  .topbar select:focus { outline:none; border-color:var(--gold-500); }
+/* ═══════════════════════════════════════════
+   TOPBAR
+═══════════════════════════════════════════ */
+.topbar{
+  background:var(--paper);border-bottom:1px solid var(--line);
+  padding:11px 20px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:50;gap:14px;
+}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.mono{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--g100);border:1.5px solid var(--g300);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--g700)
+}
+.brand .t1{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--g700);font-weight:600;line-height:1.1}
+.brand .t2{font-size:10px;color:var(--ink2);text-transform:uppercase;letter-spacing:.6px}
+.top-right{display:flex;align-items:center;gap:10px}
+.top-right label{font-size:11px;color:var(--ink2);text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.sel{
+  padding:8px 30px 8px 12px;border:1px solid var(--line);border-radius:var(--rsm);
+  background:var(--g50) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%237F6000' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>") no-repeat right 8px center;
+  -webkit-appearance:none;color:var(--ink);font-size:14px;font-weight:500;cursor:pointer;min-width:130px
+}
+.sel:focus{outline:none;border-color:var(--g500)}
 
-  /* ── CONTAINER ── */
-  .container { max-width:1200px; margin:0 auto; padding:24px 20px 80px; }
+/* ═══════════════════════════════════════════
+   NAV TABS (Jobs / Relatório)
+═══════════════════════════════════════════ */
+.page-tabs{
+  display:flex;gap:0;
+  border-bottom:1px solid var(--line);
+  background:var(--paper);
+  padding:0 20px;
+  position:sticky;top:57px;z-index:40;
+}
+.page-tab{
+  padding:12px 20px;font-size:14px;font-weight:500;color:var(--ink2);
+  cursor:pointer;border-bottom:2px solid transparent;
+  transition:color .15s,border-color .15s;white-space:nowrap;
+  display:flex;align-items:center;gap:7px;
+}
+.page-tab:hover{color:var(--g700)}
+.page-tab.active{color:var(--g700);border-bottom-color:var(--g700)}
+.page-tab svg{width:16px;height:16px}
 
-  /* ── MÉTRICAS ── */
-  .metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:28px; }
-  .mc {
-    background:var(--paper); border:1px solid var(--line); border-radius:var(--r);
-    padding:18px; box-shadow:var(--shadow); position:relative; overflow:hidden;
-  }
-  .mc::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; border-radius:var(--r) var(--r) 0 0; background:var(--gold-300); }
-  .mc.received::before { background:var(--success); }
-  .mc.pending::before  { background:var(--warn); }
-  .mc .lbl { font-size:11px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.6px; font-weight:500; margin-bottom:8px; }
-  .mc .val { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:600; color:var(--gold-700); line-height:1; }
-  .mc.received .val { color:var(--success); }
-  .mc.pending  .val { color:var(--warn); }
-  .mc .sub { font-size:11px; color:var(--ink-soft); margin-top:4px; }
-  .progress-wrap { margin-top:10px; }
-  .progress-bar  { height:4px; background:var(--line); border-radius:10px; overflow:hidden; }
-  .progress-fill { height:100%; background:linear-gradient(90deg,var(--gold-300),var(--gold-700)); border-radius:10px; transition:width .5s ease; }
+/* ═══════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════ */
+.page{display:none}.page.show{display:block}
+.wrap{max-width:1160px;margin:0 auto;padding:24px 20px 80px}
 
-  /* ── TOOLBAR ── */
-  .toolbar { display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; align-items:center; }
-  .search-wrap { position:relative; flex:1; min-width:140px; max-width:280px; }
-  .search-wrap svg { position:absolute; left:10px; top:50%; transform:translateY(-50%); width:15px; height:15px; color:var(--ink-soft); pointer-events:none; }
-  .search-input { width:100%; padding:9px 12px 9px 32px; border:1px solid var(--line); border-radius:var(--r-sm); background:var(--paper); color:var(--ink); font-size:14px; }
-  .search-input:focus { outline:none; border-color:var(--gold-500); }
-  .btn-add {
-    margin-left:auto; background:var(--gold-700); color:var(--paper);
-    padding:10px 18px; border-radius:var(--r-sm); font-size:14px; font-weight:500;
-    display:flex; align-items:center; gap:6px; transition:background .15s; white-space:nowrap;
-  }
-  .btn-add:hover { background:var(--gold-900); }
-  .btn-add svg { width:16px; height:16px; }
+/* ═══════════════════════════════════════════
+   MÉTRICAS
+═══════════════════════════════════════════ */
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px}
+.mc{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);
+  padding:18px;box-shadow:var(--sh);position:relative;overflow:hidden}
+.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  border-radius:var(--r) var(--r) 0 0;background:var(--g300)}
+.mc.rec::before{background:var(--ok)}.mc.pend::before{background:var(--warn)}
+.mc .lbl{font-size:11px;color:var(--ink2);text-transform:uppercase;letter-spacing:.6px;
+  font-weight:500;margin-bottom:8px}
+.mc .val{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;
+  color:var(--g700);line-height:1}
+.mc.rec .val{color:var(--ok)}.mc.pend .val{color:var(--warn)}
+.mc .sub{font-size:11px;color:var(--ink2);margin-top:4px}
+.prog-bar{height:4px;background:var(--line);border-radius:10px;overflow:hidden;margin-top:10px}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--g300),var(--g700));
+  border-radius:10px;transition:width .5s ease}
 
-  /* ── TABELA ── */
-  .jobs-card { background:var(--paper); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow); overflow:hidden; }
-  .jobs-header {
-    display:grid; grid-template-columns:minmax(0,2fr) 130px 150px 1fr 100px;
-    gap:14px; padding:12px 20px;
-    background:var(--gold-100); border-bottom:1px solid var(--gold-200);
-    font-size:11px; text-transform:uppercase; letter-spacing:.6px; color:var(--gold-700); font-weight:600;
-  }
-  .job-row {
-    display:grid; grid-template-columns:minmax(0,2fr) 130px 150px 1fr 100px;
-    gap:14px; padding:14px 20px; border-bottom:1px solid var(--line);
-    align-items:center; transition:background .12s;
-  }
-  .job-row:last-child { border-bottom:none; }
-  .job-row:hover { background:var(--gold-50); }
-  .job-origem { font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .job-valor  { font-family:'Cormorant Garamond',serif; font-size:19px; font-weight:600; color:var(--gold-700); }
+/* ═══════════════════════════════════════════
+   TOOLBAR
+═══════════════════════════════════════════ */
+.toolbar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.sw{position:relative;flex:1;min-width:140px;max-width:280px}
+.sw svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);
+  width:15px;height:15px;color:var(--ink2);pointer-events:none}
+.sw input{width:100%;padding:9px 12px 9px 32px;border:1px solid var(--line);
+  border-radius:var(--rsm);background:var(--paper);color:var(--ink);font-size:14px}
+.sw input:focus{outline:none;border-color:var(--g500)}
+.btn-add{margin-left:auto;background:var(--g700);color:var(--paper);
+  padding:10px 18px;border-radius:var(--rsm);font-size:14px;font-weight:500;
+  display:flex;align-items:center;gap:6px;transition:background .15s;white-space:nowrap}
+.btn-add:hover{background:var(--g900)}
+.btn-add svg{width:16px;height:16px}
 
-  /* Switch */
-  .switch { position:relative; display:inline-flex; align-items:center; cursor:pointer; user-select:none; }
-  .switch input { opacity:0; position:absolute; pointer-events:none; }
-  .sw-track {
-    width:44px; height:24px; background:var(--warn-soft); border-radius:100px;
-    position:relative; transition:background .2s; border:1px solid var(--warn);
-  }
-  .sw-track::after {
-    content:''; position:absolute; top:2px; left:2px;
-    width:18px; height:18px; background:var(--paper); border-radius:50%;
-    transition:transform .2s; box-shadow:0 1px 3px rgba(0,0,0,.15);
-  }
-  .switch input:checked ~ .sw-track { background:var(--success-soft); border-color:var(--success); }
-  .switch input:checked ~ .sw-track::after { transform:translateX(20px); }
-  .sw-lbl { margin-left:8px; font-size:12px; color:var(--warn); text-transform:uppercase; letter-spacing:.4px; font-weight:500; min-width:56px; }
-  .switch input:checked ~ .sw-lbl { color:var(--success); }
+/* ═══════════════════════════════════════════
+   TABELA JOBS
+═══════════════════════════════════════════ */
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--sh);overflow:hidden}
+.th{display:grid;grid-template-columns:minmax(0,2fr) 130px 150px 1fr 100px;
+  gap:14px;padding:12px 20px;background:var(--g100);border-bottom:1px solid var(--g200);
+  font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--g700);font-weight:600}
+.jr{display:grid;grid-template-columns:minmax(0,2fr) 130px 150px 1fr 100px;
+  gap:14px;padding:14px 20px;border-bottom:1px solid var(--line);
+  align-items:center;transition:background .12s}
+.jr:last-child{border-bottom:none}.jr:hover{background:var(--g50)}
+.jo{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.jv{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:var(--g700)}
 
-  /* Chips */
-  .chips { display:flex; gap:5px; flex-wrap:wrap; }
-  .chip { background:var(--gold-100); color:var(--gold-700); padding:3px 8px; border-radius:100px; font-size:11px; font-weight:600; border:1px solid var(--gold-200); }
-  .chip.empty { background:transparent; color:var(--ink-soft); border-color:transparent; opacity:.5; }
+/* Switch */
+.sw-wrap{position:relative;display:inline-flex;align-items:center;cursor:pointer;user-select:none}
+.sw-wrap input{opacity:0;position:absolute;pointer-events:none}
+.sw-track{width:44px;height:24px;background:var(--warn2);border-radius:100px;
+  position:relative;transition:background .2s;border:1px solid var(--warn)}
+.sw-track::after{content:'';position:absolute;top:2px;left:2px;
+  width:18px;height:18px;background:var(--paper);border-radius:50%;
+  transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.sw-wrap input:checked~.sw-track{background:var(--ok2);border-color:var(--ok)}
+.sw-wrap input:checked~.sw-track::after{transform:translateX(20px)}
+.sw-lbl{margin-left:8px;font-size:12px;color:var(--warn);text-transform:uppercase;
+  letter-spacing:.4px;font-weight:500;min-width:56px}
+.sw-wrap input:checked~.sw-lbl{color:var(--ok)}
 
-  /* Ações */
-  .row-actions { display:flex; gap:5px; justify-content:flex-end; }
-  .icon-btn {
-    width:32px; height:32px; border:1px solid var(--line); background:var(--paper);
-    border-radius:8px; display:flex; align-items:center; justify-content:center;
-    color:var(--ink-soft); transition:all .15s;
-  }
-  .icon-btn:hover { background:var(--gold-50); color:var(--gold-700); border-color:var(--gold-300); }
-  .icon-btn.danger:hover { background:var(--danger-soft); color:var(--danger); border-color:var(--danger); }
-  .icon-btn svg { width:14px; height:14px; }
+/* Chips */
+.chips{display:flex;gap:5px;flex-wrap:wrap}
+.chip{background:var(--g100);color:var(--g700);padding:3px 8px;border-radius:100px;
+  font-size:11px;font-weight:600;border:1px solid var(--g200)}
+.chip.em{background:transparent;color:var(--ink2);border-color:transparent;opacity:.5}
 
-  /* Empty / Loader */
-  .empty-state { text-align:center; padding:56px 20px; color:var(--ink-soft); }
-  .empty-state .ico { font-family:'Cormorant Garamond',serif; font-size:48px; color:var(--gold-300); margin-bottom:8px; }
-  .loader-wrap { display:flex; justify-content:center; padding:40px; }
-  .loader { width:34px; height:34px; border:3px solid var(--gold-200); border-top-color:var(--gold-700); border-radius:50%; animation:spin .8s linear infinite; }
-  @keyframes spin { to { transform:rotate(360deg); } }
+/* Ações */
+.acts{display:flex;gap:5px;justify-content:flex-end}
+.ib{width:32px;height:32px;border:1px solid var(--line);background:var(--paper);
+  border-radius:8px;display:flex;align-items:center;justify-content:center;
+  color:var(--ink2);transition:all .15s}
+.ib:hover{background:var(--g50);color:var(--g700);border-color:var(--g300)}
+.ib.del:hover{background:var(--err2);color:var(--err);border-color:var(--err)}
+.ib svg{width:14px;height:14px}
 
-  /* ── MODAIS ── */
-  .modal-backdrop {
-    position:fixed; inset:0;
-    background:rgba(42,36,25,.45); backdrop-filter:blur(4px);
-    display:none; align-items:flex-end; justify-content:center; z-index:100;
-  }
-  .modal-backdrop.show { display:flex; }
-  .modal-backdrop.center { align-items:center; padding:20px; }
-  .modal {
-    background:var(--paper); border-radius:20px 20px 0 0;
-    width:100%; max-width:540px; max-height:94dvh; overflow-y:auto;
-    padding:24px; padding-bottom:calc(24px + env(safe-area-inset-bottom));
-    animation:slideUp .25s cubic-bezier(.2,.9,.3,1);
-  }
-  .modal.rounded { border-radius:var(--r); max-width:400px; }
-  @keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
-  .modal-handle { width:40px; height:4px; background:var(--gold-200); border-radius:100px; margin:-6px auto 16px; }
-  .modal-title { font-family:'Cormorant Garamond',serif; font-size:24px; color:var(--gold-700); margin:0 0 2px; }
-  .modal-sub   { font-size:12px; color:var(--ink-soft); margin-bottom:20px; text-transform:uppercase; letter-spacing:.5px; }
+/* Empty / Loader */
+.empty{text-align:center;padding:56px 20px;color:var(--ink2)}
+.empty .ico{font-family:'Cormorant Garamond',serif;font-size:48px;color:var(--g300);margin-bottom:8px}
+.ldw{display:flex;justify-content:center;padding:40px}
+.ld{width:34px;height:34px;border:3px solid var(--g200);border-top-color:var(--g700);
+  border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-  /* Campos */
-  .field { margin-bottom:14px; }
-  .field label { display:block; font-size:12px; color:var(--ink-soft); margin-bottom:5px; font-weight:500; }
-  .field input, .field select {
-    width:100%; padding:11px 14px; border:1px solid var(--line);
-    border-radius:var(--r-sm); background:var(--paper); color:var(--ink); font-size:15px;
-    transition:border-color .15s, box-shadow .15s;
-  }
-  .field input:focus, .field select:focus { outline:none; border-color:var(--gold-500); box-shadow:0 0 0 3px rgba(201,169,97,.15); }
-  .field select { -webkit-appearance:none; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237F6000' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>"); background-repeat:no-repeat; background-position:right 10px center; padding-right:32px; }
-  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-  .grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+/* ═══════════════════════════════════════════
+   RELATÓRIO
+═══════════════════════════════════════════ */
+.rel-header{display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;margin-bottom:22px}
+.rel-title{font-family:'Cormorant Garamond',serif;font-size:26px;
+  color:var(--g700);font-weight:600;margin:0}
+.year-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.ytab{padding:7px 16px;border-radius:100px;font-size:13px;font-weight:500;
+  border:1.5px solid var(--line);background:var(--paper);color:var(--ink2);
+  cursor:pointer;transition:all .15s}
+.ytab:hover{border-color:var(--g300);color:var(--g700)}
+.ytab.active{background:var(--g700);color:var(--paper);border-color:var(--g700)}
 
-  /* Divider com texto */
-  .divider { display:flex; align-items:center; gap:10px; margin:18px 0 14px; }
-  .divider::before, .divider::after { content:''; flex:1; height:1px; background:var(--line); }
-  .divider span { font-size:11px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.6px; white-space:nowrap; }
+/* Cards de resumo anual */
+.year-summary{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+  margin-bottom:24px;
+}
+.ys-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);
+  padding:16px 18px;box-shadow:var(--sh)}
+.ys-card .lbl{font-size:10px;color:var(--ink2);text-transform:uppercase;
+  letter-spacing:.6px;font-weight:500;margin-bottom:6px}
+.ys-card .val{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--g700)}
+.ys-card .val.ok{color:var(--ok)}.ys-card .val.warn{color:var(--warn)}
 
-  /* Caixa de criar novo mês */
-  .novo-mes-box {
-    background:var(--blue-soft); border:1px solid #BFDBFE; border-radius:var(--r-sm);
-    padding:14px 16px; display:none; margin-top:4px;
-  }
-  .novo-mes-box.show { display:block; }
-  .novo-mes-box label { font-size:12px; color:#1E40AF; font-weight:500; margin-bottom:6px; display:block; }
-  .novo-mes-row { display:flex; gap:8px; align-items:center; }
-  .novo-mes-row input {
-    flex:1; padding:9px 12px; border:1px solid #BFDBFE; border-radius:var(--r-sm);
-    background:#fff; font-size:14px; color:var(--ink);
-  }
-  .novo-mes-row input:focus { outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(37,99,235,.12); }
-  .btn-criar-mes {
-    background:var(--blue); color:#fff; padding:9px 14px;
-    border-radius:var(--r-sm); font-size:13px; font-weight:500; white-space:nowrap;
-    transition:background .15s;
-  }
-  .btn-criar-mes:hover { background:#1D4ED8; }
-  .btn-criar-mes:disabled { opacity:.5; cursor:not-allowed; }
-  .novo-mes-hint { font-size:11px; color:#3B82F6; margin-top:6px; }
-  .novo-mes-ok { font-size:12px; color:var(--success); font-weight:500; margin-top:6px; display:none; }
-  .novo-mes-ok.show { display:block; }
+/* Gráfico de barras */
+.chart-wrap{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px 20px 16px;margin-bottom:22px;box-shadow:var(--sh)}
+.chart-label{font-size:12px;color:var(--ink2);text-transform:uppercase;
+  letter-spacing:.6px;font-weight:600;margin-bottom:16px}
+.chart-bars{display:flex;align-items:flex-end;gap:10px;height:130px}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}
+.bar-val{font-size:9px;color:var(--ink2);font-weight:500;text-align:center;line-height:1.2;
+  min-height:22px;display:flex;align-items:flex-end;white-space:nowrap}
+.bar-fill{width:100%;border-radius:4px 4px 0 0;transition:height .4s ease;
+  min-height:4px;position:relative}
+.bar-fill.acordado{background:var(--g200);border:1px solid var(--g300)}
+.bar-fill.pago    {background:var(--g700);border:1px solid var(--g900);
+  position:absolute;bottom:0;left:0;right:0;border-radius:4px 4px 0 0}
+.bar-lbl{font-size:10px;color:var(--ink2);font-weight:500;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;max-width:100%;text-align:center}
+.chart-legend{display:flex;gap:16px;margin-top:12px;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink2)}
+.legend-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
 
-  /* Ações do modal */
-  .modal-actions { display:flex; gap:10px; margin-top:20px; padding-top:16px; border-top:1px solid var(--line); }
-  .btn-primary {
-    flex:1; padding:13px 16px; border:none; border-radius:var(--r-sm);
-    background:var(--gold-700); color:var(--paper); font-size:15px; font-weight:500;
-    transition:background .15s; cursor:pointer;
-  }
-  .btn-primary:hover { background:var(--gold-900); }
-  .btn-primary:disabled { opacity:.6; cursor:not-allowed; }
-  .btn-secondary {
-    padding:13px 20px; border:1px solid var(--line); background:var(--paper);
-    color:var(--ink-soft); border-radius:var(--r-sm); font-weight:500; cursor:pointer;
-  }
-  .btn-secondary:hover { background:var(--gold-50); }
-  .btn-danger { background:var(--danger); color:#fff; }
-  .btn-danger:hover { background:#8E2C38; }
+/* Tabela mensal */
+.mes-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.mes-table th{text-align:left;padding:10px 14px;font-size:10.5px;
+  text-transform:uppercase;letter-spacing:.6px;color:var(--g700);font-weight:600;
+  background:var(--g100);border-bottom:1px solid var(--g200)}
+.mes-table td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.mes-table tr:last-child td{border-bottom:none}
+.mes-table tr:hover td{background:var(--g50)}
+.pct-bar{height:6px;background:var(--line);border-radius:10px;overflow:hidden;margin-top:4px;min-width:80px}
+.pct-fill{height:100%;background:linear-gradient(90deg,var(--g300),var(--g700));border-radius:10px}
+.badge{display:inline-block;padding:3px 9px;border-radius:100px;
+  font-size:11px;font-weight:600;border:1px solid transparent}
+.badge.ok{background:var(--ok2);color:var(--ok);border-color:var(--ok2)}
+.badge.warn{background:var(--warn2);color:var(--warn);border-color:var(--warn2)}
+.badge.full{background:var(--g700);color:#fff}
 
-  /* Modal confirmar */
-  .confirm-icon {
-    width:52px; height:52px; border-radius:50%; background:var(--danger-soft);
-    color:var(--danger); display:flex; align-items:center; justify-content:center;
-    margin:0 auto 12px; font-size:24px; font-weight:700;
-  }
-  .confirm-text { color:var(--ink-soft); margin:0 0 18px; text-align:center; }
+/* ═══════════════════════════════════════════
+   MODAIS
+═══════════════════════════════════════════ */
+.mbk{position:fixed;inset:0;background:rgba(42,36,25,.45);backdrop-filter:blur(4px);
+  display:none;align-items:flex-end;justify-content:center;z-index:100}
+.mbk.show{display:flex}
+.mbk.center{align-items:center;padding:20px}
+.modal{background:var(--paper);border-radius:20px 20px 0 0;
+  width:100%;max-width:540px;max-height:94dvh;overflow-y:auto;
+  padding:24px;padding-bottom:calc(24px + env(safe-area-inset-bottom));
+  animation:slideUp .25s cubic-bezier(.2,.9,.3,1)}
+.modal.rd{border-radius:var(--r);max-width:400px}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.mhandle{width:40px;height:4px;background:var(--g200);border-radius:100px;
+  margin:-6px auto 16px}
+.mtitle{font-family:'Cormorant Garamond',serif;font-size:24px;
+  color:var(--g700);margin:0 0 2px}
+.msub{font-size:12px;color:var(--ink2);margin-bottom:20px;
+  text-transform:uppercase;letter-spacing:.5px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12px;color:var(--ink2);margin-bottom:5px;font-weight:500}
+.field input,.field select{width:100%;padding:11px 14px;border:1px solid var(--line);
+  border-radius:var(--rsm);background:var(--paper);color:var(--ink);font-size:15px;
+  transition:border-color .15s,box-shadow .15s}
+.field input:focus,.field select:focus{outline:none;border-color:var(--g500);
+  box-shadow:0 0 0 3px rgba(201,169,97,.15)}
+.field select{-webkit-appearance:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237F6000' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat:no-repeat;background-position:right 10px center;padding-right:32px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.divider{display:flex;align-items:center;gap:10px;margin:16px 0 12px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--line)}
+.divider span{font-size:11px;color:var(--ink2);text-transform:uppercase;
+  letter-spacing:.6px;white-space:nowrap}
 
-  /* Toast */
-  .toast {
-    position:fixed; left:50%;
-    bottom:calc(24px + env(safe-area-inset-bottom));
-    transform:translateX(-50%) translateY(20px);
-    background:var(--ink); color:var(--paper);
-    padding:11px 22px; border-radius:100px;
-    font-size:13px; box-shadow:var(--shadow-lg);
-    opacity:0; pointer-events:none;
-    transition:opacity .2s, transform .2s;
-    z-index:300; max-width:calc(100% - 40px); white-space:nowrap;
-  }
-  .toast.show   { opacity:1; transform:translateX(-50%) translateY(0); }
-  .toast.error  { background:var(--danger); }
-  .toast.success{ background:var(--success); }
+/* Caixa novo mês */
+.nbox{background:var(--blue2);border:1px solid var(--blue3);border-radius:var(--rsm);
+  padding:14px 16px;display:none;margin-top:4px}
+.nbox.show{display:block}
+.nbox label{font-size:12px;color:#1E40AF;font-weight:500;margin-bottom:6px;display:block}
+.nrow{display:flex;gap:8px;align-items:center}
+.nrow input{flex:1;padding:9px 12px;border:1px solid var(--blue3);border-radius:var(--rsm);
+  background:#fff;font-size:14px;color:var(--ink)}
+.nrow input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.btn-nm{background:var(--blue);color:#fff;padding:9px 14px;border-radius:var(--rsm);
+  font-size:13px;font-weight:500;white-space:nowrap;transition:background .15s}
+.btn-nm:hover{background:#1D4ED8}.btn-nm:disabled{opacity:.5;cursor:not-allowed}
+.nhint{font-size:11px;color:#3B82F6;margin-top:6px}
+.nok{font-size:12px;color:var(--ok);font-weight:500;margin-top:6px;display:none}
+.nok.show{display:block}
 
-  /* ── MOBILE ── */
-  @media (max-width:720px) {
-    .container { padding:16px 14px 60px; }
-    .topbar { padding:10px 14px; }
-    .brand-txt .t1 { font-size:16px; }
-    .topbar-right label { display:none; }
-    .topbar select { min-width:110px; font-size:13px; }
-    .metrics { grid-template-columns:1fr 1fr; gap:10px; margin-bottom:18px; }
-    .metrics .mc:first-child { grid-column:span 2; }
-    .mc .val { font-size:22px; }
-    .jobs-header { display:none; }
-    .job-row {
-      grid-template-columns:1fr auto;
-      grid-template-areas:"origem actions" "valor switch" "chips chips";
-      gap:8px; padding:14px 16px;
-    }
-    .job-origem   { grid-area:origem; white-space:normal; }
-    .job-valor    { grid-area:valor; font-size:20px; }
-    .job-switch   { grid-area:switch; justify-self:end; }
-    .job-entregas { grid-area:chips; padding-top:6px; border-top:1px dashed var(--line); }
-    .row-actions  { grid-area:actions; }
-    .search-wrap  { max-width:100%; }
-    .btn-add      { margin-left:0; width:100%; justify-content:center; }
-    .toolbar      { flex-direction:column; align-items:stretch; }
-    .grid-4       { grid-template-columns:1fr 1fr; }
-  }
+/* Ações modal */
+.macts{display:flex;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
+.btn-p{flex:1;padding:13px 16px;border:none;border-radius:var(--rsm);
+  background:var(--g700);color:var(--paper);font-size:15px;font-weight:500;
+  transition:background .15s;cursor:pointer}
+.btn-p:hover{background:var(--g900)}.btn-p:disabled{opacity:.6;cursor:not-allowed}
+.btn-s{padding:13px 20px;border:1px solid var(--line);background:var(--paper);
+  color:var(--ink2);border-radius:var(--rsm);font-weight:500;cursor:pointer}
+.btn-s:hover{background:var(--g50)}
+.btn-d{background:var(--err);color:#fff}.btn-d:hover{background:#8E2C38}
+.ci{width:52px;height:52px;border-radius:50%;background:var(--err2);color:var(--err);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 12px;font-size:24px;font-weight:700}
+
+/* Toast */
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));
+  transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--paper);
+  padding:11px 22px;border-radius:100px;font-size:13px;box-shadow:var(--shl);
+  opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;
+  z-index:300;max-width:calc(100% - 40px);white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.err{background:var(--err)}.toast.ok{background:var(--ok)}
+
+/* ═══════════════════════════════════════════
+   MOBILE
+═══════════════════════════════════════════ */
+@media(max-width:720px){
+  .wrap{padding:16px 14px 70px}
+  .topbar{padding:10px 14px}
+  .brand .t1{font-size:16px}
+  .top-right label{display:none}
+  .sel{min-width:110px;font-size:13px}
+  .page-tab{padding:10px 12px;font-size:13px}
+  .page-tab span{display:none}
+  .metrics{grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+  .metrics .mc:first-child{grid-column:span 2}
+  .mc .val{font-size:22px}
+  .th{display:none}
+  .jr{grid-template-columns:1fr auto;grid-template-areas:"jo acts" "jv sw" "ch ch";
+    gap:8px;padding:14px 16px}
+  .jo-c{grid-area:jo;white-space:normal}.jv-c{grid-area:jv;font-size:20px}
+  .jsw-c{grid-area:sw;justify-self:end}.je-c{grid-area:ch;padding-top:6px;border-top:1px dashed var(--line)}
+  .acts{grid-area:acts}
+  .sw{max-width:100%}
+  .btn-add{margin-left:0;width:100%;justify-content:center}
+  .toolbar{flex-direction:column;align-items:stretch}
+  .g4{grid-template-columns:1fr 1fr}
+  .year-summary{grid-template-columns:1fr 1fr}
+  .chart-bars{height:100px;gap:6px}
+  .bar-val{font-size:8px}
+  .mes-table th:nth-child(n+4),.mes-table td:nth-child(n+4){display:none}
+}
 </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
+<!-- ══ TOPBAR ══ -->
 <header class="topbar">
   <div class="brand">
-    <div class="brand-mono">JM</div>
-    <div class="brand-txt">
+    <div class="mono">JM</div>
+    <div>
       <div class="t1">Jobs Jamille Mariah</div>
       <div class="t2">Publicidade & Parcerias</div>
     </div>
   </div>
-  <div class="topbar-right">
+  <div class="top-right">
     <label for="selMes">Mês</label>
-    <select id="selMes"><option>Carregando…</option></select>
+    <select id="selMes" class="sel"><option>Carregando…</option></select>
   </div>
 </header>
 
-<!-- PAINEL -->
-<div class="container">
+<!-- ══ ABAS DE PÁGINA ══ -->
+<nav class="page-tabs">
+  <div class="page-tab active" id="tab-jobs" onclick="setPage('jobs')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+    <span>Jobs</span>
+  </div>
+  <div class="page-tab" id="tab-relatorio" onclick="setPage('relatorio')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+    <span>Relatório</span>
+  </div>
+</nav>
 
-  <!-- Métricas -->
-  <div class="metrics">
-    <div class="mc">
-      <div class="lbl">Total Acordado</div>
-      <div class="val" id="mTotal">R$ 0</div>
-      <div class="progress-wrap">
-        <div class="progress-bar"><div class="progress-fill" id="mProgress" style="width:0%"></div></div>
-        <div class="sub" id="mPct" style="margin-top:5px;">0% recebido</div>
+<!-- ══════════════════════════
+     PÁGINA: JOBS
+══════════════════════════ -->
+<div id="page-jobs" class="page show">
+  <div class="wrap">
+
+    <div class="metrics">
+      <div class="mc">
+        <div class="lbl">Total Acordado</div>
+        <div class="val" id="mTotal">R$ 0</div>
+        <div class="prog-bar"><div class="prog-fill" id="mProg" style="width:0%"></div></div>
+        <div class="sub" id="mPct" style="margin-top:5px">0% recebido</div>
+      </div>
+      <div class="mc rec">
+        <div class="lbl">Total Pago</div>
+        <div class="val" id="mPago">R$ 0</div>
+        <div class="sub" id="mPagoQt"></div>
+      </div>
+      <div class="mc pend">
+        <div class="lbl">A Receber</div>
+        <div class="val" id="mRec">R$ 0</div>
+        <div class="sub" id="mRecQt"></div>
       </div>
     </div>
-    <div class="mc received">
-      <div class="lbl">Total Pago</div>
-      <div class="val" id="mPago">R$ 0</div>
-      <div class="sub" id="mPagoQt"></div>
+
+    <div class="toolbar">
+      <div class="sw">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="busca" placeholder="Buscar cliente…" oninput="filtrar()">
+      </div>
+      <button class="btn-add" id="btnNovo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Novo Job
+      </button>
     </div>
-    <div class="mc pending">
-      <div class="lbl">A Receber</div>
-      <div class="val" id="mReceber">R$ 0</div>
-      <div class="sub" id="mReceberQt"></div>
+
+    <div class="card">
+      <div class="th">
+        <div>Origem / Cliente</div><div>Valor</div>
+        <div>Situação</div><div>Entregas</div>
+        <div style="text-align:right">Ações</div>
+      </div>
+      <div id="jobsList"><div class="ldw"><div class="ld"></div></div></div>
     </div>
   </div>
+</div>
 
-  <!-- Toolbar -->
-  <div class="toolbar">
-    <div class="search-wrap">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input class="search-input" id="searchInput" placeholder="Buscar cliente…" oninput="filtrarJobs()">
+<!-- ══════════════════════════
+     PÁGINA: RELATÓRIO
+══════════════════════════ -->
+<div id="page-relatorio" class="page">
+  <div class="wrap">
+
+    <div class="rel-header">
+      <h2 class="rel-title">Faturamento por Período</h2>
+      <div class="year-tabs" id="yearTabs"></div>
     </div>
-    <button class="btn-add" id="btnNovoJob">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      Novo Job
-    </button>
+
+    <!-- Resumo do ano selecionado -->
+    <div class="year-summary" id="yearSummary">
+      <div class="ys-card"><div class="lbl">Faturamento bruto</div><div class="val" id="rs-total">—</div></div>
+      <div class="ys-card"><div class="lbl">Total recebido</div>  <div class="val ok" id="rs-pago">—</div></div>
+      <div class="ys-card"><div class="lbl">A receber</div>        <div class="val warn" id="rs-rec">—</div></div>
+      <div class="ys-card"><div class="lbl">Taxa de recebimento</div><div class="val" id="rs-pct">—</div></div>
+    </div>
+
+    <!-- Gráfico -->
+    <div class="chart-wrap">
+      <div class="chart-label">Faturamento mensal</div>
+      <div class="chart-bars" id="chartBars"></div>
+      <div class="chart-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--g200);border:1px solid var(--g300)"></div>Total acordado</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--g700)"></div>Recebido</div>
+      </div>
+    </div>
+
+    <!-- Tabela mensal -->
+    <div class="card">
+      <table class="mes-table">
+        <thead>
+          <tr>
+            <th>Mês</th>
+            <th>Total acordado</th>
+            <th>Recebido</th>
+            <th>A receber</th>
+            <th>Recebimento</th>
+            <th>Jobs</th>
+          </tr>
+        </thead>
+        <tbody id="relTabela"></tbody>
+      </table>
+    </div>
+
+    <div id="relLoader" class="ldw" style="display:none"><div class="ld"></div></div>
+    <div id="relEmpty" class="empty" style="display:none">
+      <div class="ico">📊</div>
+      <p>Selecione um ano acima para ver o relatório</p>
+    </div>
+
   </div>
+</div>
 
-  <!-- Tabela -->
-  <div class="jobs-card">
-    <div class="jobs-header">
-      <div>Origem / Cliente</div>
-      <div>Valor</div>
-      <div>Situação</div>
-      <div>Entregas</div>
-      <div style="text-align:right">Ações</div>
-    </div>
-    <div id="jobsList">
-      <div class="loader-wrap"><div class="loader"></div></div>
-    </div>
-  </div>
-
-</div><!-- /container -->
-
-<!-- ════════════════════════════════
-     MODAL — CRIAR / EDITAR JOB
-     ════════════════════════════════ -->
-<div class="modal-backdrop" id="modalJob">
+<!-- ══════════════════════════
+     MODAL: CRIAR/EDITAR JOB
+══════════════════════════ -->
+<div class="mbk" id="mJob">
   <div class="modal">
-    <div class="modal-handle"></div>
-    <h2 class="modal-title" id="modalTitulo">Novo Job</h2>
-    <p class="modal-sub"  id="modalSub">Cadastrar parceria</p>
+    <div class="mhandle"></div>
+    <h2 class="mtitle" id="mJobTitle">Novo Job</h2>
+    <p class="msub"    id="mJobSub">Preencha os dados</p>
 
-    <!-- Seletor de mês (só aparece no modo Criar) -->
+    <!-- Seletor de mês (só no modo criar) -->
     <div class="field" id="fieldMes">
       <label>Mês de referência</label>
-      <select id="fMes"></select>
+      <select id="fMes" class="sel" style="min-width:100%"></select>
     </div>
 
-    <!-- Caixa de criar novo mês -->
-    <div class="novo-mes-box" id="novoMesBox">
-      <label>Nome do novo mês (formato: MMM AA)</label>
-      <div class="novo-mes-row">
-        <input type="text" id="novoMesInput" placeholder="Ex: JUL 26" maxlength="6"
+    <!-- Caixa criar novo mês -->
+    <div class="nbox" id="nbox">
+      <label>Nome do novo mês (formato MMM AA)</label>
+      <div class="nrow">
+        <input type="text" id="nboxInput" placeholder="Ex: JUL 26" maxlength="6"
                oninput="this.value=this.value.toUpperCase()">
-        <button class="btn-criar-mes" id="btnCriarMes" onclick="criarNovoMes()">Criar</button>
+        <button class="btn-nm" id="btnCriarMes" onclick="criarMes()">Criar</button>
       </div>
-      <div class="novo-mes-hint">Ex: JAN 27 · FEV 27 · MAR 27 etc.</div>
-      <div class="novo-mes-ok" id="novoMesOk">✓ Mês criado! Já está selecionado.</div>
+      <div class="nhint">Exemplos: JUL 26 · AGO 26 · SET 26</div>
+      <div class="nok" id="nok">✓ Mês criado com sucesso!</div>
     </div>
 
     <div class="divider"><span>dados do job</span></div>
@@ -404,287 +502,236 @@
       <label>Origem / Cliente *</label>
       <input type="text" id="fOrigem" placeholder="Ex: La Vie, Império das Joias…" autocapitalize="words">
     </div>
-    <div class="grid-2">
+    <div class="g2">
       <div class="field">
         <label>Valor (R$) *</label>
         <input type="number" id="fValor" step="0.01" min="0" placeholder="0,00" inputmode="decimal">
       </div>
       <div class="field">
         <label>Situação</label>
-        <select id="fSituacao">
-          <option value="PENDENTE">Pendente</option>
-          <option value="PAGO">Pago</option>
-        </select>
+        <select id="fSit"><option value="PENDENTE">Pendente</option><option value="PAGO">Pago</option></select>
       </div>
     </div>
 
     <div class="divider"><span>entregas (opcional)</span></div>
-    <div class="grid-4">
-      <div class="field"><label>Visitas</label><input type="number" id="fVisitas" min="0" placeholder="0" inputmode="numeric"></div>
-      <div class="field"><label>Stories</label><input type="number" id="fStories" min="0" placeholder="0" inputmode="numeric"></div>
-      <div class="field"><label>Reels</label>  <input type="number" id="fReels"   min="0" placeholder="0" inputmode="numeric"></div>
-      <div class="field"><label>Posts</label>  <input type="number" id="fPosts"   min="0" placeholder="0" inputmode="numeric"></div>
+    <div class="g4">
+      <div class="field"><label>Visitas</label><input type="number" id="fVis" min="0" placeholder="0" inputmode="numeric"></div>
+      <div class="field"><label>Stories</label><input type="number" id="fSto" min="0" placeholder="0" inputmode="numeric"></div>
+      <div class="field"><label>Reels</label>  <input type="number" id="fRee" min="0" placeholder="0" inputmode="numeric"></div>
+      <div class="field"><label>Posts</label>  <input type="number" id="fPos" min="0" placeholder="0" inputmode="numeric"></div>
     </div>
 
-    <div class="modal-actions">
-      <button class="btn-secondary" id="btnCancelarJob">Cancelar</button>
-      <button class="btn-primary"   id="btnSalvarJob">Salvar</button>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════
-     MODAL — CONFIRMAR DELETE
-     ════════════════════════════════ -->
-<div class="modal-backdrop center" id="modalDel">
-  <div class="modal rounded" style="text-align:center; padding:28px 24px;">
-    <div class="confirm-icon">!</div>
-    <h2 class="modal-title" style="text-align:center;">Excluir Job?</h2>
-    <p class="confirm-text">Isso removerá <strong id="delNome">o job</strong> permanentemente da planilha.</p>
-    <div class="modal-actions">
-      <button class="btn-secondary" id="btnCancelarDel" style="flex:1">Cancelar</button>
-      <button class="btn-primary btn-danger" id="btnConfirmarDel" style="flex:1">Excluir</button>
+    <div class="macts">
+      <button class="btn-s" id="btnCancJob">Cancelar</button>
+      <button class="btn-p" id="btnSalvarJob">Salvar</button>
     </div>
   </div>
 </div>
 
-<!-- TOAST -->
+<!-- ══════════════════════════
+     MODAL: CONFIRMAR DELETE
+══════════════════════════ -->
+<div class="mbk center" id="mDel">
+  <div class="modal rd" style="text-align:center;padding:28px 24px">
+    <div class="ci">!</div>
+    <h2 class="mtitle" style="text-align:center">Excluir Job?</h2>
+    <p style="color:var(--ink2);margin:0 0 18px">Isso removerá <strong id="delNome">o job</strong> permanentemente da planilha.</p>
+    <div class="macts">
+      <button class="btn-s" id="btnCancDel" style="flex:1">Cancelar</button>
+      <button class="btn-p btn-d" id="btnConfDel" style="flex:1">Excluir</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
-<!-- ════════════════════════════════
+<!-- ══════════════════════════
      JAVASCRIPT
-     ════════════════════════════════ -->
+══════════════════════════ -->
 <script>
-/* ─────────────────────────────────────────────
-   CONFIGURAÇÃO — cole a URL do seu Web App aqui
-   ───────────────────────────────────────────── */
-const API_URL = 'https://script.google.com/macros/s/AKfycbzAaYx85v4SzVX-Y8raAR_0RvIwdJbDmZWiEVIL_Ujsyqwh4eh8ALkmQZPLa1Mj2Cg/exec';
+/* ─────────────────────────────────────────
+   ⚙ CONFIGURAÇÃO
+   Cole aqui a URL do seu Google Apps Script
+   ───────────────────────────────────────── */
+const API_URL = 'https://script.google.com/macros/s/AKfycbyaNMi3Z3_-8lUn7Bdrm9_2hWKjI34vqYfFOMQVDtmtGhoSt53RMW3QMDoTK4aGcx8/exec';
 
-/* ─────────────────────────────────────────────
+/* ─────────────────────────────────────────
    ESTADO
-   ───────────────────────────────────────────── */
+   ───────────────────────────────────────── */
 const S = {
-  abas:           [],   // lista de abas [{nome, nomeOriginal}]
-  abaAtual:       null, // aba selecionada na topbar
-  jobs:           [],   // jobs filtrados
-  todosJobs:      [],   // cache completo do mês
-  editandoLinha:  null,
-  excluindoLinha: null
+  abas:[],abaAtual:null,
+  jobs:[],todosJobs:[],
+  editLinha:null,delLinha:null,
+  relDados:null,anoAtivo:null
 };
 
-/* ─────────────────────────────────────────────
+/* ─────────────────────────────────────────
    API
-   ───────────────────────────────────────────── */
-async function api(acao, params = {}) {
-  if (!API_URL || API_URL.includes('COLE_AQUI'))
-    throw new Error('Cole a URL do Apps Script no index.html (linha API_URL).');
-
-  const qs = new URLSearchParams({ acao, ...params });
+   ───────────────────────────────────────── */
+async function api(acao, p={}) {
+  if (!API_URL||API_URL.includes('COLE_AQUI'))
+    throw new Error('Cole a URL do Apps Script na linha API_URL do index.html');
+  const qs = new URLSearchParams({acao,...p});
   let resp;
-  try {
-    resp = await fetch(`${API_URL}?${qs}`, { method:'GET', redirect:'follow' });
-  } catch {
-    throw new Error('Falha de rede. Verifique a URL do Apps Script e se está publicado como "Qualquer pessoa".');
-  }
+  try { resp = await fetch(`${API_URL}?${qs}`,{method:'GET',redirect:'follow'}); }
+  catch { throw new Error('Falha de rede. Verifique a URL e se o Web App está publicado como "Qualquer pessoa".'); }
   if (!resp.ok) throw new Error(`Erro HTTP ${resp.status}`);
-  let data;
-  try { data = await resp.json(); } catch { throw new Error('Resposta inválida do servidor.'); }
-  if (!data.ok) throw new Error(data.erro || 'Erro desconhecido');
-  return data;
+  let d; try{d=await resp.json();}catch{throw new Error('Resposta inválida do servidor.');}
+  if (!d.ok) throw new Error(d.erro||'Erro desconhecido');
+  return d;
 }
 
-/* ─────────────────────────────────────────────
+/* ─────────────────────────────────────────
    UTILS
-   ───────────────────────────────────────────── */
-const $    = id => document.getElementById(id);
-const fmtR = n  => 'R$ ' + Number(n||0).toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:2});
-const esc  = s  => String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+   ───────────────────────────────────────── */
+const $  = id=>document.getElementById(id);
+const R  = n=>'R$ '+Number(n||0).toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:2});
+const esc= s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let _t; function toast(m,t=''){const e=$('toast');e.textContent=m;e.className='toast show '+t;clearTimeout(_t);_t=setTimeout(()=>e.classList.remove('show'),3200);}
 
-let _tt;
-function toast(msg, tipo='') {
-  const el=$('toast'); el.textContent=msg; el.className='toast show '+tipo;
-  clearTimeout(_tt); _tt=setTimeout(()=>el.classList.remove('show'),3200);
+/* ─────────────────────────────────────────
+   NAVEGAÇÃO DE PÁGINAS
+   ───────────────────────────────────────── */
+function setPage(p) {
+  ['jobs','relatorio'].forEach(x=>{
+    $('page-'+x).classList.toggle('show',x===p);
+    $('tab-'+x).classList.toggle('active',x===p);
+  });
+  // Seletor de mês só faz sentido na aba de jobs
+  $('selMes').closest('.top-right').style.display = p==='jobs' ? 'flex' : 'none';
+  if (p==='relatorio') carregarRelatorio();
 }
 
-/* ─────────────────────────────────────────────
-   INIT — carrega direto, sem login
-   ───────────────────────────────────────────── */
+/* ─────────────────────────────────────────
+   INIT
+   ───────────────────────────────────────── */
 window.addEventListener('DOMContentLoaded', carregarAbas);
 
-/* ─────────────────────────────────────────────
-   ABAS (MESES)
-   ───────────────────────────────────────────── */
+/* ─────────────────────────────────────────
+   ABAS
+   ───────────────────────────────────────── */
 async function carregarAbas() {
   try {
     const r = await api('listarAbas');
     S.abas = r.abas;
-    popularSelectMes();           // topbar
-    popularSelectMesModal();      // modal de novo job
-
+    popularSelMes();
+    popularFMes();
     if (!r.abas.length) {
-      $('jobsList').innerHTML = '<div class="empty-state"><div class="ico">∅</div><p>Nenhuma aba de mês encontrada.</p></div>';
+      $('jobsList').innerHTML='<div class="empty"><div class="ico">∅</div><p>Nenhuma aba de mês encontrada.</p></div>';
       return;
     }
     S.abaAtual = r.abas[0].nomeOriginal;
     $('selMes').value = S.abaAtual;
     carregarJobs();
   } catch(e) {
-    toast('Erro: '+e.message,'error');
-    $('jobsList').innerHTML = `<div class="empty-state"><div class="ico">!</div><p>${esc(e.message)}</p></div>`;
+    toast('Erro: '+e.message,'err');
+    $('jobsList').innerHTML=`<div class="empty"><div class="ico">!</div><p>${esc(e.message)}</p></div>`;
   }
 }
 
-// Popula o <select> da topbar
-function popularSelectMes() {
-  const sel = $('selMes');
-  sel.innerHTML = S.abas.map(a=>`<option value="${esc(a.nomeOriginal)}">${esc(a.nome)}</option>`).join('');
+function popularSelMes() {
+  $('selMes').innerHTML = S.abas.map(a=>`<option value="${esc(a.nomeOriginal)}">${esc(a.nome)}</option>`).join('');
 }
 
-// Popula o <select> do modal com todas as abas + opção "Criar novo mês"
-function popularSelectMesModal() {
-  const sel = $('fMes');
-  sel.innerHTML =
+function popularFMes() {
+  $('fMes').innerHTML =
     S.abas.map(a=>`<option value="${esc(a.nomeOriginal)}">${esc(a.nome)}</option>`).join('') +
     `<option value="__novo__">➕ Criar novo mês…</option>`;
-
-  // Pré-seleciona o mês atual da topbar
-  if (S.abaAtual) sel.value = S.abaAtual;
-
-  sel.onchange = () => {
-    const novoMesBox = $('novoMesBox');
-    if (sel.value === '__novo__') {
-      novoMesBox.classList.add('show');
-      $('novoMesInput').focus();
-      // Sugerir próximo mês automaticamente
-      $('novoMesInput').value = sugerirProximoMes();
-      $('novoMesOk').classList.remove('show');
-    } else {
-      novoMesBox.classList.remove('show');
-    }
+  if (S.abaAtual) $('fMes').value = S.abaAtual;
+  $('fMes').onchange = () => {
+    const show = $('fMes').value==='__novo__';
+    $('nbox').classList.toggle('show',show);
+    if (show) { $('nboxInput').value=sugerirMes(); $('nok').classList.remove('show'); $('nboxInput').focus(); }
   };
 }
 
-// Calcula o próximo mês após o mais recente
-function sugerirProximoMes() {
-  const MESES = ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
+function sugerirMes() {
+  const M=['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
   if (!S.abas.length) return '';
-  const ultimo = S.abas[0].nome.trim().toUpperCase();
-  const partes = ultimo.split(' ');
-  const idxMes = MESES.indexOf(partes[0]);
-  if (idxMes === -1) return '';
-  const ano = parseInt(partes[1], 10) || 0;
-  const proxIdx = (idxMes + 1) % 12;
-  const proxAno = idxMes === 11 ? ano + 1 : ano;
-  return MESES[proxIdx] + ' ' + String(proxAno).slice(-2);
+  const p=S.abas[0].nome.trim().toUpperCase().split(' ');
+  const i=M.indexOf(p[0]); if (i===-1) return '';
+  const a=parseInt(p[1],10)||0;
+  return M[(i+1)%12]+' '+(i===11?a+1:a);
 }
 
-$('selMes').addEventListener('change', e => {
-  S.abaAtual = e.target.value;
-  $('searchInput').value = '';
-  carregarJobs();
-});
+$('selMes').addEventListener('change',e=>{S.abaAtual=e.target.value;$('busca').value='';carregarJobs();});
 
-/* ─────────────────────────────────────────────
-   CRIAR NOVO MÊS (dentro do modal)
-   ───────────────────────────────────────────── */
-async function criarNovoMes() {
-  const nomeMes = $('novoMesInput').value.trim().toUpperCase();
-  const btn = $('btnCriarMes');
-
-  // Validação no front
-  if (!/^[A-Z]{3}\s\d{2}$/.test(nomeMes)) {
-    toast('Formato inválido. Use "MMM AA", ex: JUL 26','error');
-    return;
-  }
-
-  btn.disabled = true; btn.textContent = 'Criando…';
+/* ─────────────────────────────────────────
+   CRIAR MÊS
+   ───────────────────────────────────────── */
+async function criarMes() {
+  const nm=$('nboxInput').value.trim().toUpperCase();
+  const btn=$('btnCriarMes');
+  if (!/^[A-Z]{3}\s\d{2}$/.test(nm)){toast('Formato inválido. Use "MMM AA", ex: JUL 26','err');return;}
+  btn.disabled=true;btn.textContent='Criando…';
   try {
-    await api('criarAba', { nomeMes });
-
-    // Adiciona à lista local e re-popula os selects
-    const novaAba = { nome: nomeMes, nomeOriginal: nomeMes };
-    S.abas.unshift(novaAba);
-    popularSelectMes();
-    popularSelectMesModal();
-
-    // Seleciona o novo mês no modal e na topbar
-    $('fMes').value = nomeMes;
-    $('novoMesBox').classList.remove('show');
-    $('novoMesOk').classList.add('show');
-
-    toast('✓ Mês "'+nomeMes+'" criado!','success');
-  } catch(e) {
-    toast('Erro: '+e.message,'error');
-  } finally {
-    btn.disabled = false; btn.textContent = 'Criar';
-  }
+    await api('criarAba',{nomeMes:nm});
+    const nova={nome:nm,nomeOriginal:nm};
+    S.abas.unshift(nova);
+    popularSelMes();popularFMes();
+    $('fMes').value=nm;
+    $('nbox').classList.remove('show');
+    $('nok').classList.add('show');
+    toast('✓ Mês "'+nm+'" criado!','ok');
+  } catch(e){toast('Erro: '+e.message,'err');}
+  finally{btn.disabled=false;btn.textContent='Criar';}
 }
 
-/* ─────────────────────────────────────────────
-   JOBS DO MÊS
-   ───────────────────────────────────────────── */
+/* ─────────────────────────────────────────
+   JOBS
+   ───────────────────────────────────────── */
 async function carregarJobs() {
   if (!S.abaAtual) return;
-  $('jobsList').innerHTML = '<div class="loader-wrap"><div class="loader"></div></div>';
+  $('jobsList').innerHTML='<div class="ldw"><div class="ld"></div></div>';
   try {
-    const r = await api('listarJobs', { aba: S.abaAtual });
-    S.todosJobs = r.jobs;
-    S.jobs = r.jobs;
-    renderMetricas(r.metricas);
-    renderJobs(r.jobs);
+    const r=await api('listarJobs',{aba:S.abaAtual});
+    S.todosJobs=r.jobs;S.jobs=r.jobs;
+    renderMetricas(r.metricas);renderJobs(r.jobs);
   } catch(e) {
-    toast('Erro ao carregar: '+e.message,'error');
-    $('jobsList').innerHTML = `<div class="empty-state"><div class="ico">!</div><p>${esc(e.message)}</p></div>`;
+    toast('Erro: '+e.message,'err');
+    $('jobsList').innerHTML=`<div class="empty"><div class="ico">!</div><p>${esc(e.message)}</p></div>`;
   }
 }
 
-function filtrarJobs() {
-  const q = $('searchInput').value.toLowerCase().trim();
-  S.jobs = q ? S.todosJobs.filter(j=>j.origem.toLowerCase().includes(q)) : S.todosJobs;
+function filtrar() {
+  const q=$('busca').value.toLowerCase().trim();
+  S.jobs=q?S.todosJobs.filter(j=>j.origem.toLowerCase().includes(q)):S.todosJobs;
   renderJobs(S.jobs);
 }
 
-/* ─────────────────────────────────────────────
-   RENDER
-   ───────────────────────────────────────────── */
 function renderMetricas(m) {
-  $('mTotal').textContent   = fmtR(m.totalAcordado);
-  $('mPago').textContent    = fmtR(m.totalPago);
-  $('mReceber').textContent = fmtR(m.totalReceber);
-  const pct = m.totalAcordado>0 ? Math.round(m.totalPago/m.totalAcordado*100) : 0;
-  $('mProgress').style.width = pct+'%';
-  $('mPct').textContent = pct+'% recebido';
-  const pagos = S.todosJobs.filter(j=>j.situacao==='PAGO').length;
-  const pend  = S.todosJobs.length - pagos;
-  $('mPagoQt').textContent    = pagos + (pagos===1?' job pago':' jobs pagos');
-  $('mReceberQt').textContent = pend  + (pend===1?' pendente':' pendentes');
+  $('mTotal').textContent=R(m.totalAcordado);
+  $('mPago').textContent =R(m.totalPago);
+  $('mRec').textContent  =R(m.totalReceber);
+  const p=m.totalAcordado>0?Math.round(m.totalPago/m.totalAcordado*100):0;
+  $('mProg').style.width=p+'%';$('mPct').textContent=p+'% recebido';
+  const pg=S.todosJobs.filter(j=>j.situacao==='PAGO').length;
+  const pd=S.todosJobs.length-pg;
+  $('mPagoQt').textContent=pg+(pg===1?' job pago':' jobs pagos');
+  $('mRecQt').textContent =pd+(pd===1?' pendente':' pendentes');
 }
 
 function renderJobs(jobs) {
-  const el = $('jobsList');
-  if (!jobs.length) {
-    el.innerHTML='<div class="empty-state"><div class="ico">∅</div><p>Nenhum job encontrado.<br><small>Clique em "Novo Job" para adicionar.</small></p></div>';
-    return;
-  }
-  el.innerHTML = jobs.map(j => {
-    const pago = j.situacao==='PAGO';
-    return `
-    <div class="job-row" data-linha="${j.linha}">
-      <div class="job-origem">${esc(j.origem)}</div>
-      <div class="job-valor">${fmtR(j.valor)}</div>
-      <div class="job-switch">
-        <label class="switch">
-          <input type="checkbox" ${pago?'checked':''} onchange="togglePago(${j.linha},this.checked)">
+  const el=$('jobsList');
+  if (!jobs.length){el.innerHTML='<div class="empty"><div class="ico">∅</div><p>Nenhum job.<br><small>Clique em "Novo Job" para adicionar.</small></p></div>';return;}
+  el.innerHTML=jobs.map(j=>{
+    const pg=j.situacao==='PAGO';
+    return `<div class="jr" data-l="${j.linha}">
+      <div class="jo-c jo">${esc(j.origem)}</div>
+      <div class="jv-c jv">${R(j.valor)}</div>
+      <div class="jsw-c">
+        <label class="sw-wrap">
+          <input type="checkbox" ${pg?'checked':''} onchange="togglePago(${j.linha},this.checked)">
           <span class="sw-track"></span>
-          <span class="sw-lbl">${pago?'Pago':'Pendente'}</span>
+          <span class="sw-lbl">${pg?'Pago':'Pendente'}</span>
         </label>
       </div>
-      <div class="job-entregas chips">${chips(j)}</div>
-      <div class="row-actions">
-        <button class="icon-btn" title="Editar" onclick="abrirEditar(${j.linha})">
+      <div class="je-c chips">${chps(j)}</div>
+      <div class="acts">
+        <button class="ib" onclick="abrirEditar(${j.linha})" title="Editar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
         </button>
-        <button class="icon-btn danger" title="Excluir" onclick="abrirDel(${j.linha})">
+        <button class="ib del" onclick="abrirDel(${j.linha})" title="Excluir">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14H7L5 6"/><path d="M10 11v6M14 11v6M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
         </button>
       </div>
@@ -692,157 +739,194 @@ function renderJobs(jobs) {
   }).join('');
 }
 
-function chips(j) {
-  const its=[{n:j.visitas,l:'V'},{n:j.stories,l:'S'},{n:j.reels,l:'R'},{n:j.posts,l:'P'}].filter(i=>i.n>0);
-  return its.length ? its.map(i=>`<span class="chip">${i.l} ${i.n}</span>`).join('') : '<span class="chip empty">—</span>';
+function chps(j){
+  const it=[{n:j.visitas,l:'V'},{n:j.stories,l:'S'},{n:j.reels,l:'R'},{n:j.posts,l:'P'}].filter(i=>i.n>0);
+  return it.length?it.map(i=>`<span class="chip">${i.l} ${i.n}</span>`).join(''):'<span class="chip em">—</span>';
 }
 
-/* ─────────────────────────────────────────────
+/* ─────────────────────────────────────────
    TOGGLE PAGO
-   ───────────────────────────────────────────── */
-async function togglePago(linha, marcado) {
-  const nova = marcado ? 'PAGO' : 'PENDENTE';
-  const lbl = document.querySelector(`[data-linha="${linha}"] .sw-lbl`);
-  if (lbl) lbl.textContent = marcado ? 'Pago' : 'Pendente';
-  try {
-    await api('editarJob', { aba:S.abaAtual, linha, situacao:nova });
-    toast(`✓ ${nova==='PAGO'?'Marcado como pago':'Marcado como pendente'}`, 'success');
+   ───────────────────────────────────────── */
+async function togglePago(l,m){
+  const lbl=document.querySelector(`[data-l="${l}"] .sw-lbl`);
+  if(lbl)lbl.textContent=m?'Pago':'Pendente';
+  try{
+    await api('editarJob',{aba:S.abaAtual,linha:l,situacao:m?'PAGO':'PENDENTE'});
+    toast('✓ '+(m?'Marcado como pago':'Marcado como pendente'),'ok');
     carregarJobs();
-  } catch(e) {
-    toast('Erro: '+e.message,'error');
-    carregarJobs();
-  }
+  }catch(e){toast('Erro: '+e.message,'err');carregarJobs();}
 }
 
-/* ─────────────────────────────────────────────
-   MODAL CRIAR / EDITAR
-   ───────────────────────────────────────────── */
-function limparModal() {
-  $('fOrigem').value=''; $('fValor').value=''; $('fSituacao').value='PENDENTE';
-  $('fVisitas').value=''; $('fStories').value=''; $('fReels').value=''; $('fPosts').value='';
-  $('novoMesBox').classList.remove('show');
-  $('novoMesOk').classList.remove('show');
-  $('novoMesInput').value='';
+/* ─────────────────────────────────────────
+   MODAL JOB
+   ───────────────────────────────────────── */
+function limparJob(){
+  $('fOrigem').value='';$('fValor').value='';$('fSit').value='PENDENTE';
+  $('fVis').value='';$('fSto').value='';$('fRee').value='';$('fPos').value='';
+  $('nbox').classList.remove('show');$('nok').classList.remove('show');$('nboxInput').value='';
 }
 
-$('btnNovoJob').onclick = () => {
-  S.editandoLinha = null;
-  limparModal();
-  $('modalTitulo').textContent = 'Novo Job';
-  $('modalSub').textContent    = 'Escolha o mês e preencha os dados';
-  $('fieldMes').style.display  = '';           // mostra seletor de mês
-  popularSelectMesModal();                     // atualiza a lista
-  // Pré-seleciona o mês da topbar
-  if (S.abaAtual) $('fMes').value = S.abaAtual;
-  $('modalJob').classList.add('show');
-  setTimeout(()=>$('fOrigem').focus(), 260);
+$('btnNovo').onclick=()=>{
+  S.editLinha=null;limparJob();
+  $('mJobTitle').textContent='Novo Job';
+  $('mJobSub').textContent='Escolha o mês e preencha os dados';
+  $('fieldMes').style.display='';
+  popularFMes();
+  if(S.abaAtual)$('fMes').value=S.abaAtual;
+  $('mJob').classList.add('show');
+  setTimeout(()=>$('fOrigem').focus(),260);
 };
 
-function abrirEditar(linha) {
-  const j = S.todosJobs.find(x=>x.linha===linha);
-  if (!j) return;
-  S.editandoLinha = linha;
-  limparModal();
-  $('modalTitulo').textContent = 'Editar Job';
-  $('modalSub').textContent    = (S.abaAtual||'').trim();
-  $('fieldMes').style.display  = 'none';       // esconde seletor no modo edição
-  $('fOrigem').value   = j.origem;
-  $('fValor').value    = j.valor;
-  $('fSituacao').value = j.situacao;
-  $('fVisitas').value  = j.visitas||'';
-  $('fStories').value  = j.stories||'';
-  $('fReels').value    = j.reels||'';
-  $('fPosts').value    = j.posts||'';
-  $('modalJob').classList.add('show');
+function abrirEditar(l){
+  const j=S.todosJobs.find(x=>x.linha===l);if(!j)return;
+  S.editLinha=l;limparJob();
+  $('mJobTitle').textContent='Editar Job';
+  $('mJobSub').textContent=(S.abaAtual||'').trim();
+  $('fieldMes').style.display='none';
+  $('fOrigem').value=j.origem;$('fValor').value=j.valor;$('fSit').value=j.situacao;
+  $('fVis').value=j.visitas||'';$('fSto').value=j.stories||'';
+  $('fRee').value=j.reels||'';$('fPos').value=j.posts||'';
+  $('mJob').classList.add('show');
 }
 
-$('btnCancelarJob').onclick = ()=>$('modalJob').classList.remove('show');
-$('modalJob').onclick = e=>{ if(e.target===e.currentTarget) $('modalJob').classList.remove('show'); };
+$('btnCancJob').onclick=()=>$('mJob').classList.remove('show');
+$('mJob').onclick=e=>{if(e.target===e.currentTarget)$('mJob').classList.remove('show');};
 
-$('btnSalvarJob').onclick = async () => {
-  const origem = $('fOrigem').value.trim();
-  if (!origem) { toast('Informe o cliente/origem','error'); return; }
-
-  // Aba destino: no modo criar, usa o <select fMes>; no modo editar, usa a aba atual
-  const abaDestino = S.editandoLinha ? S.abaAtual : $('fMes').value;
-
-  if (!abaDestino || abaDestino === '__novo__') {
-    toast('Selecione ou crie um mês antes de salvar','error'); return;
-  }
-
-  const dados = {
-    aba: abaDestino, origem,
-    valor:   $('fValor').value||0,
-    situacao:$('fSituacao').value,
-    visitas: $('fVisitas').value,
-    stories: $('fStories').value,
-    reels:   $('fReels').value,
-    posts:   $('fPosts').value
-  };
-
-  const btn=$('btnSalvarJob');
-  btn.disabled=true; btn.textContent='Salvando…';
-
-  try {
-    if (S.editandoLinha) {
-      dados.linha = S.editandoLinha;
-      await api('editarJob', dados);
-      toast('✓ Job atualizado','success');
-    } else {
-      await api('criarJob', dados);
-      toast('✓ Job criado em "'+abaDestino+'"','success');
-      // Se salvou em mês diferente do atual, muda a topbar para esse mês
-      if (abaDestino !== S.abaAtual) {
-        S.abaAtual = abaDestino;
-        $('selMes').value = abaDestino;
-      }
+$('btnSalvarJob').onclick=async()=>{
+  const orig=$('fOrigem').value.trim();
+  if(!orig){toast('Informe o cliente/origem','err');return;}
+  const aba=S.editLinha?S.abaAtual:$('fMes').value;
+  if(!aba||aba==='__novo__'){toast('Selecione ou crie um mês','err');return;}
+  const d={aba,origem:orig,valor:$('fValor').value||0,situacao:$('fSit').value,
+    visitas:$('fVis').value,stories:$('fSto').value,reels:$('fRee').value,posts:$('fPos').value};
+  const btn=$('btnSalvarJob');btn.disabled=true;btn.textContent='Salvando…';
+  try{
+    if(S.editLinha){d.linha=S.editLinha;await api('editarJob',d);toast('✓ Job atualizado','ok');}
+    else{
+      await api('criarJob',d);toast('✓ Job criado em "'+aba+'"','ok');
+      if(aba!==S.abaAtual){S.abaAtual=aba;$('selMes').value=aba;}
     }
-    $('modalJob').classList.remove('show');
-    carregarJobs();
-  } catch(e) {
-    toast('Erro: '+e.message,'error');
-  } finally {
-    btn.disabled=false; btn.textContent='Salvar';
-  }
+    $('mJob').classList.remove('show');carregarJobs();
+  }catch(e){toast('Erro: '+e.message,'err');}
+  finally{btn.disabled=false;btn.textContent='Salvar';}
 };
 
-/* ─────────────────────────────────────────────
-   MODAL EXCLUIR
-   ───────────────────────────────────────────── */
-function abrirDel(linha) {
-  const j = S.todosJobs.find(x=>x.linha===linha);
-  if (!j) return;
-  S.excluindoLinha = linha;
-  $('delNome').textContent = j.origem||'este job';
-  $('modalDel').classList.add('show');
+/* ─────────────────────────────────────────
+   MODAL DELETE
+   ───────────────────────────────────────── */
+function abrirDel(l){
+  const j=S.todosJobs.find(x=>x.linha===l);if(!j)return;
+  S.delLinha=l;$('delNome').textContent=j.origem||'este job';
+  $('mDel').classList.add('show');
+}
+$('btnCancDel').onclick=()=>{$('mDel').classList.remove('show');S.delLinha=null;};
+$('mDel').onclick=e=>{if(e.target===e.currentTarget){$('mDel').classList.remove('show');S.delLinha=null;}};
+$('btnConfDel').onclick=async()=>{
+  if(!S.delLinha)return;
+  const btn=$('btnConfDel');btn.disabled=true;btn.textContent='Excluindo…';
+  try{
+    await api('excluirJob',{aba:S.abaAtual,linha:S.delLinha});
+    toast('✓ Job excluído','ok');$('mDel').classList.remove('show');S.delLinha=null;carregarJobs();
+  }catch(e){toast('Erro: '+e.message,'err');}
+  finally{btn.disabled=false;btn.textContent='Excluir';}
+};
+
+/* ─────────────────────────────────────────
+   RELATÓRIO
+   ───────────────────────────────────────── */
+let relCarregado=false;
+
+async function carregarRelatorio(){
+  if(relCarregado&&S.relDados){renderRelatorio(S.relDados);return;}
+  $('relLoader').style.display='flex';
+  $('relTabela').innerHTML='';$('chartBars').innerHTML='';$('yearTabs').innerHTML='';
+  $('relEmpty').style.display='none';
+  try{
+    const r=await api('relatorio');
+    S.relDados=r;relCarregado=true;
+    renderRelatorio(r);
+  }catch(e){
+    toast('Erro no relatório: '+e.message,'err');
+    $('relEmpty').style.display='block';
+    $('relEmpty').querySelector('p').textContent=e.message;
+  }finally{$('relLoader').style.display='none';}
 }
 
-$('btnCancelarDel').onclick = ()=>{ $('modalDel').classList.remove('show'); S.excluindoLinha=null; };
-$('modalDel').onclick = e=>{ if(e.target===e.currentTarget){ $('modalDel').classList.remove('show'); S.excluindoLinha=null; } };
+function renderRelatorio(r){
+  const {anos,ordem}=r;
+  if(!ordem.length){$('relEmpty').style.display='block';return;}
 
-$('btnConfirmarDel').onclick = async () => {
-  if (!S.excluindoLinha) return;
-  const btn=$('btnConfirmarDel');
-  btn.disabled=true; btn.textContent='Excluindo…';
-  try {
-    await api('excluirJob',{aba:S.abaAtual, linha:S.excluindoLinha});
-    toast('✓ Job excluído','success');
-    $('modalDel').classList.remove('show');
-    S.excluindoLinha=null;
-    carregarJobs();
-  } catch(e) {
-    toast('Erro: '+e.message,'error');
-  } finally {
-    btn.disabled=false; btn.textContent='Excluir';
-  }
-};
+  // Tabs de ano
+  $('yearTabs').innerHTML=ordem.map(a=>
+    `<button class="ytab${a===S.anoAtivo||(!S.anoAtivo&&a===ordem[0])?' active':''}" onclick="setAno('${a}')">${a}</button>`
+  ).join('');
+
+  const anoAtivo=S.anoAtivo||ordem[0];
+  S.anoAtivo=anoAtivo;
+  renderAno(anos[anoAtivo],anoAtivo);
+}
+
+function setAno(ano){
+  S.anoAtivo=ano;
+  document.querySelectorAll('.ytab').forEach(t=>{
+    t.classList.toggle('active',t.textContent===ano);
+  });
+  renderAno(S.relDados.anos[ano],ano);
+}
+
+function renderAno(dados,ano){
+  if(!dados)return;
+  const {totalAcordado,totalPago,totalReceber,meses}=dados;
+  const pct=totalAcordado>0?Math.round(totalPago/totalAcordado*100):0;
+
+  // Cards resumo
+  $('rs-total').textContent=R(totalAcordado);
+  $('rs-pago').textContent =R(totalPago);
+  $('rs-rec').textContent  =R(totalReceber);
+  $('rs-pct').textContent  =pct+'%';
+
+  // Gráfico — meses em ordem crescente (jan→dez) para o gráfico
+  const mesesAsc=[...meses].sort((a,b)=>a.numMes-b.numMes);
+  const maxVal=Math.max(...mesesAsc.map(m=>m.totalAcordado),1);
+
+  $('chartBars').innerHTML=mesesAsc.map(m=>{
+    const hAc=Math.max(Math.round((m.totalAcordado/maxVal)*110),4);
+    const hPg=m.totalAcordado>0?Math.max(Math.round((m.totalPago/m.totalAcordado)*hAc),m.totalPago>0?3:0):0;
+    const abrev=m.mesAbrev.split(' ')[0]; // "OUT"
+    const kR=m.totalAcordado>0?Math.round(m.totalPago/m.totalAcordado*100):0;
+    return `<div class="bar-col" title="${esc(m.mesNome)}: ${R(m.totalAcordado)}">
+      <div class="bar-val">${R(m.totalAcordado).replace('R$ ','')}</div>
+      <div style="position:relative;height:${hAc}px;width:100%">
+        <div class="bar-fill acordado" style="height:100%"></div>
+        <div class="bar-fill pago"     style="height:${hPg}px"></div>
+      </div>
+      <div class="bar-lbl">${abrev}</div>
+    </div>`;
+  }).join('');
+
+  // Tabela — meses em ordem decrescente (mais recente primeiro)
+  $('relTabela').innerHTML=meses.map(m=>{
+    const pct=m.totalAcordado>0?Math.round(m.totalPago/m.totalAcordado*100):0;
+    const bc=pct>=100?'full':pct>=50?'ok':'warn';
+    return `<tr>
+      <td style="font-weight:500">${esc(m.mesNome)}</td>
+      <td style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--g700)">${R(m.totalAcordado)}</td>
+      <td style="color:var(--ok);font-weight:600">${R(m.totalPago)}</td>
+      <td style="color:var(--warn);font-weight:600">${R(m.totalReceber)}</td>
+      <td>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="badge ${bc}">${pct}%</span>
+          <div class="pct-bar" style="flex:1"><div class="pct-fill" style="width:${pct}%"></div></div>
+        </div>
+      </td>
+      <td style="color:var(--ink2)">${m.qtdJobs} job${m.qtdJobs!==1?'s':''} <span style="opacity:.6">(${m.qtdPagos} pago${m.qtdPagos!==1?'s':''})</span></td>
+    </tr>`;
+  }).join('');
+}
 
 /* ESC fecha modais */
-document.addEventListener('keydown', e=>{
-  if(e.key==='Escape'){
-    $('modalJob').classList.remove('show');
-    $('modalDel').classList.remove('show');
-  }
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){$('mJob').classList.remove('show');$('mDel').classList.remove('show');}
 });
 </script>
 </body>
