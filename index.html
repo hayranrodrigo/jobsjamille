@@ -10,501 +10,335 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold-50: #FAF8F1;
+    --gold-50:  #FAF8F1;
     --gold-100: #FFF2CC;
     --gold-200: #F5E7B8;
     --gold-300: #E8D08A;
     --gold-500: #C9A961;
     --gold-700: #7F6000;
     --gold-900: #4A3800;
-    --ink: #2A2419;
+    --ink:      #2A2419;
     --ink-soft: #5C513E;
-    --paper: #FFFDF8;
-    --line: #E8DFC4;
-    --danger: #B23A48;
+    --paper:    #FFFDF8;
+    --line:     #E8DFC4;
+    --danger:   #B23A48;
     --danger-soft: #F5E0E3;
-    --success: #5E8B4A;
+    --success:  #5E8B4A;
     --success-soft: #E3EDD9;
-    --warn: #C97D2E;
-    --warn-soft: #F8E8D4;
-    --shadow-soft: 0 1px 2px rgba(127,96,0,0.04), 0 4px 12px rgba(127,96,0,0.06);
-    --shadow-lift: 0 4px 24px rgba(127,96,0,0.12);
-    --radius: 14px;
-    --radius-sm: 8px;
+    --warn:     #C97D2E;
+    --warn-soft:#F8E8D4;
+    --blue:     #2563EB;
+    --blue-soft:#EFF6FF;
+    --shadow:   0 1px 2px rgba(127,96,0,.04), 0 4px 12px rgba(127,96,0,.06);
+    --shadow-lg:0 4px 24px rgba(127,96,0,.12);
+    --r:        14px;
+    --r-sm:     8px;
   }
-
-  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { margin: 0; padding: 0; }
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter', -apple-system, sans-serif;
     background: var(--gold-50);
     color: var(--ink);
     font-size: 15px;
     line-height: 1.5;
-    min-height: 100vh;
     min-height: 100dvh;
     -webkit-font-smoothing: antialiased;
   }
-  h1,h2,h3,.serif { font-family:'Cormorant Garamond',Georgia,serif; font-weight:600; }
-  button { font-family: inherit; cursor: pointer; }
-  input, select { font-family: inherit; }
+  button { font-family: inherit; cursor: pointer; border: none; }
+  input, select, textarea { font-family: inherit; }
 
-  /* ========== TOPBAR ========== */
+  /* ── TOPBAR ── */
   .topbar {
     background: var(--paper);
     border-bottom: 1px solid var(--line);
-    padding: 12px 20px;
+    padding: 11px 20px;
     display: flex; align-items: center; justify-content: space-between;
     position: sticky; top: 0; z-index: 50;
-    backdrop-filter: blur(8px);
     gap: 12px;
   }
   .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-  .brand-monogram {
-    width: 38px; height: 38px;
-    border-radius: 50%;
-    background: var(--gold-100);
-    border: 1.5px solid var(--gold-300);
+  .brand-mono {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--gold-100); border: 1.5px solid var(--gold-300);
     display: flex; align-items: center; justify-content: center;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 18px; font-weight: 600;
-    color: var(--gold-700);
-    flex-shrink: 0;
+    font-size: 17px; font-weight: 700; color: var(--gold-700);
   }
-  .brand-text .title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px; color: var(--gold-700); font-weight: 600; line-height:1.1;
-  }
-  .brand-text .sub {
-    font-size: 10px; color: var(--ink-soft);
-    text-transform: uppercase; letter-spacing: 0.6px;
-  }
-
-  /* seletor de mês direto na topbar */
-  .topbar-mes {
-    display: flex; align-items: center; gap: 8px; flex: 1; justify-content: flex-end;
-  }
-  .topbar-mes label {
-    font-size: 11px; color: var(--ink-soft);
-    text-transform: uppercase; letter-spacing: 0.5px;
-    white-space: nowrap;
-  }
+  .brand-txt .t1 { font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--gold-700); font-weight:600; line-height:1.1; }
+  .brand-txt .t2 { font-size:10px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.6px; }
+  .topbar-right { display:flex; align-items:center; gap:10px; }
+  .topbar-right label { font-size:11px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.5px; white-space:nowrap; }
   .topbar select {
-    padding: 8px 32px 8px 12px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    background: var(--gold-50) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237F6000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>") no-repeat right 10px center;
-    -webkit-appearance: none; appearance: none;
-    color: var(--ink);
-    font-size: 14px; font-weight: 500;
-    cursor: pointer;
-    min-width: 130px;
-    max-width: 180px;
+    padding: 8px 30px 8px 12px;
+    border: 1px solid var(--line); border-radius: var(--r-sm);
+    background: var(--gold-50) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237F6000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>") no-repeat right 8px center;
+    -webkit-appearance: none; color: var(--ink); font-size:14px; font-weight:500; cursor:pointer; min-width:130px;
   }
-  .topbar select:focus { outline: none; border-color: var(--gold-500); }
+  .topbar select:focus { outline:none; border-color:var(--gold-500); }
 
-  /* ========== CONTAINER ========== */
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 24px 20px 60px;
-  }
+  /* ── CONTAINER ── */
+  .container { max-width:1200px; margin:0 auto; padding:24px 20px 80px; }
 
-  /* ========== ERRO DE CONFIG ========== */
-  .config-alert {
-    background: var(--danger-soft);
-    border: 1px solid var(--danger);
-    border-radius: var(--radius-sm);
-    padding: 16px 18px;
-    margin-bottom: 24px;
-    font-size: 14px;
-    color: var(--danger);
-    display: none;
+  /* ── MÉTRICAS ── */
+  .metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:28px; }
+  .mc {
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--r);
+    padding:18px; box-shadow:var(--shadow); position:relative; overflow:hidden;
   }
-  .config-alert.show { display: block; }
-  .config-alert strong { display: block; margin-bottom: 6px; font-size: 15px; }
-  .config-alert code {
-    background: rgba(178,58,72,0.1);
-    padding: 2px 6px; border-radius: 4px;
-    font-family: monospace; font-size: 13px;
-  }
+  .mc::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; border-radius:var(--r) var(--r) 0 0; background:var(--gold-300); }
+  .mc.received::before { background:var(--success); }
+  .mc.pending::before  { background:var(--warn); }
+  .mc .lbl { font-size:11px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.6px; font-weight:500; margin-bottom:8px; }
+  .mc .val { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:600; color:var(--gold-700); line-height:1; }
+  .mc.received .val { color:var(--success); }
+  .mc.pending  .val { color:var(--warn); }
+  .mc .sub { font-size:11px; color:var(--ink-soft); margin-top:4px; }
+  .progress-wrap { margin-top:10px; }
+  .progress-bar  { height:4px; background:var(--line); border-radius:10px; overflow:hidden; }
+  .progress-fill { height:100%; background:linear-gradient(90deg,var(--gold-300),var(--gold-700)); border-radius:10px; transition:width .5s ease; }
 
-  /* ========== CARDS MÉTRICAS ========== */
-  .metrics {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin-bottom: 28px;
-  }
-  .metric-card {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 18px;
-    box-shadow: var(--shadow-soft);
-    position: relative;
-    overflow: hidden;
-  }
-  .metric-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--gold-300);
-    border-radius: var(--radius) var(--radius) 0 0;
-  }
-  .metric-card.received::before { background: var(--success); }
-  .metric-card.pending::before  { background: var(--warn); }
-  .metric-card .label {
-    font-size: 11px; color: var(--ink-soft);
-    text-transform: uppercase; letter-spacing: 0.6px;
-    font-weight: 500; margin-bottom: 8px;
-  }
-  .metric-card .value {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px; font-weight: 600;
-    color: var(--gold-700); line-height: 1;
-  }
-  .metric-card.received .value { color: var(--success); }
-  .metric-card.pending  .value { color: var(--warn); }
-  .metric-card .sub {
-    font-size: 11px; color: var(--ink-soft); margin-top: 4px;
-  }
-
-  /* Barra de progresso */
-  .progress-wrap { margin-top: 10px; }
-  .progress-bar {
-    height: 4px; background: var(--line);
-    border-radius: 10px; overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--gold-300), var(--gold-700));
-    border-radius: 10px;
-    transition: width 0.5s ease;
-  }
-
-  /* ========== TOOLBAR ========== */
-  .toolbar {
-    display: flex; gap: 10px;
-    margin-bottom: 18px;
-    flex-wrap: wrap; align-items: center;
-  }
+  /* ── TOOLBAR ── */
+  .toolbar { display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; align-items:center; }
+  .search-wrap { position:relative; flex:1; min-width:140px; max-width:280px; }
+  .search-wrap svg { position:absolute; left:10px; top:50%; transform:translateY(-50%); width:15px; height:15px; color:var(--ink-soft); pointer-events:none; }
+  .search-input { width:100%; padding:9px 12px 9px 32px; border:1px solid var(--line); border-radius:var(--r-sm); background:var(--paper); color:var(--ink); font-size:14px; }
+  .search-input:focus { outline:none; border-color:var(--gold-500); }
   .btn-add {
-    margin-left: auto;
-    background: var(--gold-700);
-    color: var(--paper);
-    border: none;
-    padding: 10px 18px;
-    border-radius: var(--radius-sm);
-    font-size: 14px; font-weight: 500;
-    display: flex; align-items: center; gap: 6px;
-    transition: background 0.15s;
-    white-space: nowrap;
+    margin-left:auto; background:var(--gold-700); color:var(--paper);
+    padding:10px 18px; border-radius:var(--r-sm); font-size:14px; font-weight:500;
+    display:flex; align-items:center; gap:6px; transition:background .15s; white-space:nowrap;
   }
-  .btn-add:hover { background: var(--gold-900); }
-  .btn-add svg { width: 16px; height: 16px; }
+  .btn-add:hover { background:var(--gold-900); }
+  .btn-add svg { width:16px; height:16px; }
 
-  /* search */
-  .search-wrap { position: relative; flex: 1; min-width: 140px; max-width: 260px; }
-  .search-wrap svg {
-    position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
-    width: 15px; height: 15px; color: var(--ink-soft); pointer-events: none;
-  }
-  .search-input {
-    width: 100%;
-    padding: 9px 12px 9px 32px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    background: var(--paper);
-    color: var(--ink); font-size: 14px;
-  }
-  .search-input:focus { outline: none; border-color: var(--gold-500); }
-
-  /* ========== TABELA ========== */
-  .jobs-card {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-soft);
-    overflow: hidden;
-  }
+  /* ── TABELA ── */
+  .jobs-card { background:var(--paper); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow); overflow:hidden; }
   .jobs-header {
-    display: grid;
-    grid-template-columns: minmax(0,2fr) 130px 150px 1fr 100px;
-    gap: 14px;
-    padding: 12px 20px;
-    background: var(--gold-100);
-    border-bottom: 1px solid var(--gold-200);
-    font-size: 11px;
-    text-transform: uppercase; letter-spacing: 0.6px;
-    color: var(--gold-700); font-weight: 600;
+    display:grid; grid-template-columns:minmax(0,2fr) 130px 150px 1fr 100px;
+    gap:14px; padding:12px 20px;
+    background:var(--gold-100); border-bottom:1px solid var(--gold-200);
+    font-size:11px; text-transform:uppercase; letter-spacing:.6px; color:var(--gold-700); font-weight:600;
   }
   .job-row {
-    display: grid;
-    grid-template-columns: minmax(0,2fr) 130px 150px 1fr 100px;
-    gap: 14px;
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--line);
-    align-items: center;
-    transition: background 0.15s;
+    display:grid; grid-template-columns:minmax(0,2fr) 130px 150px 1fr 100px;
+    gap:14px; padding:14px 20px; border-bottom:1px solid var(--line);
+    align-items:center; transition:background .12s;
   }
-  .job-row:last-child { border-bottom: none; }
-  .job-row:hover { background: var(--gold-50); }
-  .job-origem {
-    font-weight: 500; color: var(--ink);
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  }
-  .job-valor {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 19px; font-weight: 600; color: var(--gold-700);
-  }
+  .job-row:last-child { border-bottom:none; }
+  .job-row:hover { background:var(--gold-50); }
+  .job-origem { font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .job-valor  { font-family:'Cormorant Garamond',serif; font-size:19px; font-weight:600; color:var(--gold-700); }
 
   /* Switch */
-  .switch {
-    position: relative;
-    display: inline-flex; align-items: center;
-    cursor: pointer; user-select: none;
+  .switch { position:relative; display:inline-flex; align-items:center; cursor:pointer; user-select:none; }
+  .switch input { opacity:0; position:absolute; pointer-events:none; }
+  .sw-track {
+    width:44px; height:24px; background:var(--warn-soft); border-radius:100px;
+    position:relative; transition:background .2s; border:1px solid var(--warn);
   }
-  .switch input { opacity: 0; position: absolute; pointer-events: none; }
-  .switch-track {
-    width: 44px; height: 24px;
-    background: var(--warn-soft);
-    border-radius: 100px;
-    position: relative;
-    transition: background 0.2s;
-    border: 1px solid var(--warn);
+  .sw-track::after {
+    content:''; position:absolute; top:2px; left:2px;
+    width:18px; height:18px; background:var(--paper); border-radius:50%;
+    transition:transform .2s; box-shadow:0 1px 3px rgba(0,0,0,.15);
   }
-  .switch-track::after {
-    content: '';
-    position: absolute;
-    top: 2px; left: 2px;
-    width: 18px; height: 18px;
-    background: var(--paper);
-    border-radius: 50%;
-    transition: transform 0.2s;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-  }
-  .switch input:checked ~ .switch-track {
-    background: var(--success-soft);
-    border-color: var(--success);
-  }
-  .switch input:checked ~ .switch-track::after { transform: translateX(20px); }
-  .switch-label {
-    margin-left: 8px;
-    font-size: 12px; color: var(--warn);
-    text-transform: uppercase; letter-spacing: 0.4px;
-    font-weight: 500; min-width: 56px;
-  }
-  .switch input:checked ~ .switch-label { color: var(--success); }
+  .switch input:checked ~ .sw-track { background:var(--success-soft); border-color:var(--success); }
+  .switch input:checked ~ .sw-track::after { transform:translateX(20px); }
+  .sw-lbl { margin-left:8px; font-size:12px; color:var(--warn); text-transform:uppercase; letter-spacing:.4px; font-weight:500; min-width:56px; }
+  .switch input:checked ~ .sw-lbl { color:var(--success); }
 
-  /* Chips de entregas */
-  .entregas { display: flex; gap: 5px; flex-wrap: wrap; }
-  .chip {
-    background: var(--gold-100); color: var(--gold-700);
-    padding: 3px 8px; border-radius: 100px;
-    font-size: 11px; font-weight: 600;
-    border: 1px solid var(--gold-200);
-  }
-  .chip.empty { background: transparent; color: var(--ink-soft); border-color: transparent; opacity: 0.5; }
+  /* Chips */
+  .chips { display:flex; gap:5px; flex-wrap:wrap; }
+  .chip { background:var(--gold-100); color:var(--gold-700); padding:3px 8px; border-radius:100px; font-size:11px; font-weight:600; border:1px solid var(--gold-200); }
+  .chip.empty { background:transparent; color:var(--ink-soft); border-color:transparent; opacity:.5; }
 
   /* Ações */
-  .row-actions { display: flex; gap: 5px; justify-content: flex-end; }
+  .row-actions { display:flex; gap:5px; justify-content:flex-end; }
   .icon-btn {
-    width: 32px; height: 32px;
-    border: 1px solid var(--line);
-    background: var(--paper);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--ink-soft);
-    transition: all 0.15s;
+    width:32px; height:32px; border:1px solid var(--line); background:var(--paper);
+    border-radius:8px; display:flex; align-items:center; justify-content:center;
+    color:var(--ink-soft); transition:all .15s;
   }
-  .icon-btn:hover { background: var(--gold-50); color: var(--gold-700); border-color: var(--gold-300); }
-  .icon-btn.danger:hover { background: var(--danger-soft); color: var(--danger); border-color: var(--danger); }
-  .icon-btn svg { width: 14px; height: 14px; }
+  .icon-btn:hover { background:var(--gold-50); color:var(--gold-700); border-color:var(--gold-300); }
+  .icon-btn.danger:hover { background:var(--danger-soft); color:var(--danger); border-color:var(--danger); }
+  .icon-btn svg { width:14px; height:14px; }
 
-  /* Empty/Loader */
-  .empty-state { text-align: center; padding: 56px 20px; color: var(--ink-soft); }
-  .empty-state .ico { font-family: 'Cormorant Garamond', serif; font-size: 48px; color: var(--gold-300); margin-bottom: 8px; }
-  .loader-wrap { display: flex; justify-content: center; padding: 40px; }
-  .loader {
-    width: 34px; height: 34px;
-    border: 3px solid var(--gold-200);
-    border-top-color: var(--gold-700);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
+  /* Empty / Loader */
+  .empty-state { text-align:center; padding:56px 20px; color:var(--ink-soft); }
+  .empty-state .ico { font-family:'Cormorant Garamond',serif; font-size:48px; color:var(--gold-300); margin-bottom:8px; }
+  .loader-wrap { display:flex; justify-content:center; padding:40px; }
+  .loader { width:34px; height:34px; border:3px solid var(--gold-200); border-top-color:var(--gold-700); border-radius:50%; animation:spin .8s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
 
-  /* ========== MODAL ========== */
+  /* ── MODAIS ── */
   .modal-backdrop {
-    position: fixed; inset: 0;
-    background: rgba(42,36,25,0.45);
-    backdrop-filter: blur(4px);
-    display: none; align-items: flex-end; justify-content: center;
-    z-index: 100;
+    position:fixed; inset:0;
+    background:rgba(42,36,25,.45); backdrop-filter:blur(4px);
+    display:none; align-items:flex-end; justify-content:center; z-index:100;
   }
-  .modal-backdrop.show { display: flex; }
+  .modal-backdrop.show { display:flex; }
+  .modal-backdrop.center { align-items:center; padding:20px; }
   .modal {
-    background: var(--paper);
-    border-radius: 20px 20px 0 0;
-    width: 100%; max-width: 520px;
-    max-height: 92dvh; overflow-y: auto;
-    padding: 24px;
-    padding-bottom: calc(24px + env(safe-area-inset-bottom));
-    animation: slideUp 0.25s cubic-bezier(0.2,0.9,0.3,1);
+    background:var(--paper); border-radius:20px 20px 0 0;
+    width:100%; max-width:540px; max-height:94dvh; overflow-y:auto;
+    padding:24px; padding-bottom:calc(24px + env(safe-area-inset-bottom));
+    animation:slideUp .25s cubic-bezier(.2,.9,.3,1);
   }
-  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-  .modal-handle {
-    width: 40px; height: 4px;
-    background: var(--gold-200);
-    border-radius: 100px;
-    margin: -8px auto 16px;
-  }
-  .modal-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--gold-700); margin: 0 0 4px; }
-  .modal-sub { font-size: 12px; color: var(--ink-soft); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
-  .field { margin-bottom: 14px; }
-  .field label { display: block; font-size: 12px; color: var(--ink-soft); margin-bottom: 6px; font-weight: 500; }
+  .modal.rounded { border-radius:var(--r); max-width:400px; }
+  @keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
+  .modal-handle { width:40px; height:4px; background:var(--gold-200); border-radius:100px; margin:-6px auto 16px; }
+  .modal-title { font-family:'Cormorant Garamond',serif; font-size:24px; color:var(--gold-700); margin:0 0 2px; }
+  .modal-sub   { font-size:12px; color:var(--ink-soft); margin-bottom:20px; text-transform:uppercase; letter-spacing:.5px; }
+
+  /* Campos */
+  .field { margin-bottom:14px; }
+  .field label { display:block; font-size:12px; color:var(--ink-soft); margin-bottom:5px; font-weight:500; }
   .field input, .field select {
-    width: 100%; padding: 11px 14px;
-    border: 1px solid var(--line); border-radius: var(--radius-sm);
-    background: var(--paper); color: var(--ink); font-size: 15px;
-    transition: border-color 0.15s;
+    width:100%; padding:11px 14px; border:1px solid var(--line);
+    border-radius:var(--r-sm); background:var(--paper); color:var(--ink); font-size:15px;
+    transition:border-color .15s, box-shadow .15s;
   }
-  .field input:focus, .field select:focus { outline: none; border-color: var(--gold-500); box-shadow: 0 0 0 3px rgba(201,169,97,0.15); }
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
-  .modal-actions { display: flex; gap: 10px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
-  .modal-actions .btn-primary { flex: 1; margin: 0; }
+  .field input:focus, .field select:focus { outline:none; border-color:var(--gold-500); box-shadow:0 0 0 3px rgba(201,169,97,.15); }
+  .field select { -webkit-appearance:none; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237F6000' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>"); background-repeat:no-repeat; background-position:right 10px center; padding-right:32px; }
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+
+  /* Divider com texto */
+  .divider { display:flex; align-items:center; gap:10px; margin:18px 0 14px; }
+  .divider::before, .divider::after { content:''; flex:1; height:1px; background:var(--line); }
+  .divider span { font-size:11px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.6px; white-space:nowrap; }
+
+  /* Caixa de criar novo mês */
+  .novo-mes-box {
+    background:var(--blue-soft); border:1px solid #BFDBFE; border-radius:var(--r-sm);
+    padding:14px 16px; display:none; margin-top:4px;
+  }
+  .novo-mes-box.show { display:block; }
+  .novo-mes-box label { font-size:12px; color:#1E40AF; font-weight:500; margin-bottom:6px; display:block; }
+  .novo-mes-row { display:flex; gap:8px; align-items:center; }
+  .novo-mes-row input {
+    flex:1; padding:9px 12px; border:1px solid #BFDBFE; border-radius:var(--r-sm);
+    background:#fff; font-size:14px; color:var(--ink);
+  }
+  .novo-mes-row input:focus { outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(37,99,235,.12); }
+  .btn-criar-mes {
+    background:var(--blue); color:#fff; padding:9px 14px;
+    border-radius:var(--r-sm); font-size:13px; font-weight:500; white-space:nowrap;
+    transition:background .15s;
+  }
+  .btn-criar-mes:hover { background:#1D4ED8; }
+  .btn-criar-mes:disabled { opacity:.5; cursor:not-allowed; }
+  .novo-mes-hint { font-size:11px; color:#3B82F6; margin-top:6px; }
+  .novo-mes-ok { font-size:12px; color:var(--success); font-weight:500; margin-top:6px; display:none; }
+  .novo-mes-ok.show { display:block; }
+
+  /* Ações do modal */
+  .modal-actions { display:flex; gap:10px; margin-top:20px; padding-top:16px; border-top:1px solid var(--line); }
   .btn-primary {
-    width: 100%; padding: 13px 16px; border: none;
-    border-radius: var(--radius-sm);
-    background: var(--gold-700); color: var(--paper);
-    font-size: 15px; font-weight: 500;
-    transition: background 0.15s;
+    flex:1; padding:13px 16px; border:none; border-radius:var(--r-sm);
+    background:var(--gold-700); color:var(--paper); font-size:15px; font-weight:500;
+    transition:background .15s; cursor:pointer;
   }
-  .btn-primary:hover { background: var(--gold-900); }
-  .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+  .btn-primary:hover { background:var(--gold-900); }
+  .btn-primary:disabled { opacity:.6; cursor:not-allowed; }
   .btn-secondary {
-    padding: 13px 20px; border: 1px solid var(--line);
-    background: var(--paper); color: var(--ink-soft);
-    border-radius: var(--radius-sm); font-weight: 500;
+    padding:13px 20px; border:1px solid var(--line); background:var(--paper);
+    color:var(--ink-soft); border-radius:var(--r-sm); font-weight:500; cursor:pointer;
   }
-  .btn-secondary:hover { background: var(--gold-50); }
+  .btn-secondary:hover { background:var(--gold-50); }
+  .btn-danger { background:var(--danger); color:#fff; }
+  .btn-danger:hover { background:#8E2C38; }
 
   /* Modal confirmar */
-  .modal-backdrop.confirm { align-items: center; padding: 20px; }
-  .confirm-modal {
-    max-width: 380px; border-radius: var(--radius);
-    margin: auto; text-align: center;
-    padding: 28px 24px;
-    padding-bottom: calc(24px + env(safe-area-inset-bottom));
-  }
   .confirm-icon {
-    width: 56px; height: 56px; border-radius: 50%;
-    background: var(--danger-soft); color: var(--danger);
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 14px; font-size: 28px; font-weight: 700;
+    width:52px; height:52px; border-radius:50%; background:var(--danger-soft);
+    color:var(--danger); display:flex; align-items:center; justify-content:center;
+    margin:0 auto 12px; font-size:24px; font-weight:700;
   }
-  .confirm-text { color: var(--ink-soft); margin: 0 0 18px; }
-  .confirm-text strong { color: var(--ink); }
-  .btn-danger { background: var(--danger); color: white; }
-  .btn-danger:hover { background: #8E2C38; }
+  .confirm-text { color:var(--ink-soft); margin:0 0 18px; text-align:center; }
 
   /* Toast */
   .toast {
-    position: fixed;
-    left: 50%;
-    bottom: calc(24px + env(safe-area-inset-bottom));
-    transform: translateX(-50%) translateY(20px);
-    background: var(--ink); color: var(--paper);
-    padding: 12px 22px; border-radius: 100px;
-    font-size: 13px; box-shadow: var(--shadow-lift);
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.2s, transform 0.2s;
-    z-index: 200; max-width: calc(100% - 40px);
-    white-space: nowrap;
+    position:fixed; left:50%;
+    bottom:calc(24px + env(safe-area-inset-bottom));
+    transform:translateX(-50%) translateY(20px);
+    background:var(--ink); color:var(--paper);
+    padding:11px 22px; border-radius:100px;
+    font-size:13px; box-shadow:var(--shadow-lg);
+    opacity:0; pointer-events:none;
+    transition:opacity .2s, transform .2s;
+    z-index:300; max-width:calc(100% - 40px); white-space:nowrap;
   }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .toast.error   { background: var(--danger); }
-  .toast.success { background: var(--success); }
+  .toast.show   { opacity:1; transform:translateX(-50%) translateY(0); }
+  .toast.error  { background:var(--danger); }
+  .toast.success{ background:var(--success); }
 
-  /* ========== MOBILE ========== */
-  @media (max-width: 720px) {
-    .container { padding: 16px 14px 50px; }
-    .topbar { padding: 10px 14px; }
-    .brand-text .title { font-size: 16px; }
-    .topbar-mes label { display: none; }
-    .topbar select { min-width: 110px; font-size: 13px; }
-    .metrics { grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
-    .metrics .metric-card:first-child { grid-column: span 2; }
-    .metric-card .value { font-size: 22px; }
-    .jobs-header { display: none; }
+  /* ── MOBILE ── */
+  @media (max-width:720px) {
+    .container { padding:16px 14px 60px; }
+    .topbar { padding:10px 14px; }
+    .brand-txt .t1 { font-size:16px; }
+    .topbar-right label { display:none; }
+    .topbar select { min-width:110px; font-size:13px; }
+    .metrics { grid-template-columns:1fr 1fr; gap:10px; margin-bottom:18px; }
+    .metrics .mc:first-child { grid-column:span 2; }
+    .mc .val { font-size:22px; }
+    .jobs-header { display:none; }
     .job-row {
-      grid-template-columns: 1fr auto;
-      grid-template-areas:
-        "origem  actions"
-        "valor   switch"
-        "entregas entregas";
-      gap: 8px; padding: 14px 16px;
+      grid-template-columns:1fr auto;
+      grid-template-areas:"origem actions" "valor switch" "chips chips";
+      gap:8px; padding:14px 16px;
     }
-    .job-origem  { grid-area: origem; white-space: normal; }
-    .job-valor   { grid-area: valor; font-size: 20px; }
-    .job-switch  { grid-area: switch; justify-self: end; }
-    .job-entregas{ grid-area: entregas; padding-top: 6px; border-top: 1px dashed var(--line); }
-    .row-actions { grid-area: actions; }
-    .search-wrap { max-width: 100%; }
-    .btn-add { margin-left: 0; width: 100%; justify-content: center; }
-    .toolbar { flex-direction: column; align-items: stretch; }
-    .grid-4 { grid-template-columns: 1fr 1fr; }
-    .modal { border-radius: 18px 18px 0 0; }
+    .job-origem   { grid-area:origem; white-space:normal; }
+    .job-valor    { grid-area:valor; font-size:20px; }
+    .job-switch   { grid-area:switch; justify-self:end; }
+    .job-entregas { grid-area:chips; padding-top:6px; border-top:1px dashed var(--line); }
+    .row-actions  { grid-area:actions; }
+    .search-wrap  { max-width:100%; }
+    .btn-add      { margin-left:0; width:100%; justify-content:center; }
+    .toolbar      { flex-direction:column; align-items:stretch; }
+    .grid-4       { grid-template-columns:1fr 1fr; }
   }
 </style>
 </head>
 <body>
 
-<!-- ========== TOPBAR ========== -->
+<!-- TOPBAR -->
 <header class="topbar">
   <div class="brand">
-    <div class="brand-monogram">JM</div>
-    <div class="brand-text">
-      <div class="title">Jobs Jamille Mariah</div>
-      <div class="sub">Publicidade & Parcerias</div>
+    <div class="brand-mono">JM</div>
+    <div class="brand-txt">
+      <div class="t1">Jobs Jamille Mariah</div>
+      <div class="t2">Publicidade & Parcerias</div>
     </div>
   </div>
-  <div class="topbar-mes">
-    <label for="selectMes">Mês</label>
-    <select id="selectMes"><option>Carregando…</option></select>
+  <div class="topbar-right">
+    <label for="selMes">Mês</label>
+    <select id="selMes"><option>Carregando…</option></select>
   </div>
 </header>
 
-<!-- ========== PAINEL ========== -->
+<!-- PAINEL -->
 <div class="container">
-
-  <!-- Alerta de configuração -->
-  <div class="config-alert" id="configAlert">
-    <strong>⚠️ URL do servidor não configurada</strong>
-    Abra o arquivo <code>index.html</code>, encontre a linha com <code>API_URL</code>
-    e cole a URL do seu Google Apps Script (termina com <code>/exec</code>).
-  </div>
 
   <!-- Métricas -->
   <div class="metrics">
-    <div class="metric-card">
-      <div class="label">Total Acordado</div>
-      <div class="value" id="mTotal">R$ 0</div>
+    <div class="mc">
+      <div class="lbl">Total Acordado</div>
+      <div class="val" id="mTotal">R$ 0</div>
       <div class="progress-wrap">
         <div class="progress-bar"><div class="progress-fill" id="mProgress" style="width:0%"></div></div>
         <div class="sub" id="mPct" style="margin-top:5px;">0% recebido</div>
       </div>
     </div>
-    <div class="metric-card received">
-      <div class="label">Total Pago</div>
-      <div class="value" id="mPago">R$ 0</div>
+    <div class="mc received">
+      <div class="lbl">Total Pago</div>
+      <div class="val" id="mPago">R$ 0</div>
       <div class="sub" id="mPagoQt"></div>
     </div>
-    <div class="metric-card pending">
-      <div class="label">A Receber</div>
-      <div class="value" id="mReceber">R$ 0</div>
+    <div class="mc pending">
+      <div class="lbl">A Receber</div>
+      <div class="val" id="mReceber">R$ 0</div>
       <div class="sub" id="mReceberQt"></div>
     </div>
   </div>
@@ -528,29 +362,52 @@
       <div>Valor</div>
       <div>Situação</div>
       <div>Entregas</div>
-      <div style="text-align:right;">Ações</div>
+      <div style="text-align:right">Ações</div>
     </div>
-    <div class="jobs-list" id="jobsList">
+    <div id="jobsList">
       <div class="loader-wrap"><div class="loader"></div></div>
     </div>
   </div>
 
-</div>
+</div><!-- /container -->
 
-<!-- ========== MODAL CRIAR/EDITAR ========== -->
+<!-- ════════════════════════════════
+     MODAL — CRIAR / EDITAR JOB
+     ════════════════════════════════ -->
 <div class="modal-backdrop" id="modalJob">
   <div class="modal">
     <div class="modal-handle"></div>
     <h2 class="modal-title" id="modalTitulo">Novo Job</h2>
-    <p class="modal-sub" id="modalSub">Cadastrar parceria</p>
+    <p class="modal-sub"  id="modalSub">Cadastrar parceria</p>
+
+    <!-- Seletor de mês (só aparece no modo Criar) -->
+    <div class="field" id="fieldMes">
+      <label>Mês de referência</label>
+      <select id="fMes"></select>
+    </div>
+
+    <!-- Caixa de criar novo mês -->
+    <div class="novo-mes-box" id="novoMesBox">
+      <label>Nome do novo mês (formato: MMM AA)</label>
+      <div class="novo-mes-row">
+        <input type="text" id="novoMesInput" placeholder="Ex: JUL 26" maxlength="6"
+               oninput="this.value=this.value.toUpperCase()">
+        <button class="btn-criar-mes" id="btnCriarMes" onclick="criarNovoMes()">Criar</button>
+      </div>
+      <div class="novo-mes-hint">Ex: JAN 27 · FEV 27 · MAR 27 etc.</div>
+      <div class="novo-mes-ok" id="novoMesOk">✓ Mês criado! Já está selecionado.</div>
+    </div>
+
+    <div class="divider"><span>dados do job</span></div>
+
     <div class="field">
       <label>Origem / Cliente *</label>
-      <input type="text" id="fOrigem" placeholder="Ex: La Vie, Império das Joias…" autocapitalize="words" />
+      <input type="text" id="fOrigem" placeholder="Ex: La Vie, Império das Joias…" autocapitalize="words">
     </div>
     <div class="grid-2">
       <div class="field">
         <label>Valor (R$) *</label>
-        <input type="number" id="fValor" step="0.01" min="0" placeholder="0,00" inputmode="decimal" />
+        <input type="number" id="fValor" step="0.01" min="0" placeholder="0,00" inputmode="decimal">
       </div>
       <div class="field">
         <label>Situação</label>
@@ -560,381 +417,433 @@
         </select>
       </div>
     </div>
-    <p class="modal-sub" style="margin-top:4px;">Entregas (opcional)</p>
+
+    <div class="divider"><span>entregas (opcional)</span></div>
     <div class="grid-4">
-      <div class="field"><label>Visitas</label><input type="number" id="fVisitas" min="0" placeholder="0" inputmode="numeric" /></div>
-      <div class="field"><label>Stories</label><input type="number" id="fStories" min="0" placeholder="0" inputmode="numeric" /></div>
-      <div class="field"><label>Reels</label><input type="number" id="fReels" min="0" placeholder="0" inputmode="numeric" /></div>
-      <div class="field"><label>Posts</label><input type="number" id="fPosts" min="0" placeholder="0" inputmode="numeric" /></div>
+      <div class="field"><label>Visitas</label><input type="number" id="fVisitas" min="0" placeholder="0" inputmode="numeric"></div>
+      <div class="field"><label>Stories</label><input type="number" id="fStories" min="0" placeholder="0" inputmode="numeric"></div>
+      <div class="field"><label>Reels</label>  <input type="number" id="fReels"   min="0" placeholder="0" inputmode="numeric"></div>
+      <div class="field"><label>Posts</label>  <input type="number" id="fPosts"   min="0" placeholder="0" inputmode="numeric"></div>
     </div>
+
     <div class="modal-actions">
       <button class="btn-secondary" id="btnCancelarJob">Cancelar</button>
-      <button class="btn-primary" id="btnSalvarJob">Salvar</button>
+      <button class="btn-primary"   id="btnSalvarJob">Salvar</button>
     </div>
   </div>
 </div>
 
-<!-- ========== MODAL CONFIRMAR DELETE ========== -->
-<div class="modal-backdrop confirm" id="modalConfirm">
-  <div class="modal confirm-modal">
+<!-- ════════════════════════════════
+     MODAL — CONFIRMAR DELETE
+     ════════════════════════════════ -->
+<div class="modal-backdrop center" id="modalDel">
+  <div class="modal rounded" style="text-align:center; padding:28px 24px;">
     <div class="confirm-icon">!</div>
-    <h2 class="modal-title">Excluir Job?</h2>
-    <p class="confirm-text">Isso removerá <strong id="confirmNome">o job</strong> permanentemente da planilha.</p>
+    <h2 class="modal-title" style="text-align:center;">Excluir Job?</h2>
+    <p class="confirm-text">Isso removerá <strong id="delNome">o job</strong> permanentemente da planilha.</p>
     <div class="modal-actions">
-      <button class="btn-secondary" id="btnCancelarExcluir" style="flex:1;">Cancelar</button>
-      <button class="btn-primary btn-danger" id="btnConfirmarExcluir" style="flex:1;">Excluir</button>
+      <button class="btn-secondary" id="btnCancelarDel" style="flex:1">Cancelar</button>
+      <button class="btn-primary btn-danger" id="btnConfirmarDel" style="flex:1">Excluir</button>
     </div>
   </div>
 </div>
 
-<!-- ========== TOAST ========== -->
+<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
+<!-- ════════════════════════════════
+     JAVASCRIPT
+     ════════════════════════════════ -->
 <script>
-/* ============================================================
-   CONFIGURAÇÃO
-   Cole aqui a URL do seu Google Apps Script (termina com /exec)
-   ============================================================ */
-const API_URL = 'https://script.google.com/macros/s/AKfycbzqEceLSdCMruopOnFzTfTNB26Vs5Z09I7LFM8WVk95pjRERrYJlY9Culcha8-Q09w/exec';
+/* ─────────────────────────────────────────────
+   CONFIGURAÇÃO — cole a URL do seu Web App aqui
+   ───────────────────────────────────────────── */
+const API_URL = 'COLE_AQUI_A_URL_DO_SEU_WEB_APP_PUBLICADO';
 
-/* ============================================================
+/* ─────────────────────────────────────────────
    ESTADO
-   ============================================================ */
-const state = {
-  abas: [],
-  abaAtual: null,
-  jobs: [],
-  todosjobs: [],   // cache sem filtro
-  editandoLinha: null,
+   ───────────────────────────────────────────── */
+const S = {
+  abas:           [],   // lista de abas [{nome, nomeOriginal}]
+  abaAtual:       null, // aba selecionada na topbar
+  jobs:           [],   // jobs filtrados
+  todosJobs:      [],   // cache completo do mês
+  editandoLinha:  null,
   excluindoLinha: null
 };
 
-/* ============================================================
-   API — GET com query string (evita preflight CORS)
-   O Apps Script publicado como "Qualquer pessoa" responde
-   com redirect 302 → fetch com redirect:'follow' resolve isso.
-   ============================================================ */
+/* ─────────────────────────────────────────────
+   API
+   ───────────────────────────────────────────── */
 async function api(acao, params = {}) {
-  if (!API_URL || API_URL.includes('COLE_AQUI')) {
-    document.getElementById('configAlert').classList.add('show');
-    throw new Error('URL do servidor não configurada.');
-  }
+  if (!API_URL || API_URL.includes('COLE_AQUI'))
+    throw new Error('Cole a URL do Apps Script no index.html (linha API_URL).');
 
   const qs = new URLSearchParams({ acao, ...params });
-
-  // Tenta com no-cors como fallback — Apps Script às vezes redireciona
   let resp;
   try {
-    resp = await fetch(`${API_URL}?${qs}`, {
-      method: 'GET',
-      redirect: 'follow',
-    });
-  } catch (err) {
-    throw new Error(
-      'Falha de rede. Verifique se a URL do Apps Script está correta ' +
-      'e se o Web App está publicado como "Qualquer pessoa".'
-    );
-  }
-
-  if (!resp.ok) throw new Error(`Erro HTTP ${resp.status}`);
-
-  let data;
-  try {
-    data = await resp.json();
+    resp = await fetch(`${API_URL}?${qs}`, { method:'GET', redirect:'follow' });
   } catch {
-    throw new Error('Resposta inválida do servidor (não é JSON). Republique o Apps Script.');
+    throw new Error('Falha de rede. Verifique a URL do Apps Script e se está publicado como "Qualquer pessoa".');
   }
-
-  if (!data.ok) throw new Error(data.erro || 'Erro desconhecido da API');
+  if (!resp.ok) throw new Error(`Erro HTTP ${resp.status}`);
+  let data;
+  try { data = await resp.json(); } catch { throw new Error('Resposta inválida do servidor.'); }
+  if (!data.ok) throw new Error(data.erro || 'Erro desconhecido');
   return data;
 }
 
-/* ============================================================
+/* ─────────────────────────────────────────────
    UTILS
-   ============================================================ */
-const $  = id => document.getElementById(id);
-const fmtBRL = n => 'R$ ' + Number(n||0).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
-const esc    = s => String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+   ───────────────────────────────────────────── */
+const $    = id => document.getElementById(id);
+const fmtR = n  => 'R$ ' + Number(n||0).toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:2});
+const esc  = s  => String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-let _toastT;
-function toast(msg, tipo = '') {
-  const el = $('toast');
-  el.textContent = msg;
-  el.className = 'toast show ' + tipo;
-  clearTimeout(_toastT);
-  _toastT = setTimeout(() => el.classList.remove('show'), 3000);
+let _tt;
+function toast(msg, tipo='') {
+  const el=$('toast'); el.textContent=msg; el.className='toast show '+tipo;
+  clearTimeout(_tt); _tt=setTimeout(()=>el.classList.remove('show'),3200);
 }
 
-/* ============================================================
-   INICIALIZAÇÃO — carrega direto sem login
-   ============================================================ */
-window.addEventListener('DOMContentLoaded', () => {
-  if (!API_URL || API_URL.includes('COLE_AQUI')) {
-    $('configAlert').classList.add('show');
-    $('jobsList').innerHTML = '<div class="empty-state"><div class="ico">⚙</div><p>Configure a URL do servidor no index.html</p></div>';
-    return;
-  }
-  carregarAbas();
-});
+/* ─────────────────────────────────────────────
+   INIT — carrega direto, sem login
+   ───────────────────────────────────────────── */
+window.addEventListener('DOMContentLoaded', carregarAbas);
 
-/* ============================================================
+/* ─────────────────────────────────────────────
    ABAS (MESES)
-   ============================================================ */
+   ───────────────────────────────────────────── */
 async function carregarAbas() {
   try {
     const r = await api('listarAbas');
-    state.abas = r.abas;
-
-    const sel = $('selectMes');
-    sel.innerHTML = r.abas.map(a =>
-      `<option value="${esc(a.nomeOriginal)}">${esc(a.nome)}</option>`
-    ).join('');
+    S.abas = r.abas;
+    popularSelectMes();           // topbar
+    popularSelectMesModal();      // modal de novo job
 
     if (!r.abas.length) {
-      $('jobsList').innerHTML = '<div class="empty-state"><div class="ico">∅</div><p>Nenhuma aba de mês encontrada na planilha.</p></div>';
+      $('jobsList').innerHTML = '<div class="empty-state"><div class="ico">∅</div><p>Nenhuma aba de mês encontrada.</p></div>';
       return;
     }
-
-    state.abaAtual = r.abas[0].nomeOriginal;
-    sel.value = state.abaAtual;
+    S.abaAtual = r.abas[0].nomeOriginal;
+    $('selMes').value = S.abaAtual;
     carregarJobs();
-  } catch (e) {
-    toast('Erro: ' + e.message, 'error');
+  } catch(e) {
+    toast('Erro: '+e.message,'error');
     $('jobsList').innerHTML = `<div class="empty-state"><div class="ico">!</div><p>${esc(e.message)}</p></div>`;
   }
 }
 
-$('selectMes').addEventListener('change', e => {
-  state.abaAtual = e.target.value;
+// Popula o <select> da topbar
+function popularSelectMes() {
+  const sel = $('selMes');
+  sel.innerHTML = S.abas.map(a=>`<option value="${esc(a.nomeOriginal)}">${esc(a.nome)}</option>`).join('');
+}
+
+// Popula o <select> do modal com todas as abas + opção "Criar novo mês"
+function popularSelectMesModal() {
+  const sel = $('fMes');
+  sel.innerHTML =
+    S.abas.map(a=>`<option value="${esc(a.nomeOriginal)}">${esc(a.nome)}</option>`).join('') +
+    `<option value="__novo__">➕ Criar novo mês…</option>`;
+
+  // Pré-seleciona o mês atual da topbar
+  if (S.abaAtual) sel.value = S.abaAtual;
+
+  sel.onchange = () => {
+    const novoMesBox = $('novoMesBox');
+    if (sel.value === '__novo__') {
+      novoMesBox.classList.add('show');
+      $('novoMesInput').focus();
+      // Sugerir próximo mês automaticamente
+      $('novoMesInput').value = sugerirProximoMes();
+      $('novoMesOk').classList.remove('show');
+    } else {
+      novoMesBox.classList.remove('show');
+    }
+  };
+}
+
+// Calcula o próximo mês após o mais recente
+function sugerirProximoMes() {
+  const MESES = ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
+  if (!S.abas.length) return '';
+  const ultimo = S.abas[0].nome.trim().toUpperCase();
+  const partes = ultimo.split(' ');
+  const idxMes = MESES.indexOf(partes[0]);
+  if (idxMes === -1) return '';
+  const ano = parseInt(partes[1], 10) || 0;
+  const proxIdx = (idxMes + 1) % 12;
+  const proxAno = idxMes === 11 ? ano + 1 : ano;
+  return MESES[proxIdx] + ' ' + String(proxAno).slice(-2);
+}
+
+$('selMes').addEventListener('change', e => {
+  S.abaAtual = e.target.value;
   $('searchInput').value = '';
   carregarJobs();
 });
 
-/* ============================================================
-   JOBS DO MÊS
-   ============================================================ */
-async function carregarJobs() {
-  if (!state.abaAtual) return;
-  $('jobsList').innerHTML = '<div class="loader-wrap"><div class="loader"></div></div>';
+/* ─────────────────────────────────────────────
+   CRIAR NOVO MÊS (dentro do modal)
+   ───────────────────────────────────────────── */
+async function criarNovoMes() {
+  const nomeMes = $('novoMesInput').value.trim().toUpperCase();
+  const btn = $('btnCriarMes');
 
+  // Validação no front
+  if (!/^[A-Z]{3}\s\d{2}$/.test(nomeMes)) {
+    toast('Formato inválido. Use "MMM AA", ex: JUL 26','error');
+    return;
+  }
+
+  btn.disabled = true; btn.textContent = 'Criando…';
   try {
-    const r = await api('listarJobs', { aba: state.abaAtual });
-    state.todosjobs = r.jobs;
-    state.jobs = r.jobs;
+    await api('criarAba', { nomeMes });
+
+    // Adiciona à lista local e re-popula os selects
+    const novaAba = { nome: nomeMes, nomeOriginal: nomeMes };
+    S.abas.unshift(novaAba);
+    popularSelectMes();
+    popularSelectMesModal();
+
+    // Seleciona o novo mês no modal e na topbar
+    $('fMes').value = nomeMes;
+    $('novoMesBox').classList.remove('show');
+    $('novoMesOk').classList.add('show');
+
+    toast('✓ Mês "'+nomeMes+'" criado!','success');
+  } catch(e) {
+    toast('Erro: '+e.message,'error');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Criar';
+  }
+}
+
+/* ─────────────────────────────────────────────
+   JOBS DO MÊS
+   ───────────────────────────────────────────── */
+async function carregarJobs() {
+  if (!S.abaAtual) return;
+  $('jobsList').innerHTML = '<div class="loader-wrap"><div class="loader"></div></div>';
+  try {
+    const r = await api('listarJobs', { aba: S.abaAtual });
+    S.todosJobs = r.jobs;
+    S.jobs = r.jobs;
     renderMetricas(r.metricas);
     renderJobs(r.jobs);
-  } catch (e) {
-    toast('Erro ao carregar: ' + e.message, 'error');
+  } catch(e) {
+    toast('Erro ao carregar: '+e.message,'error');
     $('jobsList').innerHTML = `<div class="empty-state"><div class="ico">!</div><p>${esc(e.message)}</p></div>`;
   }
 }
 
 function filtrarJobs() {
   const q = $('searchInput').value.toLowerCase().trim();
-  state.jobs = q
-    ? state.todosjobs.filter(j => j.origem.toLowerCase().includes(q))
-    : state.todosjobs;
-  renderJobs(state.jobs);
+  S.jobs = q ? S.todosJobs.filter(j=>j.origem.toLowerCase().includes(q)) : S.todosJobs;
+  renderJobs(S.jobs);
 }
 
-/* ============================================================
-   RENDER MÉTRICAS
-   ============================================================ */
+/* ─────────────────────────────────────────────
+   RENDER
+   ───────────────────────────────────────────── */
 function renderMetricas(m) {
-  $('mTotal').textContent   = fmtBRL(m.totalAcordado);
-  $('mPago').textContent    = fmtBRL(m.totalPago);
-  $('mReceber').textContent = fmtBRL(m.totalReceber);
-
-  const pct = m.totalAcordado > 0 ? Math.round(m.totalPago / m.totalAcordado * 100) : 0;
-  $('mProgress').style.width = pct + '%';
-  $('mPct').textContent = pct + '% recebido';
-
-  const pagos    = state.todosjobs.filter(j => j.situacao === 'PAGO').length;
-  const pendente = state.todosjobs.length - pagos;
-  $('mPagoQt').textContent    = pagos    + (pagos === 1 ? ' job pago' : ' jobs pagos');
-  $('mReceberQt').textContent = pendente + (pendente === 1 ? ' pendente' : ' pendentes');
+  $('mTotal').textContent   = fmtR(m.totalAcordado);
+  $('mPago').textContent    = fmtR(m.totalPago);
+  $('mReceber').textContent = fmtR(m.totalReceber);
+  const pct = m.totalAcordado>0 ? Math.round(m.totalPago/m.totalAcordado*100) : 0;
+  $('mProgress').style.width = pct+'%';
+  $('mPct').textContent = pct+'% recebido';
+  const pagos = S.todosJobs.filter(j=>j.situacao==='PAGO').length;
+  const pend  = S.todosJobs.length - pagos;
+  $('mPagoQt').textContent    = pagos + (pagos===1?' job pago':' jobs pagos');
+  $('mReceberQt').textContent = pend  + (pend===1?' pendente':' pendentes');
 }
 
-/* ============================================================
-   RENDER JOBS
-   ============================================================ */
 function renderJobs(jobs) {
-  const list = $('jobsList');
+  const el = $('jobsList');
   if (!jobs.length) {
-    list.innerHTML = '<div class="empty-state"><div class="ico">∅</div><p>Nenhum job encontrado.<br><small>Clique em "Novo Job" para adicionar.</small></p></div>';
+    el.innerHTML='<div class="empty-state"><div class="ico">∅</div><p>Nenhum job encontrado.<br><small>Clique em "Novo Job" para adicionar.</small></p></div>';
     return;
   }
-
-  list.innerHTML = jobs.map(j => {
-    const pago = j.situacao === 'PAGO';
+  el.innerHTML = jobs.map(j => {
+    const pago = j.situacao==='PAGO';
     return `
     <div class="job-row" data-linha="${j.linha}">
       <div class="job-origem">${esc(j.origem)}</div>
-      <div class="job-valor">${fmtBRL(j.valor)}</div>
+      <div class="job-valor">${fmtR(j.valor)}</div>
       <div class="job-switch">
         <label class="switch">
-          <input type="checkbox" ${pago ? 'checked' : ''} onchange="toggleSituacao(${j.linha}, this.checked)" />
-          <span class="switch-track"></span>
-          <span class="switch-label">${pago ? 'Pago' : 'Pendente'}</span>
+          <input type="checkbox" ${pago?'checked':''} onchange="togglePago(${j.linha},this.checked)">
+          <span class="sw-track"></span>
+          <span class="sw-lbl">${pago?'Pago':'Pendente'}</span>
         </label>
       </div>
-      <div class="job-entregas entregas">${renderChips(j)}</div>
+      <div class="job-entregas chips">${chips(j)}</div>
       <div class="row-actions">
         <button class="icon-btn" title="Editar" onclick="abrirEditar(${j.linha})">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
         </button>
-        <button class="icon-btn danger" title="Excluir" onclick="abrirExcluir(${j.linha})">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14H7L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+        <button class="icon-btn danger" title="Excluir" onclick="abrirDel(${j.linha})">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14H7L5 6"/><path d="M10 11v6M14 11v6M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
         </button>
       </div>
     </div>`;
   }).join('');
 }
 
-function renderChips(j) {
-  const items = [
-    { n: j.visitas, l: 'Visitas' },
-    { n: j.stories, l: 'Stories' },
-    { n: j.reels,   l: 'Reels' },
-    { n: j.posts,   l: 'Posts' }
-  ].filter(i => i.n > 0);
-  if (!items.length) return '<span class="chip empty">—</span>';
-  return items.map(i => `<span class="chip" title="${i.l}">${i.l[0]} ${i.n}</span>`).join('');
+function chips(j) {
+  const its=[{n:j.visitas,l:'V'},{n:j.stories,l:'S'},{n:j.reels,l:'R'},{n:j.posts,l:'P'}].filter(i=>i.n>0);
+  return its.length ? its.map(i=>`<span class="chip">${i.l} ${i.n}</span>`).join('') : '<span class="chip empty">—</span>';
 }
 
-/* ============================================================
-   TOGGLE PAGO/PENDENTE
-   ============================================================ */
-async function toggleSituacao(linha, marcado) {
+/* ─────────────────────────────────────────────
+   TOGGLE PAGO
+   ───────────────────────────────────────────── */
+async function togglePago(linha, marcado) {
   const nova = marcado ? 'PAGO' : 'PENDENTE';
-  // Atualiza label do switch localmente antes da resposta
-  const row = document.querySelector(`[data-linha="${linha}"] .switch-label`);
-  if (row) row.textContent = marcado ? 'Pago' : 'Pendente';
-
+  const lbl = document.querySelector(`[data-linha="${linha}"] .sw-lbl`);
+  if (lbl) lbl.textContent = marcado ? 'Pago' : 'Pendente';
   try {
-    await api('editarJob', { aba: state.abaAtual, linha, situacao: nova });
-    toast(`✓ ${nova === 'PAGO' ? 'Marcado como pago' : 'Marcado como pendente'}`, 'success');
+    await api('editarJob', { aba:S.abaAtual, linha, situacao:nova });
+    toast(`✓ ${nova==='PAGO'?'Marcado como pago':'Marcado como pendente'}`, 'success');
     carregarJobs();
-  } catch (e) {
-    toast('Erro: ' + e.message, 'error');
-    carregarJobs(); // reverte
+  } catch(e) {
+    toast('Erro: '+e.message,'error');
+    carregarJobs();
   }
 }
 
-/* ============================================================
+/* ─────────────────────────────────────────────
    MODAL CRIAR / EDITAR
-   ============================================================ */
-$('btnNovoJob').addEventListener('click', () => {
-  state.editandoLinha = null;
+   ───────────────────────────────────────────── */
+function limparModal() {
+  $('fOrigem').value=''; $('fValor').value=''; $('fSituacao').value='PENDENTE';
+  $('fVisitas').value=''; $('fStories').value=''; $('fReels').value=''; $('fPosts').value='';
+  $('novoMesBox').classList.remove('show');
+  $('novoMesOk').classList.remove('show');
+  $('novoMesInput').value='';
+}
+
+$('btnNovoJob').onclick = () => {
+  S.editandoLinha = null;
+  limparModal();
   $('modalTitulo').textContent = 'Novo Job';
-  $('modalSub').textContent = 'Cadastrar em ' + (state.abaAtual || '').trim();
-  $('fOrigem').value = ''; $('fValor').value = '';
-  $('fSituacao').value = 'PENDENTE';
-  $('fVisitas').value = ''; $('fStories').value = '';
-  $('fReels').value = ''; $('fPosts').value = '';
+  $('modalSub').textContent    = 'Escolha o mês e preencha os dados';
+  $('fieldMes').style.display  = '';           // mostra seletor de mês
+  popularSelectMesModal();                     // atualiza a lista
+  // Pré-seleciona o mês da topbar
+  if (S.abaAtual) $('fMes').value = S.abaAtual;
   $('modalJob').classList.add('show');
-  setTimeout(() => $('fOrigem').focus(), 200);
-});
+  setTimeout(()=>$('fOrigem').focus(), 260);
+};
 
 function abrirEditar(linha) {
-  const j = state.todosjobs.find(x => x.linha === linha);
+  const j = S.todosJobs.find(x=>x.linha===linha);
   if (!j) return;
-  state.editandoLinha = linha;
+  S.editandoLinha = linha;
+  limparModal();
   $('modalTitulo').textContent = 'Editar Job';
-  $('modalSub').textContent = (state.abaAtual || '').trim();
+  $('modalSub').textContent    = (S.abaAtual||'').trim();
+  $('fieldMes').style.display  = 'none';       // esconde seletor no modo edição
   $('fOrigem').value   = j.origem;
   $('fValor').value    = j.valor;
   $('fSituacao').value = j.situacao;
-  $('fVisitas').value  = j.visitas || '';
-  $('fStories').value  = j.stories || '';
-  $('fReels').value    = j.reels   || '';
-  $('fPosts').value    = j.posts   || '';
+  $('fVisitas').value  = j.visitas||'';
+  $('fStories').value  = j.stories||'';
+  $('fReels').value    = j.reels||'';
+  $('fPosts').value    = j.posts||'';
   $('modalJob').classList.add('show');
 }
 
-$('btnCancelarJob').addEventListener('click', () => $('modalJob').classList.remove('show'));
-$('modalJob').addEventListener('click', e => { if (e.target === e.currentTarget) $('modalJob').classList.remove('show'); });
+$('btnCancelarJob').onclick = ()=>$('modalJob').classList.remove('show');
+$('modalJob').onclick = e=>{ if(e.target===e.currentTarget) $('modalJob').classList.remove('show'); };
 
-$('btnSalvarJob').addEventListener('click', async () => {
+$('btnSalvarJob').onclick = async () => {
   const origem = $('fOrigem').value.trim();
-  if (!origem) { toast('Informe o cliente/origem', 'error'); return; }
+  if (!origem) { toast('Informe o cliente/origem','error'); return; }
+
+  // Aba destino: no modo criar, usa o <select fMes>; no modo editar, usa a aba atual
+  const abaDestino = S.editandoLinha ? S.abaAtual : $('fMes').value;
+
+  if (!abaDestino || abaDestino === '__novo__') {
+    toast('Selecione ou crie um mês antes de salvar','error'); return;
+  }
+
   const dados = {
-    aba: state.abaAtual,
-    origem,
-    valor:    $('fValor').value   || 0,
-    situacao: $('fSituacao').value,
-    visitas:  $('fVisitas').value,
-    stories:  $('fStories').value,
-    reels:    $('fReels').value,
-    posts:    $('fPosts').value
+    aba: abaDestino, origem,
+    valor:   $('fValor').value||0,
+    situacao:$('fSituacao').value,
+    visitas: $('fVisitas').value,
+    stories: $('fStories').value,
+    reels:   $('fReels').value,
+    posts:   $('fPosts').value
   };
-  const btn = $('btnSalvarJob');
-  btn.disabled = true; btn.textContent = 'Salvando…';
+
+  const btn=$('btnSalvarJob');
+  btn.disabled=true; btn.textContent='Salvando…';
+
   try {
-    if (state.editandoLinha) {
-      dados.linha = state.editandoLinha;
+    if (S.editandoLinha) {
+      dados.linha = S.editandoLinha;
       await api('editarJob', dados);
-      toast('✓ Job atualizado', 'success');
+      toast('✓ Job atualizado','success');
     } else {
       await api('criarJob', dados);
-      toast('✓ Job criado', 'success');
+      toast('✓ Job criado em "'+abaDestino+'"','success');
+      // Se salvou em mês diferente do atual, muda a topbar para esse mês
+      if (abaDestino !== S.abaAtual) {
+        S.abaAtual = abaDestino;
+        $('selMes').value = abaDestino;
+      }
     }
     $('modalJob').classList.remove('show');
     carregarJobs();
-  } catch (e) {
-    toast('Erro: ' + e.message, 'error');
+  } catch(e) {
+    toast('Erro: '+e.message,'error');
   } finally {
-    btn.disabled = false; btn.textContent = 'Salvar';
+    btn.disabled=false; btn.textContent='Salvar';
   }
-});
+};
 
-/* ============================================================
-   EXCLUIR
-   ============================================================ */
-function abrirExcluir(linha) {
-  const j = state.todosjobs.find(x => x.linha === linha);
+/* ─────────────────────────────────────────────
+   MODAL EXCLUIR
+   ───────────────────────────────────────────── */
+function abrirDel(linha) {
+  const j = S.todosJobs.find(x=>x.linha===linha);
   if (!j) return;
-  state.excluindoLinha = linha;
-  $('confirmNome').textContent = j.origem || 'este job';
-  $('modalConfirm').classList.add('show');
+  S.excluindoLinha = linha;
+  $('delNome').textContent = j.origem||'este job';
+  $('modalDel').classList.add('show');
 }
 
-$('btnCancelarExcluir').addEventListener('click', () => {
-  $('modalConfirm').classList.remove('show');
-  state.excluindoLinha = null;
-});
-$('modalConfirm').addEventListener('click', e => {
-  if (e.target === e.currentTarget) {
-    $('modalConfirm').classList.remove('show');
-    state.excluindoLinha = null;
-  }
-});
+$('btnCancelarDel').onclick = ()=>{ $('modalDel').classList.remove('show'); S.excluindoLinha=null; };
+$('modalDel').onclick = e=>{ if(e.target===e.currentTarget){ $('modalDel').classList.remove('show'); S.excluindoLinha=null; } };
 
-$('btnConfirmarExcluir').addEventListener('click', async () => {
-  if (!state.excluindoLinha) return;
-  const btn = $('btnConfirmarExcluir');
-  btn.disabled = true; btn.textContent = 'Excluindo…';
+$('btnConfirmarDel').onclick = async () => {
+  if (!S.excluindoLinha) return;
+  const btn=$('btnConfirmarDel');
+  btn.disabled=true; btn.textContent='Excluindo…';
   try {
-    await api('excluirJob', { aba: state.abaAtual, linha: state.excluindoLinha });
-    toast('✓ Job excluído', 'success');
-    $('modalConfirm').classList.remove('show');
-    state.excluindoLinha = null;
+    await api('excluirJob',{aba:S.abaAtual, linha:S.excluindoLinha});
+    toast('✓ Job excluído','success');
+    $('modalDel').classList.remove('show');
+    S.excluindoLinha=null;
     carregarJobs();
-  } catch (e) {
-    toast('Erro: ' + e.message, 'error');
+  } catch(e) {
+    toast('Erro: '+e.message,'error');
   } finally {
-    btn.disabled = false; btn.textContent = 'Excluir';
+    btn.disabled=false; btn.textContent='Excluir';
   }
-});
+};
 
 /* ESC fecha modais */
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape'){
     $('modalJob').classList.remove('show');
-    $('modalConfirm').classList.remove('show');
+    $('modalDel').classList.remove('show');
   }
 });
 </script>
-
 </body>
 </html>
