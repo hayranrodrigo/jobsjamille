@@ -336,9 +336,111 @@ input,select,textarea{font-family:inherit}
   .bar-val{font-size:8px}
   .mes-table th:nth-child(n+4),.mes-table td:nth-child(n+4){display:none}
 }
+
+/* ═══════════════════════════════════════════
+   TELA DE LOGIN
+═══════════════════════════════════════════ */
+#login-screen {
+  position:fixed;inset:0;z-index:999;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  background:
+    radial-gradient(ellipse 90% 70% at 50% -5%, rgba(255,230,120,.25) 0%, transparent 65%),
+    var(--g50);
+  /* grade sutil */
+  background-image:
+    radial-gradient(ellipse 90% 70% at 50% -5%, rgba(255,230,120,.25) 0%, transparent 65%),
+    linear-gradient(var(--line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:100% 100%,36px 36px,36px 36px;
+}
+#login-screen.hidden{display:none}
+
+.login-card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:40px 36px 36px;
+  width:100%;max-width:380px;
+  box-shadow:0 8px 40px rgba(127,96,0,.14),0 2px 8px rgba(0,0,0,.06);
+  text-align:center;
+  animation:fadeUp .35s cubic-bezier(.2,.9,.3,1);
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+.login-mono{
+  width:64px;height:64px;border-radius:50%;
+  background:var(--g100);border:2px solid var(--g300);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:26px;font-weight:700;color:var(--g700);
+  margin:0 auto 18px;
+}
+.login-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:26px;font-weight:600;color:var(--g700);
+  line-height:1.15;margin:0 0 4px;
+}
+.login-sub{
+  font-size:11px;text-transform:uppercase;letter-spacing:.7px;
+  color:var(--ink2);margin-bottom:30px;
+}
+.login-field{margin-bottom:14px;text-align:left}
+.login-field label{
+  display:block;font-size:11px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.07em;
+  color:var(--ink2);margin-bottom:6px;
+}
+.login-field input{
+  width:100%;padding:13px 16px;
+  border:1.5px solid var(--line);border-radius:var(--rsm);
+  background:var(--paper);color:var(--ink);font-size:16px;
+  font-family:inherit;letter-spacing:.05em;
+  transition:border-color .15s,box-shadow .15s;
+  -webkit-appearance:none;
+}
+.login-field input:focus{
+  outline:none;border-color:var(--g500);
+  box-shadow:0 0 0 3px rgba(201,169,97,.15);
+}
+.login-btn{
+  width:100%;padding:14px;border:none;border-radius:var(--rsm);
+  background:var(--g700);color:var(--paper);
+  font-family:inherit;font-size:15px;font-weight:600;
+  cursor:pointer;transition:background .15s,transform .1s;
+  margin-top:6px;letter-spacing:.02em;
+}
+.login-btn:hover{background:var(--g900)}
+.login-btn:active{transform:scale(.98)}
+.login-btn:disabled{opacity:.6;cursor:not-allowed}
+.login-erro{
+  margin-top:12px;min-height:18px;
+  font-size:13px;color:var(--err);font-weight:500;
+}
+
+/* animação shake */
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
 </style>
 </head>
 <body>
+
+<!-- ══ TELA DE LOGIN ══ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-mono">JM</div>
+    <h1 class="login-title">Jobs Jamille<br>Mariah</h1>
+    <p class="login-sub">Publicidade &amp; Parcerias</p>
+    <div class="login-field">
+      <label for="inp-senha">Senha de acesso</label>
+      <input type="password" id="inp-senha" placeholder="••••••••"
+             autocomplete="current-password"
+             onkeydown="if(event.key==='Enter')tentarLogin()">
+    </div>
+    <button class="login-btn" id="btn-entrar" onclick="tentarLogin()">Entrar</button>
+    <div class="login-erro" id="login-erro"></div>
+  </div>
+</div>
+
 
 <!-- ══ TOPBAR ══ -->
 <header class="topbar">
@@ -352,6 +454,14 @@ input,select,textarea{font-family:inherit}
   <div class="top-right">
     <label for="selMes">Mês</label>
     <select id="selMes" class="sel"><option>Carregando…</option></select>
+    <button onclick="sair()" style="
+      background:transparent;border:1px solid var(--line);color:var(--ink2);
+      padding:7px 12px;border-radius:var(--rsm);font-size:12px;font-weight:500;
+      cursor:pointer;transition:all .15s;white-space:nowrap;font-family:inherit;
+    " onmouseover="this.style.background='var(--err2)';this.style.color='var(--err)';this.style.borderColor='var(--err)'"
+       onmouseout="this.style.background='transparent';this.style.color='var(--ink2)';this.style.borderColor='var(--line)'">
+      Sair
+    </button>
   </div>
 </header>
 
@@ -553,7 +663,7 @@ input,select,textarea{font-family:inherit}
    ⚙ CONFIGURAÇÃO
    Cole aqui a URL do seu Google Apps Script
    ───────────────────────────────────────── */
-const API_URL = 'https://script.google.com/macros/s/AKfycbyaNMi3Z3_-8lUn7Bdrm9_2hWKjI34vqYfFOMQVDtmtGhoSt53RMW3QMDoTK4aGcx8/exec';
+const API_URL = 'COLE_AQUI_A_URL_DO_SEU_WEB_APP_PUBLICADO';
 
 /* ─────────────────────────────────────────
    ESTADO
@@ -605,7 +715,66 @@ function setPage(p) {
 /* ─────────────────────────────────────────
    INIT
    ───────────────────────────────────────── */
-window.addEventListener('DOMContentLoaded', carregarAbas);
+
+/* ─────────────────────────────────────────
+   LOGIN — verificação local de senha
+   ───────────────────────────────────────── */
+const SENHA = 'mille3320';
+
+function sair() {
+  localStorage.removeItem(SESSAO_KEY);
+  // Limpa estado
+  $('selMes').innerHTML = '<option>Carregando…</option>';
+  $('jobsList').innerHTML = '<div class="ldw"><div class="ld"></div></div>';
+  S.abas=[]; S.abaAtual=null; S.jobs=[]; S.todosJobs=[]; S.relDados=null; S.anoAtivo=null;
+  // Volta para o login
+  $('inp-senha').value = '';
+  $('login-erro').textContent = '';
+  $('login-screen').classList.remove('hidden');
+  setTimeout(() => $('inp-senha').focus(), 150);
+}
+const SESSAO_KEY = 'jm_auth';
+
+function tentarLogin() {
+  const inp  = $('inp-senha');
+  const erro = $('login-erro');
+  const btn  = $('btn-entrar');
+  const senha = inp.value;
+
+  if (!senha) { erro.textContent = 'Digite a senha.'; return; }
+
+  if (senha === SENHA) {
+    // Salva sessão no localStorage (persiste entre abas e recargas)
+    localStorage.setItem(SESSAO_KEY, 'ok');
+    erro.textContent = '';
+    $('login-screen').classList.add('hidden');
+    // Inicia o app
+    carregarAbas();
+  } else {
+    erro.textContent = 'Senha incorreta. Tente novamente.';
+    inp.value = '';
+    inp.focus();
+    // Animação de erro
+    const card = document.querySelector('.login-card');
+    card.style.animation = 'none';
+    card.offsetHeight; // reflow
+    card.style.animation = 'shake .35s ease';
+  }
+}
+
+/* ─────────────────────────────────────────
+   INIT — verifica sessão existente
+   ───────────────────────────────────────── */
+window.addEventListener('DOMContentLoaded', () => {
+  // Se já tem sessão salva, pula o login
+  if (localStorage.getItem(SESSAO_KEY) === 'ok') {
+    $('login-screen').classList.add('hidden');
+    carregarAbas();
+  } else {
+    // Mostra tela de login, foca o campo de senha
+    setTimeout(() => $('inp-senha').focus(), 100);
+  }
+});
 
 /* ─────────────────────────────────────────
    ABAS
