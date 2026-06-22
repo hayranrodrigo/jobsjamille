@@ -420,6 +420,83 @@ input,select,textarea{font-family:inherit}
 
 /* animação shake */
 @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+
+/* ═══════════════════════════════════════════
+   CUSTOS FILMMAKER
+═══════════════════════════════════════════ */
+.custo-sel-wrap{display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.custo-sel-wrap label{font-size:11px;color:var(--ink2);text-transform:uppercase;
+  letter-spacing:.5px;white-space:nowrap;font-weight:600}
+
+/* Cards métricas custos */
+.mc.custo::before{background:var(--err)}
+.mc .val.err{color:var(--err)}
+
+/* Tabela custos */
+.custo-row{display:grid;
+  grid-template-columns:110px minmax(0,1.8fr) 90px 110px 120px 90px;
+  gap:14px;padding:13px 20px;border-bottom:1px solid var(--line);
+  align-items:center;transition:background .12s}
+.custo-row:last-child{border-bottom:none}
+.custo-row:hover{background:var(--g50)}
+.custo-th{display:grid;
+  grid-template-columns:110px minmax(0,1.8fr) 90px 110px 120px 90px;
+  gap:14px;padding:11px 20px;background:var(--g100);
+  border-bottom:1px solid var(--g200);
+  font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;
+  color:var(--g700);font-weight:600}
+.custo-data{font-size:13px;color:var(--ink2);font-weight:500}
+.custo-cliente{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.custo-horas{font-size:14px;color:var(--ink2)}
+.custo-vhora{font-size:14px;color:var(--ink2)}
+.custo-total{font-family:'Cormorant Garamond',serif;font-size:18px;
+  font-weight:600;color:var(--err)}
+
+/* Btn filmmaker */
+.btn-filmmaker{
+  background:var(--err2);color:var(--err);
+  border:1.5px solid var(--err);
+  padding:10px 18px;border-radius:var(--rsm);font-size:14px;font-weight:500;
+  display:flex;align-items:center;gap:6px;transition:all .15s;white-space:nowrap
+}
+.btn-filmmaker:hover{background:var(--err);color:#fff}
+.btn-filmmaker svg{width:16px;height:16px}
+
+/* Seletor de mês custos */
+.custo-mes-box{
+  background:var(--err2);border:1px solid #fecaca;border-radius:var(--rsm);
+  padding:14px 16px;display:none;margin-top:4px
+}
+.custo-mes-box.show{display:block}
+.custo-mes-box label{font-size:12px;color:var(--err);font-weight:500;
+  margin-bottom:6px;display:block}
+.custo-mes-row{display:flex;gap:8px;align-items:center}
+.custo-mes-row input{flex:1;padding:9px 12px;border:1px solid #fecaca;
+  border-radius:var(--rsm);background:#fff;font-size:14px;color:var(--ink)}
+.custo-mes-row input:focus{outline:none;border-color:var(--err);
+  box-shadow:0 0 0 3px rgba(178,58,72,.12)}
+.btn-criar-cm{background:var(--err);color:#fff;padding:9px 14px;
+  border-radius:var(--rsm);font-size:13px;font-weight:500;
+  white-space:nowrap;transition:background .15s}
+.btn-criar-cm:hover{background:#8E2C38}
+.btn-criar-cm:disabled{opacity:.5;cursor:not-allowed}
+
+/* Mobile custos */
+@media(max-width:720px){
+  .custo-th{display:none}
+  .custo-row{
+    grid-template-columns:1fr auto;
+    grid-template-areas:"cli acts" "dat horas" "vtot vtot";
+    gap:6px;padding:13px 16px
+  }
+  .custo-cliente{grid-area:cli}
+  .custo-data   {grid-area:dat;font-size:12px}
+  .custo-horas  {grid-area:horas;justify-self:end;font-size:12px}
+  .custo-vhora  {display:none}
+  .custo-total  {grid-area:vtot;border-top:1px dashed var(--line);padding-top:6px}
+  .custo-row .acts{grid-area:acts}
+  .btn-filmmaker{margin-left:0;width:100%;justify-content:center}
+}
 </style>
 </head>
 <body>
@@ -474,6 +551,10 @@ input,select,textarea{font-family:inherit}
   <div class="page-tab" id="tab-relatorio" onclick="setPage('relatorio')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
     <span>Relatório</span>
+  </div>
+  <div class="page-tab" id="tab-custos" onclick="setPage('custos')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span>Custos</span>
   </div>
 </nav>
 
@@ -580,6 +661,61 @@ input,select,textarea{font-family:inherit}
 </div>
 
 <!-- ══════════════════════════
+     PÁGINA: CUSTOS
+══════════════════════════ -->
+<div id="page-custos" class="page">
+  <div class="wrap">
+
+    <!-- Seletor de mês custos -->
+    <div class="custo-sel-wrap">
+      <label for="selMesCusto">Mês</label>
+      <select id="selMesCusto" class="sel" style="min-width:140px" onchange="trocarMesCusto()">
+        <option>Carregando…</option>
+      </select>
+      <button class="btn-filmmaker" id="btnNovoCusto">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Custo Filmmaker
+      </button>
+    </div>
+
+    <!-- Cards métricas -->
+    <div class="metrics" style="grid-template-columns:repeat(3,1fr)">
+      <div class="mc custo">
+        <div class="lbl">Total em custos</div>
+        <div class="val err" id="cTotal">R$ 0</div>
+        <div class="sub" id="cQtd">0 lançamentos</div>
+      </div>
+      <div class="mc custo">
+        <div class="lbl">Total de horas</div>
+        <div class="val err" id="cHoras">0 h</div>
+        <div class="sub" id="cMes2">—</div>
+      </div>
+      <div class="mc custo">
+        <div class="lbl">Valor médio/hora</div>
+        <div class="val err" id="cMediaHora">R$ 0</div>
+        <div class="sub">média do período</div>
+      </div>
+    </div>
+
+    <!-- Tabela -->
+    <div class="card">
+      <div class="custo-th">
+        <div>Data</div>
+        <div>Cliente / Sessão</div>
+        <div>Horas</div>
+        <div>Valor/hora</div>
+        <div>Total</div>
+        <div style="text-align:right">Ações</div>
+      </div>
+      <div id="custosList">
+        <div class="ldw"><div class="ld"></div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════
      MODAL: CRIAR/EDITAR JOB
 ══════════════════════════ -->
 <div class="mbk" id="mJob">
@@ -653,6 +789,97 @@ input,select,textarea{font-family:inherit}
   </div>
 </div>
 
+<!-- ══════════════════════════
+     MODAL: CRIAR/EDITAR CUSTO
+══════════════════════════ -->
+<div class="mbk" id="mCusto">
+  <div class="modal">
+    <div class="mhandle"></div>
+    <h2 class="mtitle" id="mCustoTitle">Novo Custo Filmmaker</h2>
+    <p class="msub"    id="mCustoSub">Lançar sessão de fotos/vídeo</p>
+
+    <!-- Seletor de mês do custo -->
+    <div class="field" id="fieldMesCusto">
+      <label>Mês de referência</label>
+      <select id="fMesCusto" class="sel" style="min-width:100%"></select>
+    </div>
+
+    <!-- Caixa criar novo mês de custo -->
+    <div class="custo-mes-box" id="custoMesBox">
+      <label>Nome do novo mês (MMM AA)</label>
+      <div class="custo-mes-row">
+        <input type="text" id="custoMesInput" placeholder="Ex: JUL 26" maxlength="6"
+               oninput="this.value=this.value.toUpperCase()">
+        <button class="btn-criar-cm" id="btnCriarMesCusto" onclick="criarMesCusto()">Criar</button>
+      </div>
+      <div style="font-size:11px;color:var(--err);margin-top:6px">Ex: JUL 26 · AGO 26 · SET 26</div>
+      <div class="nok" id="custoMesOk">✓ Mês criado!</div>
+    </div>
+
+    <div class="divider"><span>dados da sessão</span></div>
+
+    <div class="field">
+      <label>Data da sessão *</label>
+      <input type="date" id="fCustoData">
+    </div>
+
+    <div class="field">
+      <label>Cliente / Descrição da sessão *</label>
+      <input type="text" id="fCustoCliente" placeholder="Ex: La Vie — ensaio produto"
+             autocapitalize="words">
+    </div>
+
+    <div class="g2">
+      <div class="field">
+        <label>Quantidade de horas *</label>
+        <input type="number" id="fCustoHoras" step="0.5" min="0.5" placeholder="Ex: 4"
+               inputmode="decimal" oninput="calcTotalCusto()">
+      </div>
+      <div class="field">
+        <label>Valor por hora (R$) *</label>
+        <input type="number" id="fCustoVHora" step="0.01" min="0" placeholder="Ex: 80,00"
+               inputmode="decimal" oninput="calcTotalCusto()">
+      </div>
+    </div>
+
+    <!-- Total calculado automaticamente -->
+    <div style="background:var(--err2);border:1px solid #fecaca;border-radius:var(--rsm);
+                padding:12px 16px;margin-bottom:4px;display:flex;align-items:center;justify-content:space-between">
+      <span style="font-size:12px;color:var(--err);font-weight:600;text-transform:uppercase;letter-spacing:.05em">
+        Total da sessão
+      </span>
+      <span style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--err)" id="fCustoTotal">
+        R$ 0,00
+      </span>
+    </div>
+
+    <div class="field" style="margin-top:12px">
+      <label>Observações (opcional)</label>
+      <input type="text" id="fCustoObs" placeholder="Ex: inclui edição, deslocamento…">
+    </div>
+
+    <div class="macts">
+      <button class="btn-s" id="btnCancCusto">Cancelar</button>
+      <button class="btn-p" id="btnSalvarCusto" style="background:var(--err)">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     MODAL: CONFIRMAR DELETE CUSTO
+══════════════════════════ -->
+<div class="mbk center" id="mDelCusto">
+  <div class="modal rd" style="text-align:center;padding:28px 24px">
+    <div class="ci">!</div>
+    <h2 class="mtitle" style="text-align:center">Excluir Custo?</h2>
+    <p style="color:var(--ink2);margin:0 0 18px">Isso removerá <strong id="delCustoNome">este custo</strong> da planilha.</p>
+    <div class="macts">
+      <button class="btn-s" id="btnCancDelCusto" style="flex:1">Cancelar</button>
+      <button class="btn-p btn-d" id="btnConfDelCusto" style="flex:1">Excluir</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <!-- ══════════════════════════
@@ -703,13 +930,14 @@ let _t; function toast(m,t=''){const e=$('toast');e.textContent=m;e.className='t
    NAVEGAÇÃO DE PÁGINAS
    ───────────────────────────────────────── */
 function setPage(p) {
-  ['jobs','relatorio'].forEach(x=>{
+  ['jobs','relatorio','custos'].forEach(x=>{
     $('page-'+x).classList.toggle('show',x===p);
     $('tab-'+x).classList.toggle('active',x===p);
   });
-  // Seletor de mês só faz sentido na aba de jobs
+  // Seletor de mês da topbar só aparece na aba Jobs
   $('selMes').closest('.top-right').style.display = p==='jobs' ? 'flex' : 'none';
   if (p==='relatorio') carregarRelatorio();
+  if (p==='custos')    iniciarCustos();
 }
 
 /* ─────────────────────────────────────────
@@ -1093,9 +1321,290 @@ function renderAno(dados,ano){
   }).join('');
 }
 
+
+/* ═══════════════════════════════════════════════════════
+   CUSTOS FILMMAKER
+   A planilha de custos usa uma aba especial: "CUSTOS MMM AA"
+   ex: "CUSTOS JUN 26", "CUSTOS JUL 26"
+   Colunas: A=Data  B=Cliente  C=Horas  D=Valor/hora  E=Total  F=Obs
+   ═══════════════════════════════════════════════════════ */
+
+const SC = {
+  mesCusto:    null,   // aba atual de custos (ex: "CUSTOS JUN 26")
+  custos:      [],     // lista carregada
+  editCusto:   null,   // linha em edição
+  delCusto:    null    // linha a excluir
+};
+
+// Prefixo das abas de custo na planilha
+const CUSTO_PREFIX = 'CUSTOS ';
+
+/* ── Iniciar aba custos ── */
+let custosInicializado = false;
+function iniciarCustos() {
+  if (!custosInicializado) {
+    popularSelMesCusto();
+    custosInicializado = true;
+  }
+}
+
+/* ── Popular select de mês (filtra abas que começam com "CUSTOS ") ── */
+function popularSelMesCusto() {
+  // Busca abas de custo via API
+  api('listarAbasCusto').then(r => {
+    const sel = $('selMesCusto');
+    if (!r.abas || !r.abas.length) {
+      sel.innerHTML = '<option value="">Nenhum mês ainda</option>';
+      $('custosList').innerHTML = '<div class="empty"><div class="ico">∅</div><p>Nenhum mês de custos ainda.<br><small>Clique em "Custo Filmmaker" e crie o primeiro mês.</small></p></div>';
+      atualizarMetricasCusto([]);
+      return;
+    }
+    sel.innerHTML = r.abas.map(a=>`<option value="${esc(a)}">${esc(a.replace(CUSTO_PREFIX,''))}</option>`).join('');
+    SC.mesCusto = r.abas[0];
+    sel.value = SC.mesCusto;
+    carregarCustos();
+  }).catch(e => {
+    $('custosList').innerHTML = `<div class="empty"><div class="ico">!</div><p>${esc(e.message)}</p></div>`;
+  });
+
+  // Popular também o select do modal
+  popularFMesCusto();
+}
+
+function popularFMesCusto() {
+  api('listarAbasCusto').then(r => {
+    const sel = $('fMesCusto');
+    const abas = r.abas || [];
+    sel.innerHTML =
+      abas.map(a=>`<option value="${esc(a)}">${esc(a.replace(CUSTO_PREFIX,''))}</option>`).join('') +
+      `<option value="__novo__">➕ Criar novo mês…</option>`;
+
+    if (SC.mesCusto) sel.value = SC.mesCusto;
+
+    sel.onchange = () => {
+      const show = sel.value === '__novo__';
+      $('custoMesBox').classList.toggle('show', show);
+      if (show) {
+        $('custoMesInput').value = sugerirMesCusto(abas);
+        $('custoMesOk').classList.remove('show');
+        $('custoMesInput').focus();
+      }
+    };
+  }).catch(()=>{});
+}
+
+function sugerirMesCusto(abas) {
+  const M=['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
+  if (!abas.length) {
+    // Sugere mês atual
+    const n=new Date(); return M[n.getMonth()]+' '+(String(n.getFullYear()).slice(-2));
+  }
+  const ultimo = abas[0].replace(CUSTO_PREFIX,'').trim().toUpperCase().split(' ');
+  const i=M.indexOf(ultimo[0]); if(i===-1) return '';
+  const a=parseInt(ultimo[1],10)||0;
+  return M[(i+1)%12]+' '+(i===11?a+1:a);
+}
+
+function trocarMesCusto() {
+  SC.mesCusto = $('selMesCusto').value;
+  carregarCustos();
+}
+
+/* ── Carregar custos ── */
+async function carregarCustos() {
+  if (!SC.mesCusto) return;
+  $('custosList').innerHTML = '<div class="ldw"><div class="ld"></div></div>';
+  try {
+    const r = await api('listarCustos', { aba: SC.mesCusto });
+    SC.custos = r.custos;
+    atualizarMetricasCusto(r.custos);
+    renderCustos(r.custos);
+  } catch(e) {
+    toast('Erro: '+e.message,'err');
+    $('custosList').innerHTML = `<div class="empty"><div class="ico">!</div><p>${esc(e.message)}</p></div>`;
+  }
+}
+
+function atualizarMetricasCusto(lista) {
+  const totalR = lista.reduce((s,c)=>s+c.total,0);
+  const totalH = lista.reduce((s,c)=>s+c.horas,0);
+  const media  = totalH>0 ? totalR/totalH : 0;
+  $('cTotal').textContent    = R(totalR);
+  $('cHoras').textContent    = totalH.toLocaleString('pt-BR',{maximumFractionDigits:1}) + ' h';
+  $('cQtd').textContent      = lista.length + ' lançamento' + (lista.length!==1?'s':'');
+  $('cMediaHora').textContent= R(media);
+  $('cMes2').textContent     = SC.mesCusto ? SC.mesCusto.replace(CUSTO_PREFIX,'') : '—';
+}
+
+function renderCustos(lista) {
+  const el = $('custosList');
+  if (!lista.length) {
+    el.innerHTML = '<div class="empty"><div class="ico">∅</div><p>Nenhum custo lançado.<br><small>Clique em "Custo Filmmaker" para adicionar.</small></p></div>';
+    return;
+  }
+  el.innerHTML = lista.map(c => `
+    <div class="custo-row" data-cl="${c.linha}">
+      <div class="custo-data">${fmtData(c.data)}</div>
+      <div class="custo-cliente">${esc(c.cliente)}</div>
+      <div class="custo-horas">${Number(c.horas).toLocaleString('pt-BR',{maximumFractionDigits:1})} h</div>
+      <div class="custo-vhora">${R(c.vhora)}</div>
+      <div class="custo-total">${R(c.total)}</div>
+      <div class="acts" style="justify-content:flex-end">
+        <button class="ib" onclick="abrirEditCusto(${c.linha})" title="Editar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </button>
+        <button class="ib del" onclick="abrirDelCusto(${c.linha})" title="Excluir">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14H7L5 6"/><path d="M10 11v6M14 11v6M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+        </button>
+      </div>
+    </div>`).join('');
+}
+
+function fmtData(d) {
+  if (!d) return '—';
+  // d pode vir como "2026-06-15" ou objeto Date
+  try {
+    const dt = d instanceof Date ? d : new Date(d+'T12:00:00');
+    return dt.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'2-digit'});
+  } catch { return String(d); }
+}
+
+/* ── Calcular total no modal ── */
+function calcTotalCusto() {
+  const h = parseFloat($('fCustoHoras').value)||0;
+  const v = parseFloat($('fCustoVHora').value)||0;
+  $('fCustoTotal').textContent = R(h*v);
+}
+
+/* ── Criar mês de custo ── */
+async function criarMesCusto() {
+  const nm = $('custoMesInput').value.trim().toUpperCase();
+  const btn = $('btnCriarMesCusto');
+  if (!/^[A-Z]{3}\s\d{2}$/.test(nm)) { toast('Formato inválido. Use "MMM AA", ex: JUL 26','err'); return; }
+  btn.disabled=true; btn.textContent='Criando…';
+  try {
+    await api('criarAbaCusto', { nomeMes: nm });
+    const nomeAba = CUSTO_PREFIX + nm;
+    SC.mesCusto = nomeAba;
+    $('selMesCusto').innerHTML += `<option value="${esc(nomeAba)}">${esc(nm)}</option>`;
+    $('selMesCusto').value = nomeAba;
+    $('fMesCusto').innerHTML += `<option value="${esc(nomeAba)}">${esc(nm)}</option>`;
+    $('fMesCusto').value = nomeAba;
+    $('custoMesBox').classList.remove('show');
+    $('custoMesOk').classList.add('show');
+    toast('✓ Mês "'+nm+'" criado!','ok');
+  } catch(e) { toast('Erro: '+e.message,'err'); }
+  finally { btn.disabled=false; btn.textContent='Criar'; }
+}
+
+/* ── Modal criar/editar custo ── */
+function limparCusto() {
+  $('fCustoData').value=''; $('fCustoCliente').value='';
+  $('fCustoHoras').value=''; $('fCustoVHora').value='';
+  $('fCustoTotal').textContent='R$ 0,00'; $('fCustoObs').value='';
+  $('custoMesBox').classList.remove('show');
+  $('custoMesOk').classList.remove('show');
+}
+
+$('btnNovoCusto').onclick = () => {
+  SC.editCusto = null; limparCusto();
+  $('mCustoTitle').textContent = 'Novo Custo Filmmaker';
+  $('mCustoSub').textContent   = 'Registrar sessão de fotos/vídeo';
+  $('fieldMesCusto').style.display = '';
+  popularFMesCusto();
+  if (SC.mesCusto) setTimeout(()=>{ $('fMesCusto').value=SC.mesCusto; },100);
+  // Data padrão = hoje
+  $('fCustoData').value = new Date().toISOString().split('T')[0];
+  $('mCusto').classList.add('show');
+  setTimeout(()=>$('fCustoCliente').focus(),260);
+};
+
+function abrirEditCusto(linha) {
+  const c = SC.custos.find(x=>x.linha===linha); if(!c) return;
+  SC.editCusto = linha; limparCusto();
+  $('mCustoTitle').textContent = 'Editar Custo';
+  $('mCustoSub').textContent   = SC.mesCusto ? SC.mesCusto.replace(CUSTO_PREFIX,'') : '';
+  $('fieldMesCusto').style.display = 'none';
+  // Formatar data para input date (YYYY-MM-DD)
+  let dataVal = '';
+  if (c.data) {
+    try {
+      const dt = c.data instanceof Date ? c.data : new Date(c.data+'T12:00:00');
+      dataVal = dt.toISOString().split('T')[0];
+    } catch { dataVal = c.data; }
+  }
+  $('fCustoData').value    = dataVal;
+  $('fCustoCliente').value = c.cliente;
+  $('fCustoHoras').value   = c.horas;
+  $('fCustoVHora').value   = c.vhora;
+  $('fCustoObs').value     = c.obs||'';
+  calcTotalCusto();
+  $('mCusto').classList.add('show');
+}
+
+$('btnCancCusto').onclick = () => $('mCusto').classList.remove('show');
+$('mCusto').onclick = e => { if(e.target===e.currentTarget) $('mCusto').classList.remove('show'); };
+
+$('btnSalvarCusto').onclick = async () => {
+  const cliente = $('fCustoCliente').value.trim();
+  const horas   = parseFloat($('fCustoHoras').value)||0;
+  const vhora   = parseFloat($('fCustoVHora').value)||0;
+  const data    = $('fCustoData').value;
+
+  if (!cliente) { toast('Informe o cliente/sessão','err'); return; }
+  if (!horas)   { toast('Informe a quantidade de horas','err'); return; }
+  if (!vhora)   { toast('Informe o valor por hora','err'); return; }
+  if (!data)    { toast('Informe a data da sessão','err'); return; }
+
+  const aba = SC.editCusto ? SC.mesCusto : $('fMesCusto').value;
+  if (!aba || aba==='__novo__') { toast('Selecione ou crie um mês','err'); return; }
+
+  const dados = { aba, data, cliente, horas, vhora, total:horas*vhora, obs:$('fCustoObs').value };
+  const btn = $('btnSalvarCusto');
+  btn.disabled=true; btn.textContent='Salvando…';
+  try {
+    if (SC.editCusto) {
+      dados.linha = SC.editCusto;
+      await api('editarCusto', dados);
+      toast('✓ Custo atualizado','ok');
+    } else {
+      await api('criarCusto', dados);
+      // Se salvou em mês diferente, muda o seletor
+      if (aba !== SC.mesCusto) { SC.mesCusto=aba; $('selMesCusto').value=aba; }
+      toast('✓ Custo lançado!','ok');
+    }
+    $('mCusto').classList.remove('show');
+    carregarCustos();
+  } catch(e) { toast('Erro: '+e.message,'err'); }
+  finally { btn.disabled=false; btn.textContent='Salvar'; }
+};
+
+/* ── Modal confirmar delete custo ── */
+function abrirDelCusto(linha) {
+  const c = SC.custos.find(x=>x.linha===linha); if(!c) return;
+  SC.delCusto = linha;
+  $('delCustoNome').textContent = c.cliente || 'este custo';
+  $('mDelCusto').classList.add('show');
+}
+$('btnCancDelCusto').onclick = ()=>{ $('mDelCusto').classList.remove('show'); SC.delCusto=null; };
+$('mDelCusto').onclick = e=>{ if(e.target===e.currentTarget){ $('mDelCusto').classList.remove('show'); SC.delCusto=null; } };
+$('btnConfDelCusto').onclick = async () => {
+  if (!SC.delCusto) return;
+  const btn=$('btnConfDelCusto'); btn.disabled=true; btn.textContent='Excluindo…';
+  try {
+    await api('excluirCusto',{aba:SC.mesCusto, linha:SC.delCusto});
+    toast('✓ Custo excluído','ok');
+    $('mDelCusto').classList.remove('show'); SC.delCusto=null;
+    carregarCustos();
+  } catch(e) { toast('Erro: '+e.message,'err'); }
+  finally { btn.disabled=false; btn.textContent='Excluir'; }
+};
+
 /* ESC fecha modais */
 document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){$('mJob').classList.remove('show');$('mDel').classList.remove('show');}
+  if(e.key==='Escape'){
+    ['mJob','mDel','mCusto','mDelCusto'].forEach(id=>$(id).classList.remove('show'));
+  }
 });
 </script>
 </body>
