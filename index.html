@@ -497,6 +497,50 @@ input,select,textarea{font-family:inherit}
   .custo-row .acts{grid-area:acts}
   .btn-filmmaker{margin-left:0;width:100%;justify-content:center}
 }
+
+/* Tipo de job — fixo / pontual */
+.tipo-selector{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.tipo-opt{position:relative}
+.tipo-opt input{position:absolute;opacity:0;pointer-events:none}
+.tipo-label{
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  padding:12px 8px;border:1.5px solid var(--line);border-radius:var(--rsm);
+  cursor:pointer;transition:all .15s;text-align:center;background:var(--paper);
+}
+.tipo-label:hover{border-color:var(--g300);background:var(--g50)}
+.tipo-opt input:checked ~ .tipo-label{border-color:var(--g700);background:var(--g100);color:var(--g700)}
+.tipo-label svg{width:22px;height:22px;opacity:.5}
+.tipo-opt input:checked ~ .tipo-label svg{opacity:1}
+.tipo-label span{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.tipo-label small{font-size:10px;color:var(--ink2);font-weight:400;text-transform:none;letter-spacing:0}
+
+/* Badge fixo na tabela */
+.badge-fixo{
+  display:inline-flex;align-items:center;gap:3px;
+  background:var(--g100);color:var(--g700);
+  border:1px solid var(--g300);border-radius:100px;
+  font-size:10px;font-weight:600;padding:2px 7px;
+  margin-left:6px;vertical-align:middle;
+}
+
+/* Aviso de job fixo no modal editar */
+.fixo-alert{
+  background:var(--g100);border:1px solid var(--g300);
+  border-radius:var(--rsm);padding:12px 14px;margin-bottom:14px;
+  display:none;
+}
+.fixo-alert.show{display:flex;align-items:flex-start;gap:10px}
+.fixo-alert svg{width:18px;height:18px;color:var(--g700);flex-shrink:0;margin-top:1px}
+.fixo-alert-txt{font-size:13px;color:var(--g900);line-height:1.5}
+.fixo-alert-txt strong{display:block;margin-bottom:2px}
+.btn-encerrar{
+  display:block;width:100%;margin-top:10px;
+  padding:9px 14px;border:1.5px solid var(--err);
+  background:var(--err2);color:var(--err);
+  border-radius:var(--rsm);font-size:13px;font-weight:600;
+  cursor:pointer;font-family:inherit;transition:all .15s;text-align:center;
+}
+.btn-encerrar:hover{background:var(--err);color:#fff}
 </style>
 </head>
 <body>
@@ -742,6 +786,41 @@ input,select,textarea{font-family:inherit}
       <div class="nok" id="nok">✓ Mês criado com sucesso!</div>
     </div>
 
+    <div class="divider"><span>tipo de trabalho</span></div>
+
+    <!-- Aviso job fixo (só aparece no modo EDITAR) -->
+    <div class="fixo-alert" id="fixoAlert">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div class="fixo-alert-txt">
+        <strong>Trabalho fixo recorrente</strong>
+        Este job está lançado nos próximos meses automaticamente.
+        Para parar os lançamentos futuros, clique abaixo.
+        <button class="btn-encerrar" id="btnEncerrar" onclick="encerrarFixo()">
+          ✕ Encerrar trabalho fixo a partir deste mês
+        </button>
+      </div>
+    </div>
+
+    <!-- Seletor de tipo (só aparece no modo CRIAR) -->
+    <div id="tipoWrap" class="tipo-selector">
+      <div class="tipo-opt">
+        <input type="radio" name="fTipo" id="tipoUnico" value="unico" checked>
+        <label class="tipo-label" for="tipoUnico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span>Pontual</span>
+          <small>Uma única vez</small>
+        </label>
+      </div>
+      <div class="tipo-opt">
+        <input type="radio" name="fTipo" id="tipoFixo" value="fixo">
+        <label class="tipo-label" for="tipoFixo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Fixo</span>
+          <small>Repete por 6 meses</small>
+        </label>
+      </div>
+    </div>
+
     <div class="divider"><span>dados do job</span></div>
 
     <div class="field">
@@ -890,7 +969,7 @@ input,select,textarea{font-family:inherit}
    ⚙ CONFIGURAÇÃO
    Cole aqui a URL do seu Google Apps Script
    ───────────────────────────────────────── */
-const API_URL = 'https://script.google.com/macros/s/AKfycbyaNMi3Z3_-8lUn7Bdrm9_2hWKjI34vqYfFOMQVDtmtGhoSt53RMW3QMDoTK4aGcx8/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbxjRYrm8dM0lI7oVaR4ZHRz7wIopye2lWRcTLYLUOxsAEPFRwGlTqd8n0CPgpsAcDI/exec';
 
 /* ─────────────────────────────────────────
    ESTADO
@@ -1114,7 +1193,7 @@ function renderJobs(jobs) {
   el.innerHTML=jobs.map(j=>{
     const pg=j.situacao==='PAGO';
     return `<div class="jr" data-l="${j.linha}">
-      <div class="jo-c jo">${esc(j.origem)}</div>
+      <div class="jo-c jo">${esc(j.origem)}${j.fixo?'<span class="badge-fixo">↻ fixo</span>':''}</div>
       <div class="jv-c jv">${R(j.valor)}</div>
       <div class="jsw-c">
         <label class="sw-wrap">
@@ -1155,34 +1234,77 @@ async function togglePago(l,m){
 }
 
 /* ─────────────────────────────────────────
+   HELPERS DE MÊS
+   ───────────────────────────────────────── */
+const MESES_ABR = ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
+
+// Retorna "ABR" de "ABR 26" ou de um objeto {nome:"ABR 26"}
+function parseMes(nomeAba) {
+  const s = typeof nomeAba === 'object' ? nomeAba.nome : String(nomeAba);
+  return s.trim().toUpperCase().split(' ');
+}
+
+// Avança N meses a partir de "MMM AA", retorna "MMM AA"
+function avancarMes(nomeAba, n) {
+  const [sig, anoStr] = parseMes(nomeAba);
+  const idx  = MESES_ABR.indexOf(sig);
+  if (idx === -1) return null;
+  const ano  = parseInt(anoStr, 10) || 0;
+  const total = idx + n;
+  const novoIdx = ((total % 12) + 12) % 12;
+  const novoAno = ano + Math.floor(total / 12);
+  return MESES_ABR[novoIdx] + ' ' + String(novoAno).slice(-2);
+}
+
+// Verifica se aba existe na lista S.abas
+function abaExiste(nome) {
+  return S.abas.some(a => a.nomeOriginal === nome || a.nome === nome);
+}
+
+/* ─────────────────────────────────────────
    MODAL JOB
    ───────────────────────────────────────── */
 function limparJob(){
   $('fOrigem').value='';$('fValor').value='';$('fSit').value='PENDENTE';
   $('fVis').value='';$('fSto').value='';$('fRee').value='';$('fPos').value='';
   $('nbox').classList.remove('show');$('nok').classList.remove('show');$('nboxInput').value='';
+  // Reset tipo para pontual
+  $('tipoUnico').checked = true;
+  // Ocultar alerta fixo e botão encerrar
+  $('fixoAlert').classList.remove('show');
 }
 
 $('btnNovo').onclick=()=>{
-  S.editLinha=null;limparJob();
+  S.editLinha=null; limparJob();
   $('mJobTitle').textContent='Novo Job';
   $('mJobSub').textContent='Escolha o mês e preencha os dados';
-  $('fieldMes').style.display='';
+  $('fieldMes').style.display='';       // mostra seletor de mês
+  $('tipoWrap').style.display='';       // mostra seletor de tipo
+  $('fixoAlert').classList.remove('show'); // esconde alerta fixo
   popularFMes();
-  if(S.abaAtual)$('fMes').value=S.abaAtual;
+  if(S.abaAtual) $('fMes').value=S.abaAtual;
   $('mJob').classList.add('show');
   setTimeout(()=>$('fOrigem').focus(),260);
 };
 
 function abrirEditar(l){
-  const j=S.todosJobs.find(x=>x.linha===l);if(!j)return;
-  S.editLinha=l;limparJob();
+  const j=S.todosJobs.find(x=>x.linha===l); if(!j) return;
+  S.editLinha=l; limparJob();
   $('mJobTitle').textContent='Editar Job';
   $('mJobSub').textContent=(S.abaAtual||'').trim();
-  $('fieldMes').style.display='none';
-  $('fOrigem').value=j.origem;$('fValor').value=j.valor;$('fSit').value=j.situacao;
-  $('fVis').value=j.visitas||'';$('fSto').value=j.stories||'';
-  $('fRee').value=j.reels||'';$('fPos').value=j.posts||'';
+  $('fieldMes').style.display='none';   // esconde seletor de mês na edição
+  $('tipoWrap').style.display='none';   // esconde seletor de tipo na edição
+  $('fOrigem').value=j.origem; $('fValor').value=j.valor; $('fSit').value=j.situacao;
+  $('fVis').value=j.visitas||''; $('fSto').value=j.stories||'';
+  $('fRee').value=j.reels||'';   $('fPos').value=j.posts||'';
+
+  // Se o job é fixo (tem a flag), mostra o aviso
+  if (j.fixo) {
+    $('fixoAlert').classList.add('show');
+  } else {
+    $('fixoAlert').classList.remove('show');
+  }
+
   $('mJob').classList.add('show');
 }
 
@@ -1190,23 +1312,122 @@ $('btnCancJob').onclick=()=>$('mJob').classList.remove('show');
 $('mJob').onclick=e=>{if(e.target===e.currentTarget)$('mJob').classList.remove('show');};
 
 $('btnSalvarJob').onclick=async()=>{
-  const orig=$('fOrigem').value.trim();
-  if(!orig){toast('Informe o cliente/origem','err');return;}
-  const aba=S.editLinha?S.abaAtual:$('fMes').value;
-  if(!aba||aba==='__novo__'){toast('Selecione ou crie um mês','err');return;}
-  const d={aba,origem:orig,valor:$('fValor').value||0,situacao:$('fSit').value,
-    visitas:$('fVis').value,stories:$('fSto').value,reels:$('fRee').value,posts:$('fPos').value};
-  const btn=$('btnSalvarJob');btn.disabled=true;btn.textContent='Salvando…';
-  try{
-    if(S.editLinha){d.linha=S.editLinha;await api('editarJob',d);toast('✓ Job atualizado','ok');}
-    else{
-      await api('criarJob',d);toast('✓ Job criado em "'+aba+'"','ok');
-      if(aba!==S.abaAtual){S.abaAtual=aba;$('selMes').value=aba;}
+  const orig = $('fOrigem').value.trim();
+  if (!orig){ toast('Informe o cliente/origem','err'); return; }
+
+  const aba = S.editLinha ? S.abaAtual : $('fMes').value;
+  if (!aba||aba==='__novo__'){ toast('Selecione ou crie um mês','err'); return; }
+
+  const isFixo = !S.editLinha && $('tipoFixo').checked;
+
+  const d = {
+    aba, origem:orig, valor:$('fValor').value||0, situacao:$('fSit').value,
+    visitas:$('fVis').value, stories:$('fSto').value,
+    reels:$('fRee').value,   posts:$('fPos').value,
+    fixo: isFixo ? '1' : '0'
+  };
+
+  const btn=$('btnSalvarJob'); btn.disabled=true;
+  btn.textContent = isFixo ? 'Criando 6 meses…' : 'Salvando…';
+
+  try {
+    if (S.editLinha) {
+      // — EDITAR —
+      d.linha = S.editLinha;
+      await api('editarJob', d);
+      toast('✓ Job atualizado','ok');
+
+    } else if (isFixo) {
+      // — CRIAR FIXO — replica nos próximos 6 meses
+      const mesesCriados = [];
+      const mesesFaltando = [];
+
+      // Verifica quais abas já existem e quais precisa criar
+      for (let i = 0; i < 6; i++) {
+        const nomeMes = i === 0 ? aba : avancarMes(aba, i);
+        if (!nomeMes) continue;
+        if (!abaExiste(nomeMes)) mesesFaltando.push(nomeMes);
+      }
+
+      // Cria as abas que faltam
+      for (const nomeMes of mesesFaltando) {
+        await api('criarAba', { nomeMes });
+        const nova = { nome:nomeMes, nomeOriginal:nomeMes };
+        S.abas.unshift(nova);
+      }
+
+      // Lança o job em cada mês
+      for (let i = 0; i < 6; i++) {
+        const nomeMes = i === 0 ? aba : avancarMes(aba, i);
+        if (!nomeMes) continue;
+        await api('criarJob', { ...d, aba:nomeMes });
+        mesesCriados.push(nomeMes);
+      }
+
+      // Atualiza selects com os novos meses
+      popularSelMes(); popularFMes();
+
+      // Navega para o mês de origem
+      if (aba !== S.abaAtual) { S.abaAtual=aba; $('selMes').value=aba; }
+      toast('✓ Job fixo criado em '+mesesCriados.length+' meses!','ok');
+
+    } else {
+      // — CRIAR PONTUAL —
+      await api('criarJob', d);
+      toast('✓ Job criado em "'+aba+'"','ok');
+      if (aba !== S.abaAtual){ S.abaAtual=aba; $('selMes').value=aba; }
     }
-    $('mJob').classList.remove('show');carregarJobs();
-  }catch(e){toast('Erro: '+e.message,'err');}
-  finally{btn.disabled=false;btn.textContent='Salvar';}
+
+    $('mJob').classList.remove('show');
+    carregarJobs();
+  } catch(e){ toast('Erro: '+e.message,'err'); }
+  finally{ btn.disabled=false; btn.textContent='Salvar'; }
 };
+
+/* ─────────────────────────────────────────
+   ENCERRAR TRABALHO FIXO
+   Remove o job do mês atual e todos os 
+   meses seguintes que tiverem o mesmo
+   cliente/origem com a flag fixo=1
+   ───────────────────────────────────────── */
+async function encerrarFixo() {
+  const j = S.todosJobs.find(x=>x.linha===S.editLinha);
+  if (!j) return;
+
+  if (!confirm('Encerrar "'+j.origem+'" a partir de '+S.abaAtual+'? Os meses anteriores são mantidos.')) return;
+
+  $('mJob').classList.remove('show');
+  const btn = $('btnEncerrar'); btn.textContent='Encerrando…';
+
+  // Pega a lista de abas ordenada (mais recente primeiro)
+  // e filtra as que são iguais ou posteriores ao mês atual
+  const [sigAtual, anoAtualStr] = parseMes(S.abaAtual);
+  const ordemAtual = (parseInt(anoAtualStr,10)||0)*100 + (MESES_ABR.indexOf(sigAtual)+1);
+
+  const abasFuturas = S.abas.filter(a => {
+    const [sig, anoStr] = parseMes(a.nomeOriginal);
+    const ordem = (parseInt(anoStr,10)||0)*100 + (MESES_ABR.indexOf(sig)+1);
+    return ordem >= ordemAtual;
+  });
+
+  let removidos = 0;
+  for (const aba of abasFuturas) {
+    try {
+      // Busca jobs da aba para encontrar o mesmo cliente com flag fixo
+      const r = await api('listarJobs', { aba: aba.nomeOriginal });
+      const match = (r.jobs||[]).find(x =>
+        x.origem.trim().toLowerCase() === j.origem.trim().toLowerCase() && x.fixo
+      );
+      if (match) {
+        await api('excluirJob', { aba: aba.nomeOriginal, linha: match.linha });
+        removidos++;
+      }
+    } catch(e) { /* ignora abas com erro */ }
+  }
+
+  toast('✓ Trabalho fixo encerrado em '+removidos+' mês(es)','ok');
+  carregarJobs();
+}
 
 /* ─────────────────────────────────────────
    MODAL DELETE
@@ -1342,55 +1563,74 @@ const CUSTO_PREFIX = 'CUSTOS ';
 /* ── Iniciar aba custos ── */
 let custosInicializado = false;
 function iniciarCustos() {
-  if (!custosInicializado) {
-    popularSelMesCusto();
-    custosInicializado = true;
+  // Recarrega sempre para pegar meses novos criados na sessão
+  recarregarAbasCusto();
+}
+
+async function recarregarAbasCusto() {
+  const sel = $('selMesCusto');
+  try {
+    const r = await api('listarAbasCusto');
+    const abas = r.abas || [];
+
+    if (!abas.length) {
+      sel.innerHTML = '<option value="">— Nenhum mês ainda —</option>';
+      $('custosList').innerHTML = '<div class="empty"><div class="ico">∅</div><p>Nenhum mês de custos ainda.<br><small>Clique em "Custo Filmmaker" e crie o primeiro mês.</small></p></div>';
+      atualizarMetricasCusto([]);
+      popularFMesCusto(abas);
+      return;
+    }
+
+    // Preenche o select da topbar dos custos
+    sel.innerHTML = abas.map(a =>
+      `<option value="${esc(a)}">${esc(a.replace(CUSTO_PREFIX,''))}</option>`
+    ).join('');
+
+    // Mantém o mês já selecionado ou usa o mais recente
+    if (SC.mesCusto && abas.includes(SC.mesCusto)) {
+      sel.value = SC.mesCusto;
+    } else {
+      SC.mesCusto = abas[0];
+      sel.value = SC.mesCusto;
+    }
+
+    // Garante que trocarMesCusto dispara ao mudar
+    sel.onchange = () => { SC.mesCusto = sel.value; carregarCustos(); };
+
+    popularFMesCusto(abas);
+    carregarCustos();
+  } catch(e) {
+    $('custosList').innerHTML = `<div class="empty"><div class="ico">!</div><p>${esc(e.message)}</p></div>`;
   }
 }
 
-/* ── Popular select de mês (filtra abas que começam com "CUSTOS ") ── */
+/* ── Popular select de mês no MODAL (recebe array já carregado) ── */
 function popularSelMesCusto() {
-  // Busca abas de custo via API
-  api('listarAbasCusto').then(r => {
-    const sel = $('selMesCusto');
-    if (!r.abas || !r.abas.length) {
-      sel.innerHTML = '<option value="">Nenhum mês ainda</option>';
-      $('custosList').innerHTML = '<div class="empty"><div class="ico">∅</div><p>Nenhum mês de custos ainda.<br><small>Clique em "Custo Filmmaker" e crie o primeiro mês.</small></p></div>';
-      atualizarMetricasCusto([]);
-      return;
-    }
-    sel.innerHTML = r.abas.map(a=>`<option value="${esc(a)}">${esc(a.replace(CUSTO_PREFIX,''))}</option>`).join('');
-    SC.mesCusto = r.abas[0];
-    sel.value = SC.mesCusto;
-    carregarCustos();
-  }).catch(e => {
-    $('custosList').innerHTML = `<div class="empty"><div class="ico">!</div><p>${esc(e.message)}</p></div>`;
-  });
-
-  // Popular também o select do modal
-  popularFMesCusto();
+  recarregarAbasCusto();
 }
 
-function popularFMesCusto() {
-  api('listarAbasCusto').then(r => {
-    const sel = $('fMesCusto');
-    const abas = r.abas || [];
-    sel.innerHTML =
-      abas.map(a=>`<option value="${esc(a)}">${esc(a.replace(CUSTO_PREFIX,''))}</option>`).join('') +
-      `<option value="__novo__">➕ Criar novo mês…</option>`;
+function popularFMesCusto(abas) {
+  // Se não recebeu o array, busca da API
+  if (!abas) {
+    api('listarAbasCusto').then(r => popularFMesCusto(r.abas||[])).catch(()=>{});
+    return;
+  }
+  const sel = $('fMesCusto');
+  sel.innerHTML =
+    abas.map(a=>`<option value="${esc(a)}">${esc(a.replace(CUSTO_PREFIX,''))}</option>`).join('') +
+    `<option value="__novo__">➕ Criar novo mês…</option>`;
 
-    if (SC.mesCusto) sel.value = SC.mesCusto;
+  if (SC.mesCusto && abas.includes(SC.mesCusto)) sel.value = SC.mesCusto;
 
-    sel.onchange = () => {
-      const show = sel.value === '__novo__';
-      $('custoMesBox').classList.toggle('show', show);
-      if (show) {
-        $('custoMesInput').value = sugerirMesCusto(abas);
-        $('custoMesOk').classList.remove('show');
-        $('custoMesInput').focus();
-      }
-    };
-  }).catch(()=>{});
+  sel.onchange = () => {
+    const show = sel.value === '__novo__';
+    $('custoMesBox').classList.toggle('show', show);
+    if (show) {
+      $('custoMesInput').value = sugerirMesCusto(abas);
+      $('custoMesOk').classList.remove('show');
+      $('custoMesInput').focus();
+    }
+  };
 }
 
 function sugerirMesCusto(abas) {
@@ -1486,13 +1726,14 @@ async function criarMesCusto() {
     await api('criarAbaCusto', { nomeMes: nm });
     const nomeAba = CUSTO_PREFIX + nm;
     SC.mesCusto = nomeAba;
-    $('selMesCusto').innerHTML += `<option value="${esc(nomeAba)}">${esc(nm)}</option>`;
-    $('selMesCusto').value = nomeAba;
-    $('fMesCusto').innerHTML += `<option value="${esc(nomeAba)}">${esc(nm)}</option>`;
-    $('fMesCusto').value = nomeAba;
     $('custoMesBox').classList.remove('show');
     $('custoMesOk').classList.add('show');
     toast('✓ Mês "'+nm+'" criado!','ok');
+    // Recarrega a lista completa de abas
+    await recarregarAbasCusto();
+    $('selMesCusto').value = nomeAba;
+    $('fMesCusto').value   = nomeAba;
+    SC.mesCusto = nomeAba;
   } catch(e) { toast('Erro: '+e.message,'err'); }
   finally { btn.disabled=false; btn.textContent='Criar'; }
 }
